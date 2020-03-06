@@ -1,0 +1,29 @@
+﻿<Window x:Class="WoT_Win.Init.InitView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:WoT_Win.Common.Views"
+        Title="{Binding Path=AppTitle}" 
+        Height="340" Width="300"
+        ResizeMode="NoResize"
+        Background="{StaticResource WindowBackgroundBrush}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Languages/InitView.es-ES.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <views:LanguageSelectorView HorizontalAlignment="Right" VerticalAlignment="Top" Width="Auto" Height="Auto" />
+        <Button Content="{DynamicResource ResourceKey=BtnNew}" Command="{Binding NewCommand}" Style="{StaticResource BtnInGridStyle}" HorizontalAlignment="Center" Margin="0,40,0,0"/>
+        <Button Content="{DynamicResource ResourceKey=BtnNewOnline}" Command="{Binding NewOnlineCommand}" Style="{StaticResource BtnInGridStyle}" HorizontalAlignment="Center" Margin="0,80,0,0"/>
+        <Button Content="{DynamicResource ResourceKey=BtnLoad}" Command="{Binding PlayCommand}" Style="{StaticResource BtnInGridStyle}" HorizontalAlignment="Center" Margin="0,120,0,0"/>
+        <Button Content="{DynamicResource ResourceKey=BtnLoadOnline}" Command="{Binding PlayOnlineCommand}" Style="{StaticResource BtnInGridStyle}" HorizontalAlignment="Center" Margin="0,160,0,0"/>
+        <Button Content="{DynamicResource ResourceKey=BtnExit}" Command="{Binding ExitCommand}" Style="{StaticResource BtnInGridStyle}" HorizontalAlignment="Center" Margin="0,200,0,0"/>
+        <StatusBar Height="30" VerticalAlignment="Bottom" Background="{StaticResource DisabledBackgroundBrush}">
+            <StatusBarItem HorizontalContentAlignment="Right">
+                <views:ServerView DataContext="{Binding Path=ServerStatusViewModel}"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

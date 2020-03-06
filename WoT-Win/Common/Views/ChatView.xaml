@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="WoT_Win.Common.Views.ChatView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Languages/ChatView.es-ES.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="Gray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBox Grid.Row="0" Width="400" Height="30" TextWrapping="Wrap" AcceptsReturn="True" MaxLength="128" HorizontalAlignment="Left" Margin="4"/>
+        <Button Grid.Row="0" Content="{DynamicResource ResourceKey=BtnSend}" Height="30" Width="90" HorizontalAlignment="Left" Margin="410,4,4,4"/>
+        <TextBox Grid.Row="1" Width="Auto" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" AcceptsReturn="True" Margin="4" IsReadOnly="True"/>
+    </Grid>
+</UserControl>
+
+    

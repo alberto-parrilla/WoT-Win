@@ -1,0 +1,34 @@
+Para las Skin:
+- abrir con Paint .net
+- Abrir cara
+- Ajustes -> Brillo y contraste
+- Probar con:
+Brillo 40, Brillo 0 (por defecto), brillo -50, brillo -100 (negro)
+
+Habilidades y dotes (skills & feats):
+- Se tendrá la misma clase SkillBaseModel para ambas, y una propiedad marca si es dote o no
+- La dote se deberá entrenar/progresar (mostrándose ese progreso mediante una barra de progreso), y hasta que no se tenga al 100%, no se podrá utilizar
+- Las "plantillas" seran la clase SkillBaseModel, y para cada pj/pnj existirá una clase con: la habilidad/dote, un valor de progreso de la misma. Toda la info 
+necesaria de la habilidad/dote (así como su Execute) se obtendrá de esa propiedad en la clase
+
+
+Gestion del Background (Canvas) y movimiento
+--------------------------------------------
+Tendremos una propiedad OffsetX, OffsetY que nos indica la posición relativa del Background.
+Cuando el PJ se mueva, se mueve su X, Y de manera normal. Pero si no se produce una condición especial, también cambia el Offset del fondo.
+La posicion en pantalla del PJ (y de los PNJ) siempre será X,Y particular + Offset del Background.
+Cuando se produzca la condición de que se ha llegado al límite del dibujo (del Background), entonces el Offset del Background ya no se toca, y el movimiento del PJ se verá
+más marcado en pantalla
+REVISAR ESTO 
+
+48ppc (pixex por celda) (tamanyo optimo canvas 24 celdas x 16 celdas = 1152x768)
+48 celdas = 2304 px = 288 unidades de movimiento (2304 / 8)
+128 celdas = 6144 px = 768 unidades de movimiento (6144 / 8)
+256 celdas = 12288 px = 1536 unidades de movimiento (12288 / 8)
+Movimiento = 8px 
+
+Gestion de Areas y Escenas
+--------------------------
+Vamos a tener un elemento principal: Area
+Cada Area puede tener distintas Escenas
+Cuando se carga un Area, se carga el Area completa (con sus escenas). Es algo más pesado y lento, pero luego el movimiento entre escenas debería ser fluido

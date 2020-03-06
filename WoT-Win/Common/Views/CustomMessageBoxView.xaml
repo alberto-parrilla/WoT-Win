@@ -1,0 +1,18 @@
+﻿<Window x:Class="WoT_Win.Common.Views.CustomMessageBoxView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding Path=Title}" 
+        Height="200" Width="300" Background="{StaticResource WindowBackgroundBrush}"
+        WindowStyle="ToolWindow" ResizeMode="NoResize">
+    <Grid>
+        <Label Content="{Binding Path=Message}" Height="Auto" Width="Auto" Margin="20" 
+                   Style="{StaticResource LabelStyle}" 
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button Content="{Binding Path=TrueButton}" Command="{Binding Path=TrueCommand}" 
+                Style="{StaticResource BtnInGridStyle}"
+                VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10"/>
+        <Button Content="{Binding Path=FalseButton}" Command="{Binding Path=FalseCommand}" 
+                Style="{StaticResource BtnInGridStyle}"
+                VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10"/>
+    </Grid>
+</Window>

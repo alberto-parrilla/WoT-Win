@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="WoT_Win.Creation.Views.CreationWeavesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:weaves="clr-namespace:WoT_Win.Game.Weaves"
+             xmlns:views="clr-namespace:WoT_Win.Creation.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Languages/CreationWeavesView.es-ES.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="RadioButton" >
+                <Style.Triggers>
+                    <Trigger Property="IsChecked" Value="False">
+                        <Setter Property="Opacity" Value="0.5"></Setter>
+                    </Trigger>
+                </Style.Triggers>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <Border BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="Transparent">
+                                <Image Source="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Width" Value="48"/>
+                <Setter Property="Height" Value="48"/>
+            </Style>
+            <DataTemplate x:Key="WeaveDataTemplate" DataType="weaves:BaseWeaveViewModel">
+                <views:WeaveView DataContext="{Binding}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="PlayerWeaveDataTemplate" DataType="weaves:PlayerWeaveViewModel">
+                <views:WeaveView DataContext="{Binding}"/>
+            </DataTemplate>
+            <Style x:Key="ListBoxItemStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                <Setter Property="IsEnabled" Value="{Binding Path=IsEnabled}"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <RadioButton Grid.Row="0" Command="{Binding Path=SelectTypeCommand}" CommandParameter="Earth" 
+                     Content="../../Resources/Icons/Weaves/Earth_170x170.png" Margin="0,0,200,0" ToolTip="{DynamicResource ResourceKey=ToolTipEarth}" />
+        <RadioButton Grid.Row="0" Command="{Binding Path=SelectTypeCommand}" CommandParameter="Fire"
+                     Content="../../Resources/Icons/Weaves/Fire_170x170.png" Margin="0,0,100,0" ToolTip="{DynamicResource ResourceKey=ToolTipFire}" />
+        <RadioButton Grid.Row="0" Command="{Binding Path=SelectTypeCommand}" CommandParameter="Water"
+                     Content="../../Resources/Icons/Weaves/Water_170x170.png" ToolTip="{DynamicResource ResourceKey=ToolTipWater}" />
+        <RadioButton Grid.Row="0" Command="{Binding Path=SelectTypeCommand}" CommandParameter="Wind"
+                     Content="../../Resources/Icons/Weaves/Wind_170x170.png" Margin="100,0,0,0" ToolTip="{DynamicResource ResourceKey=ToolTipWind}" />
+        <RadioButton Grid.Row="0" Command="{Binding Path=SelectTypeCommand}" CommandParameter="Energy" 
+                     Content="../../Resources/Icons/Weaves/Energy_170x170.png" Margin="200,0,0,0" ToolTip="{DynamicResource ResourceKey=ToolTipEnergy}" />
+        <Grid Grid.Row="1">
+            <Label Content="{DynamicResource ResourceKey=LblWeavesPoints}" Style="{StaticResource LblInGridStyle}" Width="120" Margin="10,10,0,0"/>
+            <Label Content="{Binding Path=WeavesPoints}" Style="{StaticResource LblInGridStyle}" Margin="130,10,0,0"/>
+            <ListBox ItemsSource="{Binding Path=Weaves}" ItemTemplate="{StaticResource WeaveDataTemplate}"
+                     ItemContainerStyle="{DynamicResource ResourceKey=ListBoxItemStyle}"
+                     SelectedItem="{Binding Path=SelectedWeave}"
+                     Width="160" Height="360" 
+                     Margin="10,40" VerticalAlignment="Top" HorizontalAlignment="Left" />
+            <Button Content="&#xE768;" FontFamily="Segoe MDL2 Assets" FontSize="24" Width="26" Height="26" 
+                    VerticalAlignment="Center" Margin="0,0,0,50"
+                    Command="{Binding AddCommand}"/>
+            <Button Content="&#xE768;" FontFamily="Segoe MDL2 Assets" FontSize="24" Width="26" Height="26"
+                    VerticalAlignment="Center" Margin="0,50,0,0"
+                    Command="{Binding RemoveCommand}">
+                <Button.LayoutTransform>
+                    <RotateTransform CenterX="0.5" CenterY="0.5" Angle="180"/>
+                </Button.LayoutTransform>
+            </Button>
+            <ListBox ItemsSource="{Binding Path=PlayerWeaves}"  ItemTemplate="{StaticResource PlayerWeaveDataTemplate}"
+                     SelectedItem="{Binding Path=SelectedPlayerWeave}"
+                     Width="180" Height="360" 
+                     Margin="10,40" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+        </Grid>
+    </Grid>
+</UserControl>

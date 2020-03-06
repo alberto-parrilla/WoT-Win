@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="ResourceDictionaryName">Loc-en-UK</sys:String>
+    <sys:String x:Key="ToolTipHead">Head</sys:String>
+    <sys:String x:Key="ToolTipBody">Body</sys:String>
+    <sys:String x:Key="ToolTipNeck">Neck</sys:String>
+    <sys:String x:Key="ToolTipCloak">Cloak</sys:String>
+    <sys:String x:Key="ToolTipBelt">Belt</sys:String>
+    <sys:String x:Key="ToolTipGloves">Gloves</sys:String>
+    <sys:String x:Key="ToolTipLeftRing">Left Ring</sys:String>
+    <sys:String x:Key="ToolTipLeftItem">Left Item</sys:String>
+    <sys:String x:Key="ToolTipRightRing">Right Ring</sys:String>
+    <sys:String x:Key="ToolTipRightItem">Right Item</sys:String>
+    <sys:String x:Key="ToolTipLegs">Legs</sys:String>
+    <sys:String x:Key="ToolTipFeet">Feet</sys:String>
+</ResourceDictionary>

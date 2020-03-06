@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="ResourceDictionaryName">Loc-en-UK</sys:String>
+    <sys:String x:Key="TabGameInfo">Game Info</sys:String>
+    <sys:String x:Key="TabSceneChat">Scene Chat</sys:String>
+    <sys:String x:Key="TabGeneralChat">General Chat</sys:String>
+</ResourceDictionary>

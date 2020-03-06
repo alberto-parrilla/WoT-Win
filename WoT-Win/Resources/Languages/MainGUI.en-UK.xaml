@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="ResourceDictionaryName">Loc-en-UK</sys:String>
+    <sys:String x:Key="MenuPlayerInfo">PC Info</sys:String>
+    <sys:String x:Key="MenuSkills">Skills</sys:String>
+    <sys:String x:Key="MenuInventory">Inventory</sys:String>
+    <sys:String x:Key="MenuWeaves">Weaves</sys:String>
+    <sys:String x:Key="MenuExit">Exit</sys:String>
+</ResourceDictionary>

@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="ResourceDictionaryName">Loc-es-ES</sys:String>
+    <sys:String x:Key="Header">Tejidos</sys:String>
+    <sys:String x:Key="ToolTipEarth">Tierra</sys:String>
+    <sys:String x:Key="ToolTipFire">Fuego</sys:String>
+    <sys:String x:Key="ToolTipWater">Agua</sys:String>
+    <sys:String x:Key="ToolTipWind">Viento</sys:String>
+    <sys:String x:Key="ToolTipEnergy">Energia</sys:String>
+    <sys:String x:Key="LblWeavesPoints">Tejidos a elegir</sys:String>
+    <sys:String x:Key="ErrorWeaves">Selecciona al menos un tejido</sys:String>
+</ResourceDictionary>

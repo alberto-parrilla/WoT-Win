@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="WoT_Win.Creation.Views.CreationAttributeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Height="30" Width="360">
+    <StackPanel Orientation="Horizontal">
+        <Label Content="{Binding Path=Header}" Style="{StaticResource LblInGridStyle}" Margin="10,0,10,0" Width="60"/>
+        <Button Content="&#xE768;" FontFamily="Segoe MDL2 Assets" FontSize="24" Width="26" Height="26"
+                Command="{Binding DownCommand}">
+            <Button.LayoutTransform>
+                <RotateTransform CenterX="0.5" CenterY="0.5" Angle="180"/>
+            </Button.LayoutTransform>
+        </Button>
+        <TextBox Text="{Binding Path=BaseValue}" Style="{StaticResource TxtInGridStyle}" Width="50"/>
+        <Button Content="&#xE768;" FontFamily="Segoe MDL2 Assets" FontSize="24" Width="26" Height="26" 
+                Command="{Binding UpCommand}"/>
+        <TextBox Text="{Binding Path=RaceMod}" Style="{StaticResource TxtInGridStyle}"  Width="30" Margin="10,0,10,0"/>
+        <TextBox Text="{Binding Path=NationMod}" Style="{StaticResource TxtInGridStyle}"  Width="30" Margin="10,0,10,0"/>
+        <TextBox Text="{Binding Path=Value, Mode=OneWay}" Style="{StaticResource TxtInGridStyle}"  Width="50" Margin="10,0,10,0"/>
+    </StackPanel>
+</UserControl>

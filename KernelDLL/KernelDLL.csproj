@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2CE33632-7C89-4EA2-8E12-A0F9358EEE14}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KernelDLL</RootNamespace>
+    <AssemblyName>KernelDLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\DataManager.cs" />
+    <Compile Include="Common\DisposableAction.cs" />
+    <Compile Include="Common\IDataManager.cs" />
+    <Compile Include="Common\IRepositoryManager.cs" />
+    <Compile Include="Common\RepositoryManager.cs" />
+    <Compile Include="Common\Util.cs" />
+    <Compile Include="Creation\Interfaces\IAvatarGenerator.cs" />
+    <Compile Include="Database\FakeDatabase.cs" />
+    <Compile Include="Database\IDatabase.cs" />
+    <Compile Include="Game\Enums\Enums.cs" />
+    <Compile Include="Game\Interfaces\IScene.cs" />
+    <Compile Include="Game\Interfaces\ISkillParameter.cs" />
+    <Compile Include="Game\Interfaces\ISkillTarget.cs" />
+    <Compile Include="Game\Interfaces\IWeaveParameter.cs" />
+    <Compile Include="Game\Models\AreaModel.cs" />
+    <Compile Include="Game\Models\AttributeModel.cs" />
+    <Compile Include="Game\Models\AttributeModModel.cs" />
+    <Compile Include="Game\Models\BaseObjectModel.cs" />
+    <Compile Include="Game\Models\BaseWeaveModel.cs" />
+    <Compile Include="Game\Models\FeatModel.cs" />
+    <Compile Include="Game\Models\ObjectModel.cs" />
+    <Compile Include="Game\Models\PlayerFeatModel.cs" />
+    <Compile Include="Game\Models\PlayerItemModel.cs" />
+    <Compile Include="Game\Models\PlayerModel.cs" />
+    <Compile Include="Game\Models\PlayerSkillModel.cs" />
+    <Compile Include="Game\Models\SceneModel.cs" />
+    <Compile Include="Game\Models\SkillActiveTargetDistance.cs" />
+    <Compile Include="Game\Models\SkillActiveTargetNear.cs" />
+    <Compile Include="Game\Models\SkillActiveZoneDistance.cs" />
+    <Compile Include="Game\Models\SkillActiveZoneNear.cs" />
+    <Compile Include="Game\Models\BaseSkillModel.cs" />
+    <Compile Include="Game\Models\SkillPassiveTargetDistance.cs" />
+    <Compile Include="Game\Models\SkillPassiveTargetNear.cs" />
+    <Compile Include="Game\Models\SkillPassiveZoneDistance.cs" />
+    <Compile Include="Game\Models\SkillPassiveZoneNear.cs" />
+    <Compile Include="Game\Models\SkillResult.cs" />
+    <Compile Include="Game\Models\TransitionModel.cs" />
+    <Compile Include="Game\Models\WeaveResult.cs" />
+    <Compile Include="Init\AreaSavedModel.cs" />
+    <Compile Include="Init\PlayerSavedModel.cs" />
+    <Compile Include="Init\SavedGameModel.cs" />
+    <Compile Include="Init\SceneSavedModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

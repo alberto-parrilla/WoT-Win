@@ -1,0 +1,22 @@
+﻿<Window x:Class="WoT_Win.Game.GUI.PlayerInfoView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:objects="clr-namespace:WoT_Win.Game.Objects"
+        Title="Ficha" Height="600" Width="800" ResizeMode="NoResize">
+    <Grid>
+        <TabControl SelectedIndex="{Binding Path=SelectedIndex}">
+            <TabItem Header="Datos">
+
+            </TabItem>
+            <TabItem Header="Habilidades">
+
+            </TabItem>
+            <TabItem Header="Inventario">
+                <!--<objects:PlayerInfoItemsView DataContext="{Binding Path=InventoryViewModel}" />-->
+            </TabItem>
+            <TabItem Header="Tejidos" Visibility="{Binding Path=Player.IsChanneler, Converter={StaticResource BoolToVisibilityConverter}}">
+
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

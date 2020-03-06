@@ -1,0 +1,53 @@
+﻿<Window x:Class="WoT_Win.Game.GUI.MainGui"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:gui="clr-namespace:WoT_Win.Game.GUI"
+        xmlns:views="clr-namespace:WoT_Win.Common.Views"
+        ResizeMode="NoResize"
+        DataContext=""
+        Title="MainGui" Height="976" Width="1352" Background="{StaticResource WindowBackgroundBrush}">
+    <Window.InputBindings>
+        <KeyBinding Key="Up" Command="{Binding MoveCommand}" CommandParameter="Up"/>
+        <KeyBinding Key="Down" Command="{Binding MoveCommand}" CommandParameter="Down"/>
+        <KeyBinding Key="Left" Command="{Binding MoveCommand}" CommandParameter="Left"/>
+        <KeyBinding Key="Right" Command="{Binding MoveCommand}" CommandParameter="Right"/>
+    </Window.InputBindings>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Languages/MainGui.es-ES.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="TransitionDataTemplate" DataType="gui:TransitionViewModel">
+                <Rectangle Width="{Binding Path=Width}" Height="{Binding Path=Height}" Margin="{Binding Path=Offset}" Fill="Red" />
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource WindowBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Height="30">
+            <MenuItem Header="{DynamicResource ResourceKey=MenuPlayerInfo}" Command="{Binding Path=MenuOpenCommand}" CommandParameter="Stats"/>
+            <MenuItem Header="{DynamicResource ResourceKey=MenuSkills}" Command="{Binding Path=MenuOpenCommand}" CommandParameter="Skills"/>
+            <MenuItem Header="{DynamicResource ResourceKey=MenuInventory}" Command="{Binding Path=MenuOpenCommand}" CommandParameter="Inventory"/>
+            <MenuItem Header="{DynamicResource ResourceKey=MenuWeaves}" Command="{Binding Path=MenuOpenCommand}" CommandParameter="Weaves"/>
+            <MenuItem Header="{DynamicResource ResourceKey=MenuExit}" Command="{Binding Path=MenuExitCommand}"/>
+        </Menu>
+        <Canvas Grid.Row="1" Grid.Column="0" x:Name="MainCanvas" Width="1152" Height="768" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <!--<Image DataContext="{Binding Path=Scene}"  Source="{Binding Path=Map}" Canvas.Left="{Binding Path=OffsetX}" Canvas.Top="{Binding Path=OffsetY}"/>-->
+            <!--<Image DataContext="{Binding Path=Player}" Source="{Binding Path=Avatar}" Width="48" Height="48" Canvas.Left="{Binding Path=X}"  Canvas.Top="{Binding Path=Y}"/>-->
+            <ItemsControl ItemsSource="{Binding Path=Scene.Transitions}" ItemTemplate="{StaticResource TransitionDataTemplate}"/>
+        </Canvas>
+        <views:LanguageSelectorView Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Width="Auto" Height="Auto" />
+        <!--<gui:RightGuiView Grid.Row="1" Grid.Column="1"/>-->
+        <gui:BottomGuiView Grid.Row="2" Grid.Column="0"/>
+        <gui:NonPlayerGuiView Grid.Row="2" Grid.Column="1"/>
+    </Grid>
+</Window>

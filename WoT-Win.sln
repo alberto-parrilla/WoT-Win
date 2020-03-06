@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoT-Win", "WoT-Win\WoT-Win.csproj", "{8FE62075-DF5A-4266-8131-5FB240F59C79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerDLL", "ServerDLL\ServerDLL.csproj", "{12370746-2A00-40E0-AEBE-8398B605ABB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoTServer", "WoTServer\WoTServer.csproj", "{97816CB6-8316-4B78-819D-BE7D5339D8D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KernelDLL", "KernelDLL\KernelDLL.csproj", "{2CE33632-7C89-4EA2-8E12-A0F9358EEE14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E54A87C1-7EF2-4C06-9896-A7EC819E725C}"
+	ProjectSection(SolutionItems) = preProject
+		Notas.txt = Notas.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FE62075-DF5A-4266-8131-5FB240F59C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FE62075-DF5A-4266-8131-5FB240F59C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FE62075-DF5A-4266-8131-5FB240F59C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FE62075-DF5A-4266-8131-5FB240F59C79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12370746-2A00-40E0-AEBE-8398B605ABB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12370746-2A00-40E0-AEBE-8398B605ABB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12370746-2A00-40E0-AEBE-8398B605ABB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12370746-2A00-40E0-AEBE-8398B605ABB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97816CB6-8316-4B78-819D-BE7D5339D8D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97816CB6-8316-4B78-819D-BE7D5339D8D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97816CB6-8316-4B78-819D-BE7D5339D8D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97816CB6-8316-4B78-819D-BE7D5339D8D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CE33632-7C89-4EA2-8E12-A0F9358EEE14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CE33632-7C89-4EA2-8E12-A0F9358EEE14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CE33632-7C89-4EA2-8E12-A0F9358EEE14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CE33632-7C89-4EA2-8E12-A0F9358EEE14}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

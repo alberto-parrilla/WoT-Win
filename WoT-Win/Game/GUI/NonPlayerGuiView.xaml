@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="WoT_Win.Game.GUI.NonPlayerGuiView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:actor="clr-namespace:WoT_Win.Game.Actor"
+             Height="150"
+             Width="200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0" Source="{Binding Portrait}" Height="96" Width="96" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Grid.Column="1" Content="Name"/>
+        <Label Grid.Column="1" Content="Country"/>
+        <actor:ValueBarView Grid.Column="0" Width="150" Height="20" />
+    </Grid>
+</UserControl>

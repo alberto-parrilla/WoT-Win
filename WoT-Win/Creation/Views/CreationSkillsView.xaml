@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="WoT_Win.Creation.Views.CreationSkillsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="clr-namespace:WoT_Win.Creation.Views"
+             xmlns:skills="clr-namespace:WoT_Win.Game.Skills"
+             Height="400" Width="440" Background="{StaticResource ControlBackgroundBrush}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Languages/CreationSkillsView.es-ES.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="SkillDataTemplate" DataType="skills:BaseSkillViewModel">
+                <views:SkillView DataContext="{Binding}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="PlayerSkillDataTemplate" DataType="skills:PlayerSkillViewModel">
+                <views:SkillView DataContext="{Binding}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="PlayerFeatDataTemplate" DataType="skills:PlayerFeatViewModel">
+                <views:SkillView DataContext="{Binding}"/>
+            </DataTemplate>
+            <Style x:Key="ListBoxItemStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                <!--<Setter Property="IsHitTestVisible" Value="{Binding Path=IsEnabled}"/>-->
+                <Setter Property="IsEnabled" Value="{Binding Path=IsEnabled}"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <RadioButton Content="Habilidad" Style="{StaticResource {x:Type ToggleButton}}" IsChecked="{Binding Path=IsSkillChecked}" Width="100"
+                     VerticalAlignment="Top" Margin="0,10,150,0"/>
+        <RadioButton Content="Dote" Style="{StaticResource {x:Type ToggleButton}}" Width="100"
+                     VerticalAlignment="Top" Margin="150,10,0,0"/>
+        <Grid Visibility="{Binding Path=IsSkillChecked, Converter={StaticResource BoolToVisibilityConverter}}"
+              Margin="0,35,0,0">
+            <Label Content="Puntos disponibles:" Style="{StaticResource LblInGridStyle}" Width="120" Margin="10,10,0,0"/>
+            <Label Content="{Binding SkillPoints}" Style="{StaticResource LblInGridStyle}" Margin="130,10,0,0"/>
+            <ListBox ItemsSource="{Binding Path=Skills}" ItemTemplate="{StaticResource SkillDataTemplate}"
+                     ItemContainerStyle="{DynamicResource ListBoxItemStyle}"
+                     SelectedItem="{Binding Path=SelectedSkill}"
+                     Width="160" Height="360" 
+                     Margin="10,40" VerticalAlignment="Top" HorizontalAlignment="Left" />      
+            <Button Content="&#xE768;" FontFamily="Segoe MDL2 Assets" FontSize="24" Width="26" Height="26" 
+                    VerticalAlignment="Center" Margin="0,0,0,50"
+                    Command="{Binding AddCommand}"/>
+            <Button Content="&#xE768;" FontFamily="Segoe MDL2 Assets" FontSize="24" Width="26" Height="26"
+                    VerticalAlignment="Center" Margin="0,50,0,0"
+                    Command="{Binding RemoveCommand}">
+                <Button.LayoutTransform>
+                    <RotateTransform CenterX="0.5" CenterY="0.5" Angle="180"/>
+                </Button.LayoutTransform>
+            </Button>
+            <ListBox ItemsSource="{Binding Path=PlayerSkills}"  ItemTemplate="{StaticResource PlayerSkillDataTemplate}"
+                     SelectedItem="{Binding Path=SelectedPlayerSkill}"
+                     Width="180" Height="360" 
+                     Margin="10,40" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+        </Grid>
+        <Grid Visibility="{Binding Path=IsSkillChecked, Converter={StaticResource InverseBoolToVisibilityConverter}}"
+              Margin="0,35,0,0">
+            <Label Content="Dotes disponibles:" Style="{StaticResource LblInGridStyle}" Width="120" Margin="10,10,0,0"/>
+            <Label Content="{Binding FeatPoints}" Style="{StaticResource LblInGridStyle}" Margin="130,10,0,0"/>
+            <ListBox ItemsSource="{Binding Path=Feats}" ItemTemplate="{StaticResource SkillDataTemplate}"
+                     ItemContainerStyle="{DynamicResource ListBoxItemStyle}"
+                     SelectedItem="{Binding Path=SelectedFeat}"
+                     Width="180" Height="360" 
+                     Margin="10,40" VerticalAlignment="Top" HorizontalAlignment="Left" />        
+            <Button Content="&#xE768;" FontFamily="Segoe MDL2 Assets" FontSize="24" Width="26" Height="26" 
+                    VerticalAlignment="Center" Margin="0,0,0,50"
+                    Command="{Binding AddCommand}"/>
+            <Button Content="&#xE768;" FontFamily="Segoe MDL2 Assets" FontSize="24" Width="26" Height="26"
+                    VerticalAlignment="Center" Margin="0,50,0,0"
+                    Command="{Binding RemoveCommand}">
+                <Button.LayoutTransform>
+                    <RotateTransform CenterX="0.5" CenterY="0.5" Angle="180"/>
+                </Button.LayoutTransform>
+            </Button>
+            <ListBox ItemsSource="{Binding Path=PlayerFeats}" ItemTemplate="{StaticResource PlayerFeatDataTemplate}"
+                     SelectedItem="{Binding Path=SelectedPlayerFeat}"
+                     Width="180" Height="360" 
+                     Margin="10,40" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+        </Grid>
+</Grid>
+</UserControl>

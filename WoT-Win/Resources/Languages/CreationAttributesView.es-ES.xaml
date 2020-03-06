@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="ResourceDictionaryName">Loc-es-ES</sys:String>
+    <sys:String x:Key="Header">Atributos</sys:String>
+    <sys:String x:Key="LblPoints">Puntos a repartir</sys:String>
+    <sys:String x:Key="LblStr">Fue</sys:String>
+    <sys:String x:Key="LblDex">Des</sys:String>
+    <sys:String x:Key="LblCon">Con</sys:String>
+    <sys:String x:Key="LblInt">Int</sys:String>
+    <sys:String x:Key="LblWis">Sab</sys:String>
+    <sys:String x:Key="LblCha">Car</sys:String>
+    <sys:String x:Key="ErrorPoints">Deben usarse todos los puntos de atributos</sys:String>
+</ResourceDictionary>

@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="WoT_Win.Game.GUI.PlayerGuiView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:attributes="clr-namespace:WoT_Win.Game.Attributes"
+             xmlns:actor="clr-namespace:WoT_Win.Game.Actor"
+             Width="200"
+             Height="Auto"
+             Background="{StaticResource ControlBackgroundBrush}">
+    <Grid>
+        <Image Source="{Binding Path=Faceset}" Height="96" Width="96" VerticalAlignment="Top"/>
+        <Label Content="{Binding Path=Name}" Style="{StaticResource LblInGridStyle}" Margin="10,120,0,0"/>
+        <Label Content="{Binding Path=Race}" Style="{StaticResource LblInGridStyle}" Margin="10,150,0,0"/>
+        <Label Content="{Binding Path=Sex}" Style="{StaticResource LblInGridStyle}" Margin="100,150,0,0"/>
+        <Label Content="{Binding Path=Nation}" Style="{StaticResource LblInGridStyle}" Margin="10,180,0,0"/>
+        <attributes:PlayerAttributeView DataContext="{Binding Path=Str}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,210,0,0"/>
+        <attributes:PlayerAttributeView DataContext="{Binding Path=Dex}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,210,0,0"/>
+        <attributes:PlayerAttributeView DataContext="{Binding Path=Con}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,240,0,0"/>
+        <attributes:PlayerAttributeView DataContext="{Binding Path=Int}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,240,0,0"/>    
+        <attributes:PlayerAttributeView DataContext="{Binding Path=Wis}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,270,0,0"/>
+        <attributes:PlayerAttributeView DataContext="{Binding Path=Cha}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,270,0,0"/>
+        <Label Style="{StaticResource LblInGridStyle}" Content="Hp:" Margin="10,300,0,0"/>
+        <actor:ValueBarView DataContext="{Binding Path=HitPoints}" Width="140" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,300,0,0" />
+        <Label Style="{StaticResource LblInGridStyle}" Content="En:" Margin="10,340,0,0"/>
+        <actor:ValueBarView DataContext="{Binding Path=Energy}" Width="140" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,340,0,0"/>
+        <Button Content="Ficha" Command="{Binding PlayerInfoCommand}" Style="{StaticResource BtnInGridStyle}" HorizontalAlignment="Center" Margin="0,380,0,0"/>
+        <Button Content="Habilidades" Command="{Binding PlayerSkillsCommand}"  Style="{StaticResource BtnInGridStyle}" HorizontalAlignment="Center" Margin="0,430,0,0"/>
+        <Button Content="Inventario" Command="{Binding PlayerItemsCommand}" Style="{StaticResource BtnInGridStyle}" HorizontalAlignment="Center" Margin="0,480,0,0"/>     
+        <Button Content="Tejidos" Command="{Binding PlayerWeavesCommand}" Style="{StaticResource BtnInGridStyle}" HorizontalAlignment="Center" Margin="0,530,0,0"
+                Visibility="{Binding Path=IsChanneler, Converter={StaticResource BoolToVisibilityConverter}}"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,19 @@
+﻿<Window x:Class="WoT_Win.Game.GUI.InventoryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WoT_Win.Game.GUI"
+        mc:Ignorable="d"
+        Title="Inventory" Height="450" Width="600" ResizeMode="NoResize" Background="{StaticResource WindowBackgroundBrush}">
+    <Grid>
+        <ListBox Width="180" Height="400" HorizontalAlignment="Left" Margin="10"></ListBox>
+        <Image Source=""/>
+        <Border Width="48" Height="48" BorderBrush="WhiteSmoke" BorderThickness="1" CornerRadius="10" Margin="0,0,0,220"/>
+        <Border Width="48" Height="48" BorderBrush="WhiteSmoke" BorderThickness="1" CornerRadius="10" Margin="0,0,0,100"/>
+        <Border Width="48" Height="48" BorderBrush="WhiteSmoke" BorderThickness="1" CornerRadius="10" Margin="0,0,120,100"/>
+        <Border Width="48" Height="48" BorderBrush="WhiteSmoke" BorderThickness="1" CornerRadius="10" Margin="120,0,0,100"/>
+        <Border Width="48" Height="48" BorderBrush="WhiteSmoke" BorderThickness="1" CornerRadius="10" Margin="0,20,60,0"/>
+        <Border Width="48" Height="48" BorderBrush="WhiteSmoke" BorderThickness="1" CornerRadius="10" Margin="60,20,0,0"/>
+    </Grid>
+</Window>

@@ -1,0 +1,63 @@
+﻿<Window x:Class="WoT_Win.Game.Objects.PlayerInventoryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WoT_Win.Game.Objects"
+        mc:Ignorable="d"
+        Title="{DynamicResource ResourceKey=Title}" Height="400" Width="740" Background="{StaticResource ControlBackgroundBrush}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Languages/PlayerInventoryView.es-ES.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="PlayerItemDataTemplate" DataType="local:PlayerItemViewModel">
+                <Grid Background="{Binding Path=IsEquiped, Converter={StaticResource BoolToColorConverter}, ConverterParameter=LightGray}">
+                    <Image Source="{Binding Path=Icon}" Width="16" Height="16" HorizontalAlignment="Left"/>
+                    <Label Content="{Binding Path=Name}" Style="{StaticResource LblInGridStyle}" Margin="20,0,0,0"/>
+                </Grid>
+            </DataTemplate>
+            <Style x:Key="CellStyle" TargetType="Grid">
+                <Setter Property="Height" Value="64"/>
+                <Setter Property="Width" Value="64"/>
+                <Setter Property="Background" Value="LightGray"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <ListBox ItemsSource="{Binding Path=Items}" 
+                 ItemTemplate="{StaticResource PlayerItemDataTemplate}" 
+                 PreviewMouseLeftButtonDown="listBox_PreviewMouseLeftButtonDown"
+                 PreviewMouseMove="listBox_PreviewMouseMove"
+                 HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="270"  Margin="10" />
+        <Image Source="../../Resources/Icons/Items/inventory.png" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="400,0,0,0" Height="400" Width="220"/>
+        <local:ItemSlotView DataContext="{Binding Path=HeadSlot}" ToolTip="{DynamicResource ResourceKey=ToolTipHead}"
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="475,5,0,0" AllowDrop="True" Drop="slotView_Drop" DragEnter="slotView_DragEnter"/>
+        <local:ItemSlotView DataContext="{Binding Path=BodySlot}" ToolTip="{DynamicResource ResourceKey=ToolTipBody}" 
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="475,75,0,0" AllowDrop="True"/>
+        <local:ItemSlotView DataContext="{Binding Path=NeckSlot}" ToolTip="{DynamicResource ResourceKey=ToolTipNeck}"
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="375,75,0,0" AllowDrop="True"/>
+        <local:ItemSlotView DataContext="{Binding Path=CloakSlot}" ToolTip="{DynamicResource ResourceKey=ToolTipCloak}"
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="575,75,0,0" AllowDrop="True"/>
+        <local:ItemSlotView DataContext="{Binding Path=BeltSlot}" ToolTip="{DynamicResource ResourceKey=ToolTipBelt}"
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="475,150,0,0" AllowDrop="True"/>
+        <local:ItemSlotView DataContext="{Binding Path=GlovesSlot}" ToolTip="{DynamicResource ResourceKey=ToolTipGloves}"
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="305,150,0,0" AllowDrop="True"/>
+        <local:ItemSlotView DataContext="{Binding Path=LeftRingSlot}" ToolTip="{DynamicResource ResourceKey=ToolTipLeftRing}"
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="375,150,0,0" AllowDrop="True"/>
+        <local:ItemSlotView DataContext="{Binding Path=LeftItemSlot}" ToolTip="{DynamicResource ResourceKey=ToolTipLeftItem}"
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="375,220,0,0" AllowDrop="True"/>
+        <!--<local:ItemSlotView DataContext="{Binding Path=RightGloveSlot}" ToolTip="{DynamicResource ResourceKey=ToolTipBody}"
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="575,150,0,0" AllowDrop="True"/>-->
+        <local:ItemSlotView DataContext="{Binding Path=RightRingSlot}" ToolTip="{DynamicResource ResourceKey=ToolTipRightRing}"
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="575,150,0,0" AllowDrop="True"/>
+        <local:ItemSlotView DataContext="{Binding Path=RightItemSlot}" ToolTip="{DynamicResource ResourceKey=ToolTipRightItem}"
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="575,220,0,0" AllowDrop="True"/>
+        <local:ItemSlotView DataContext="{Binding Path=LegsSlot}" ToolTip="{DynamicResource ResourceKey=ToolTipLegs}"
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="475,225,0,0" AllowDrop="True"/>
+        <local:ItemSlotView DataContext="{Binding Path=FeetSlot}" ToolTip="{DynamicResource ResourceKey=ToolTipFeet}"
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="475,295,0,0" AllowDrop="True"/>
+    </Grid>
+</Window>

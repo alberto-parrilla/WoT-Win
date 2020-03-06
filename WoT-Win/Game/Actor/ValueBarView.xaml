@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="WoT_Win.Game.Actor.ValueBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Height="Auto" Width="Auto">
+    <Grid>   
+        <Grid>
+            <ProgressBar Maximum="{Binding Path=MaxValue}" Value="{Binding Path=CurrentValue}"/>        
+        </Grid>
+        <Label Content="{Binding Path=ValueText}" Style="{StaticResource LabelStyle}" Width="50" Height="30" />
+    </Grid>
+</UserControl>

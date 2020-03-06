@@ -1,0 +1,1002 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8FE62075-DF5A-4266-8131-5FB240F59C79}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WoT_Win</RootNamespace>
+    <AssemblyName>WoT-Win</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Client\BaseRequest.cs" />
+    <Compile Include="Client\IClient.cs" />
+    <Compile Include="Client\IRequest.cs" />
+    <Compile Include="Client\LocalClient.cs" />
+    <Compile Include="Client\PingRequest.cs" />
+    <Compile Include="Client\ServerClient.cs" />
+    <Compile Include="Common\Commands\RelayCommand.cs" />
+    <Compile Include="Common\Controls\BooleanToColorConverter.cs" />
+    <Compile Include="Common\Controls\ColorPickerControl.xaml.cs">
+      <DependentUpon>ColorPickerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Controls\InverseBooleanToVisibilityConverter.cs" />
+    <Compile Include="Common\Controls\SelectorControl.xaml.cs">
+      <DependentUpon>SelectorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Services\CreateFactory.cs" />
+    <Compile Include="Common\ViewModels\LanguageManager.cs" />
+    <Compile Include="Common\ViewModels\LanguageSelectorViewModel.cs" />
+    <Compile Include="Common\ViewModels\ServerStatusViewModel.cs" />
+    <Compile Include="Common\Views\ChatView.xaml.cs">
+      <DependentUpon>ChatView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Views\LanguageSelectorView.xaml.cs">
+      <DependentUpon>LanguageSelectorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Views\ServerView.xaml.cs">
+      <DependentUpon>ServerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Creation\Views\WeaveView.xaml.cs">
+      <DependentUpon>WeaveView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Attributes\AttributeViewModel.cs" />
+    <Compile Include="Common\ViewModels\BaseViewModel.cs" />
+    <Compile Include="Common\ViewModels\CustomMesssageBox.cs" />
+    <Compile Include="Game\GUI\AreaViewModel.cs" />
+    <Compile Include="Game\GUI\InventoryView_NEW.xaml.cs">
+      <DependentUpon>InventoryView_NEW.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\GUI\PlayerInfoView_OLD.xaml.cs">
+      <DependentUpon>PlayerInfoView_OLD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\GUI\PlayerInfoViewModel_OLD.cs" />
+    <Compile Include="Game\GUI\PlayerViewModel.cs" />
+    <Compile Include="Common\ViewModels\SplashLoadViewModel.cs" />
+    <Compile Include="Common\Views\CustomMessageBoxView.xaml.cs">
+      <DependentUpon>CustomMessageBoxView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Views\SplashLoadView.xaml.cs">
+      <DependentUpon>SplashLoadView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Creation\Services\CreationManager.cs" />
+    <Compile Include="Creation\ViewModels\BaseCreationViewModel.cs" />
+    <Compile Include="Creation\ViewModels\CreateAvatarItem.cs" />
+    <Compile Include="Creation\ViewModels\CreatePlayerAvatarViewModel.cs" />
+    <Compile Include="Creation\ViewModels\CreationAttributesViewModel.cs" />
+    <Compile Include="Creation\ViewModels\CreationAttributeViewModel.cs" />
+    <Compile Include="Creation\ViewModels\CreationDataViewModel.cs" />
+    <Compile Include="Creation\ViewModels\CreationSkillsViewModel.cs" />
+    <Compile Include="Creation\ViewModels\CreationViewModel.cs" />
+    <Compile Include="Creation\ViewModels\CreationWeavesViewModel.cs" />
+    <Compile Include="Creation\Views\CreatePlayerAvatarView.xaml.cs">
+      <DependentUpon>CreatePlayerAvatarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Creation\Views\CreationAttributesView.xaml.cs">
+      <DependentUpon>CreationAttributesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Creation\Views\CreationAttributeView.xaml.cs">
+      <DependentUpon>CreationAttributeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Creation\Views\CreationDataView.xaml.cs">
+      <DependentUpon>CreationDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Creation\Views\CreationSkillsView.xaml.cs">
+      <DependentUpon>CreationSkillsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Creation\Views\CreationView.xaml.cs">
+      <DependentUpon>CreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Creation\Views\CreationWeavesView.xaml.cs">
+      <DependentUpon>CreationWeavesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Creation\Views\SkillView.xaml.cs">
+      <DependentUpon>SkillView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Actor\ValueBarView.xaml.cs">
+      <DependentUpon>ValueBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Actor\ValueBarViewModel.cs" />
+    <Compile Include="Game\Attributes\AttributeModViewModel.cs" />
+    <Compile Include="Game\Attributes\PlayerAttributeView.xaml.cs">
+      <DependentUpon>PlayerAttributeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\GUI\MainGui.xaml.cs">
+      <DependentUpon>MainGui.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\GUI\MainGuiViewModel.cs" />
+    <Compile Include="Game\GUI\BottomGuiView.xaml.cs">
+      <DependentUpon>BottomGuiView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\GUI\NonPlayerGuiView.xaml.cs">
+      <DependentUpon>NonPlayerGuiView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\GUI\PlayerGuiView.xaml.cs">
+      <DependentUpon>PlayerGuiView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\GUI\RightGuiView.xaml.cs">
+      <DependentUpon>RightGuiView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\GUI\SceneViewModel.cs" />
+    <Compile Include="Game\GUI\TransitionViewModel.cs" />
+    <Compile Include="Game\Objects\ItemSlotView.xaml.cs">
+      <DependentUpon>ItemSlotView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Objects\ItemSlotViewModel.cs" />
+    <Compile Include="Game\Objects\PlayerInventoryViewModel.cs" />
+    <Compile Include="Game\Objects\PlayerInventoryView.xaml.cs">
+      <DependentUpon>PlayerInventoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Objects\PlayerItemViewModel.cs" />
+    <Compile Include="Game\Skills\BaseSkillViewModel.cs" />
+    <Compile Include="Game\Skills\PlayerFeatViewModel.cs" />
+    <Compile Include="Game\Skills\PlayerSkillViewModel.cs" />
+    <Compile Include="Game\Weaves\BaseWeaveViewModel.cs" />
+    <Compile Include="Game\Weaves\PlayerWeaveViewModel.cs" />
+    <Compile Include="Init\InitViewModel.cs" />
+    <Compile Include="Init\InitView.xaml.cs">
+      <DependentUpon>InitView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Init\LoadedGameTemplateSelector.cs" />
+    <Compile Include="Init\LoadedGameView.xaml.cs">
+      <DependentUpon>LoadedGameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Init\LoadedGameViewModel.cs" />
+    <Compile Include="Init\LoadView.xaml.cs">
+      <DependentUpon>LoadView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Init\LoadViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Languages\Strings.en.resx" />
+    <EmbeddedResource Include="Resources\Languages\Strings.es.resx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <Content Include="Resources\Areas\1\1_1_CampoEmond_48px.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Areas\1\1_2_PosadaManantialPB_48px.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Icons\Attributes\" />
+    <Folder Include="Resources\Icons\Skills\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Common\Controls\ColorPickerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Controls\SelectorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Views\ChatView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Views\CustomMessageBoxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Views\LanguageSelectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Views\ServerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Views\SplashLoadView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Creation\Views\CreatePlayerAvatarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Creation\Views\CreationAttributesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Creation\Views\CreationAttributeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Creation\Views\CreationDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Creation\Views\CreationSkillsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Creation\Views\CreationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Creation\Views\CreationWeavesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Creation\Views\SkillView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Creation\Views\WeaveView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Actor\ValueBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Attributes\PlayerAttributeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\GUI\InventoryView_NEW.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\GUI\MainGui.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\GUI\BottomGuiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\GUI\NonPlayerGuiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\GUI\PlayerGuiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\GUI\PlayerInfoView_OLD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\GUI\RightGuiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Objects\ItemSlotView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Objects\PlayerInventoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Init\InitView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Init\LoadedGameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Init\LoadView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Resource Include="Resources\Icons\Common\spain-flag-32x32.png" />
+    <Resource Include="Resources\Icons\Common\united-kingdom-flag-32x32.png" />
+    <Resource Include="Resources\Icons\Weaves\Earth_170x170.png" />
+    <Resource Include="Resources\Icons\Weaves\Energy_170x170.png" />
+    <Resource Include="Resources\Icons\Weaves\Fire_170x170.png" />
+    <Resource Include="Resources\Icons\Weaves\Water_170x170.png" />
+    <Resource Include="Resources\Icons\Weaves\Wind_170x170.png" />
+    <Content Include="Resources\Languages\InitView.en-UK.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\InitView.es-ES.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\LoadView.en-UK.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\LoadView.es-ES.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\CreationView.en-UK.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\CreationView.es-ES.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\CreationDataView.en-UK.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\CreationDataView.es-ES.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\CreationAttributesView.en-UK.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\CreationAttributesView.es-ES.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\CreationWeavesView.en-UK.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\CreationSkillsView.en-UK.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\CreationWeavesView.es-ES.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\CreationSkillsView.es-ES.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\MainGui.en-UK.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\MainGui.es-ES.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\BottomGuiView.en-UK.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\BottomGuiView.es-ES.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\ChatView.en-UK.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\ChatView.es-ES.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\PlayerInventoryView.en-UK.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\PlayerInventoryView.es-ES.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\ItemSlotView.en-UK.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages\ItemSlotView.es-ES.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Page Include="Resources\Themes\CustomTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Themes\ExpressionDarkTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KernelDLL\KernelDLL.csproj">
+      <Project>{2ce33632-7c89-4ea2-8e12-a0f9358eee14}</Project>
+      <Name>KernelDLL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Areas\1\1_1_CampoEmond_48px.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Areas\1\1_2_PosadaManantialPB_48px.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Backgrounds\background1.jfif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Backgrounds\background2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Backgrounds\background3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\Icons\Common\Check_Icon-128.png" />
+    <Resource Include="Resources\Icons\Common\Fail_Icon-128.png" />
+    <Content Include="Resources\Icons\Items\body_bw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Items\belt_bw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Items\foot_bw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Items\cloak_bw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Items\glove_bw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Items\head_bw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Items\inventory.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Items\neck_bw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Items\legs_bw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Items\ring_bw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Items\used_bw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Objects\Sword_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Objects\Sword_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Saved\1\charaset.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Saved\1\faceset.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Female_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Female_Skin2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Female_Skin3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Female_Skin4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Beard10.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Beard11.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Beard12.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Beard2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Beard3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Beard4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Beard5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Beard6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Beard7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Beard8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Beard9.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Skin2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Skin3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\Human_Male_Skin4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\TV_FrontHair1_p01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Charaset\TV_FrontHair1_p01_c.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Female_Face1_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Female_Face2_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Female_Face3_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Female_Face4_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Female_Face5_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Female_Face6_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Female_Face7_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_BaseEyes1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_BaseEyes2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_BaseEyes3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_BaseEyes4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_BaseEyes5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_BaseEyes6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_BaseEyes7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_BaseEyes8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_BaseEyes9.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Beard10.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Beard11.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Beard12.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Beard2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Beard3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Beard4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Beard5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Beard6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Beard7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Beard8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Beard9.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Ears_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes10.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes11.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes14.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes15.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes16.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes17.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes18.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes19.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes20.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes21.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes22.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes23.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes24.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes25.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes9.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes12.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Eyes13.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Face10_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Face11_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Face12_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Face1_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Face2_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Face3_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Face4_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Face5_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Face6_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Face7_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Face8_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Face9_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_10.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_11.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_12.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_13.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_14.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_15.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_16.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_17.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair1_9.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_10.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_11.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_12.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_13.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_14.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_15.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_16.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_17.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_18.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Hair2_9.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth10.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth11.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth12.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth13.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth14.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth15.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth16.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Mouth9.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Nose10_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Nose11_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Nose1_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Nose2_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Nose3_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Nose4_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Nose5_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Nose6_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Nose7_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Nose8_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Nose9_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Human_Male_Skin1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Generator\Portrait\Ogier_Male_Ears.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

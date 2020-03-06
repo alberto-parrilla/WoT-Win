@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="ResourceDictionaryName">Loc-en-UK</sys:String>
+    <sys:String x:Key="Header">Personal data</sys:String>
+    <sys:String x:Key="LblName">Name</sys:String>
+    <sys:String x:Key="LblRace">Race</sys:String>
+    <sys:String x:Key="LblSex">Sex</sys:String>
+    <sys:String x:Key="LblOrigin">Origin</sys:String>
+    <sys:String x:Key="LblChanneler">Channeler</sys:String>
+    <sys:String x:Key="BtnEdit">Edit</sys:String>
+    <sys:String x:Key="ErrorName">Name must be completed</sys:String>
+</ResourceDictionary>
