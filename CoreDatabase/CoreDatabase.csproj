@@ -53,6 +53,11 @@
   <ItemGroup>
     <Compile Include="Abstractions\BusinessEntity.cs" />
     <Compile Include="Abstractions\BusinessEntityTypeConfiguration.cs" />
+    <Compile Include="Context\UserDbContext.cs" />
+    <Compile Include="Context\UserDbContextInitializer.cs" />
+    <Compile Include="Context\Users\Configuration\UserConfiguration.cs" />
+    <Compile Include="Context\Users\User.cs" />
+    <Compile Include="DbUtil.cs" />
     <Compile Include="Managers\DataDbManager.cs" />
     <Compile Include="Managers\GameDbManager.cs" />
     <Compile Include="Managers\IDataDbManager.cs" />
@@ -68,7 +73,6 @@
   <ItemGroup>
     <Folder Include="Context\Data\" />
     <Folder Include="Context\Game\" />
-    <Folder Include="Context\Users\" />
     <Folder Include="FakeDatabase\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
