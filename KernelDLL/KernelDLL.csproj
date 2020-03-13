@@ -39,6 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\IUserManager.cs" />
+    <Compile Include="Authentication\LoginResult.cs" />
+    <Compile Include="Authentication\RegisterResult.cs" />
+    <Compile Include="Authentication\RegisterUser.cs" />
+    <Compile Include="Authentication\UserManager.cs" />
     <Compile Include="Common\DataManager.cs" />
     <Compile Include="Common\DisposableAction.cs" />
     <Compile Include="Common\IDataManager.cs" />
@@ -83,7 +88,12 @@
     <Compile Include="Init\SceneSavedModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\CoreDatabase\CoreDatabase.csproj">
+      <Project>{44ce7dca-ea96-401b-919e-44d71a18e567}</Project>
+      <Name>CoreDatabase</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
