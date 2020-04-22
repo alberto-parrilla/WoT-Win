@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using KernelDLL.Common;
 using WoT_Win.Common.Services;
 using WoT_Win.Common.ViewModels;
 using System.Windows.Input;
 using WoT_Win.Common.Commands;
 using System.Windows;
-using WoT_Win.Common.Views;
+using ClientDLL.Client;
 using WoT_Win.Game.GUI;
 
 namespace WoT_Win.Init
@@ -19,10 +15,13 @@ namespace WoT_Win.Init
     {
         private Window _view;
         private CreateFactory _factory;
-        public LoadViewModel(Window view, DataManager dataManager, CreateFactory factory) : base(dataManager)
+        private IMainClient _client;
+
+        public LoadViewModel(Window view, DataManager dataManager, CreateFactory factory, IMainClient client) : base(dataManager)
         {
             _view = view;
             _factory = factory;
+            _client = client;
             //_dataManager.LoadGames();
             //Items = new ObservableCollection<LoadedGameViewModel>(_dataManager.LoadedGames.Select((m) => _factory.Create(m)).ToList() );
             LoadCommand = new RelayCommand((o) => Load(), (o) => CanLoad());

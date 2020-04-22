@@ -11,6 +11,7 @@
     <AssemblyName>KernelDLL</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -86,6 +87,12 @@
     <Compile Include="Init\PlayerSavedModel.cs" />
     <Compile Include="Init\SavedGameModel.cs" />
     <Compile Include="Init\SceneSavedModel.cs" />
+    <Compile Include="Network\Request\BaseRequest.cs" />
+    <Compile Include="Network\Request\IRequest.cs" />
+    <Compile Include="Network\Request\PingRequest.cs" />
+    <Compile Include="Network\Response\BaseResponse.cs" />
+    <Compile Include="Network\Response\IResponse.cs" />
+    <Compile Include="Network\Response\PingResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +101,7 @@
       <Name>CoreDatabase</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

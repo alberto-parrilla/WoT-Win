@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using ClientDLL.Client;
 using KernelDLL.Common;
 using WoT_Win.Common.Services;
 using WoT_Win.Init;
@@ -17,6 +18,7 @@ namespace WoT_Win
     /// </summary>
     public partial class App : Application
     {
+        private IMainClient _client;
         private DataManager _dataManager;
         private CreateFactory _createFactory;
 
@@ -24,7 +26,7 @@ namespace WoT_Win
         {
             Init();
             // Create the startup window
-            InitView wnd = new InitView(_dataManager, _createFactory);
+            InitView wnd = new InitView(_dataManager, _createFactory, _client);
             // Do stuff here, e.g. to the window
 
             // Show the window
@@ -33,6 +35,8 @@ namespace WoT_Win
 
         private void Init()
         {
+            _client = new MainClient();
+            _client.Init();
             _dataManager = new DataManager(new FakeDatabase(), new RepositoryManager());
             _createFactory = new CreateFactory();
         }

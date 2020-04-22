@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ClientDLL.Client;
 using KernelDLL.Common;
 using WoT_Win.Common.Commands;
 using WoT_Win.Common.Services;
@@ -16,9 +17,10 @@ namespace WoT_Win.Init
     public sealed class InitViewModel : BaseViewModel
     {
         private Window _view;
-        private CreateFactory _creteFactory;
+        private CreateFactory _createFactory;
+        private IMainClient _client;
 
-        public InitViewModel(Window view, DataManager dataManager, CreateFactory createFactory) : base(dataManager)
+        public InitViewModel(Window view, DataManager dataManager, CreateFactory createFactory, IMainClient client) : base(dataManager)
         {
             NewCommand = new RelayCommand((o) => New(false), (o) => true);
             NewOnlineCommand = new RelayCommand((o) => New(true), (o) => IsOnline);
@@ -26,8 +28,9 @@ namespace WoT_Win.Init
             PlayOnlineCommand = new RelayCommand((o) => Play(true), (o) => IsOnline); 
             ExitCommand = new RelayCommand((o) => Exit(), (o) => true);
             _view = view;
-            _creteFactory = createFactory;
-            ServerStatusViewModel = new ServerStatusViewModel();
+            _createFactory = createFactory;
+            _client = client;
+            ServerStatusViewModel = new ServerStatusViewModel(_client);
         }
 
         public bool IsOnline { get { return false; } }
@@ -41,13 +44,13 @@ namespace WoT_Win.Init
 
         private void New(bool isOnline)
         {
-            new CreationView(_dataManager, _creteFactory).Show();
+            new CreationView(_dataManager, _createFactory).Show();
             _view.Close();
         }
 
         private void Play(bool isOnline)
         {
-            new LoadView(_dataManager, _creteFactory).Show();
+            new LoadView(_dataManager, _createFactory, _client).Show();
             _view.Close();
         }
 

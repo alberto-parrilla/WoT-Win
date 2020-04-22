@@ -22,7 +22,7 @@
         <Button Content="{DynamicResource ResourceKey=BtnExit}" Command="{Binding ExitCommand}" Style="{StaticResource BtnInGridStyle}" HorizontalAlignment="Center" Margin="0,200,0,0"/>
         <StatusBar Height="30" VerticalAlignment="Bottom" Background="{StaticResource DisabledBackgroundBrush}">
             <StatusBarItem HorizontalContentAlignment="Right">
-                <views:ServerView DataContext="{Binding Path=ServerStatusViewModel}"/>
+                <views:ServerStatusView DataContext="{Binding Path=ServerStatusViewModel}"/>
             </StatusBarItem>
         </StatusBar>
     </Grid>

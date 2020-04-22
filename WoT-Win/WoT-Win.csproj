@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -61,12 +62,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\BaseRequest.cs" />
-    <Compile Include="Client\IClient.cs" />
-    <Compile Include="Client\IRequest.cs" />
-    <Compile Include="Client\LocalClient.cs" />
-    <Compile Include="Client\PingRequest.cs" />
-    <Compile Include="Client\ServerClient.cs" />
     <Compile Include="Common\Commands\RelayCommand.cs" />
     <Compile Include="Common\Controls\BooleanToColorConverter.cs" />
     <Compile Include="Common\Controls\ColorPickerControl.xaml.cs">
@@ -86,8 +81,8 @@
     <Compile Include="Common\Views\LanguageSelectorView.xaml.cs">
       <DependentUpon>LanguageSelectorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\Views\ServerView.xaml.cs">
-      <DependentUpon>ServerView.xaml</DependentUpon>
+    <Compile Include="Common\Views\ServerStatusView.xaml.cs">
+      <DependentUpon>ServerStatusView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Creation\Views\WeaveView.xaml.cs">
       <DependentUpon>WeaveView.xaml</DependentUpon>
@@ -257,7 +252,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Common\Views\ServerView.xaml">
+    <Page Include="Common\Views\ServerStatusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -470,6 +465,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClientDLL\ClientDLL.csproj">
+      <Project>{75adb994-71d7-474c-8123-472c8df85bf2}</Project>
+      <Name>ClientDLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KernelDLL\KernelDLL.csproj">
       <Project>{2ce33632-7c89-4ea2-8e12-a0f9358eee14}</Project>
       <Name>KernelDLL</Name>
