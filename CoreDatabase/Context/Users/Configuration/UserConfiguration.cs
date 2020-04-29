@@ -19,7 +19,11 @@ namespace CoreDatabase.Context.Users.Configuration
             // Password
             this.Property(o => o.Password)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(100);
+
+            // Status
+            this.Property(o => o.Status)
+                .IsRequired();
         }
 
         protected override void RelateEntity()

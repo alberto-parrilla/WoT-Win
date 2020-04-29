@@ -8,9 +8,10 @@ namespace CoreDatabase.Context.Users
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public bool IsActive { get; set; }
+        public int Status { get; set; }
+        public DateTime? RegisterDate { get; set; }
         public Guid ActivationCode { get; set; }
-        public bool IsBlocked { get; set; }
+        public DateTime? ActivationDate { get; set; }
         public DateTime? BlockDate { get; set; }
         public string BlockReason { get; set; }
     }

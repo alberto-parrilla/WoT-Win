@@ -59,6 +59,7 @@
     <Compile Include="Context\Users\Configuration\UserConfiguration.cs" />
     <Compile Include="Context\Users\User.cs" />
     <Compile Include="DbUtil.cs" />
+    <Compile Include="FakeDatabase\FakeUserDbManager.cs" />
     <Compile Include="Managers\DataDbManager.cs" />
     <Compile Include="Managers\GameDbManager.cs" />
     <Compile Include="Managers\IDataDbManager.cs" />
@@ -74,7 +75,6 @@
   <ItemGroup>
     <Folder Include="Context\Data\" />
     <Folder Include="Context\Game\" />
-    <Folder Include="FakeDatabase\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
