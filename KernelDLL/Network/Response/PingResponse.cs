@@ -10,5 +10,7 @@
         }
 
         public bool TimeOut => !PingTime.HasValue;
+
+        public override EnumResponseType ResponseType => EnumResponseType.Ping;
     }
 }

@@ -18,9 +18,8 @@ namespace WoT_Win.Init
     {
         private Window _view;
         private CreateFactory _createFactory;
-        private IMainClient _client;
 
-        public InitViewModel(Window view, DataManager dataManager, CreateFactory createFactory, IMainClient client) : base(dataManager)
+        public InitViewModel(Window view, DataManager dataManager, CreateFactory createFactory, IMainClient client) : base(client, dataManager)
         {
             NewCommand = new RelayCommand((o) => New(false), (o) => true);
             NewOnlineCommand = new RelayCommand((o) => New(true), (o) => IsOnline);
@@ -29,7 +28,6 @@ namespace WoT_Win.Init
             ExitCommand = new RelayCommand((o) => Exit(), (o) => true);
             _view = view;
             _createFactory = createFactory;
-            _client = client;
             ServerStatusViewModel = new ServerStatusViewModel(_client);
         }
 

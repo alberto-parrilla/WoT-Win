@@ -20,7 +20,7 @@ namespace WoT_Win.Creation.ViewModels
     {
         private CreateFactory _createFactory;
 
-        public CreationViewModel(DataManager dataManager, CreateFactory createFactory) : base(dataManager)
+        public CreationViewModel(DataManager dataManager, CreateFactory createFactory) : base(null, dataManager)
         {
             _createFactory = createFactory;
 

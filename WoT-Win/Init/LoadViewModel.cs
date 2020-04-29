@@ -15,13 +15,11 @@ namespace WoT_Win.Init
     {
         private Window _view;
         private CreateFactory _factory;
-        private IMainClient _client;
 
-        public LoadViewModel(Window view, DataManager dataManager, CreateFactory factory, IMainClient client) : base(dataManager)
+        public LoadViewModel(Window view, DataManager dataManager, CreateFactory factory, IMainClient client) : base(client, dataManager)
         {
             _view = view;
             _factory = factory;
-            _client = client;
             //_dataManager.LoadGames();
             //Items = new ObservableCollection<LoadedGameViewModel>(_dataManager.LoadedGames.Select((m) => _factory.Create(m)).ToList() );
             LoadCommand = new RelayCommand((o) => Load(), (o) => CanLoad());

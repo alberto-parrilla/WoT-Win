@@ -18,7 +18,7 @@ namespace WoT_Win.Common.ViewModels
 
     public static class CustomMessageBox
     {
-        public static bool Show(string title, string message, EnumMessageBox mode )
+        public static bool Show(string title, string message, EnumMessageBox mode)
         {
             var messageBox = new CustomMessageBoxView();
             var messageBoxViewModel = new CustomMesssageBox(title, message, mode, messageBox);

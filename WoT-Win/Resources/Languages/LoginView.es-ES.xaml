@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="ResourceDictionaryName">Loc-es-ES</sys:String>
+    <sys:String x:Key="LblUser">Email</sys:String>
+    <sys:String x:Key="LblPassword">Contraseña</sys:String>
+    <sys:String x:Key="BtnLogin">Login</sys:String>
+    <sys:String x:Key="BtnRegister">Registrar</sys:String>
+    <sys:String x:Key="BtnExit">Salir</sys:String>
+    <sys:String x:Key="ErrorNotVerified">La cuenta no ha sido verificada</sys:String>
+    <sys:String x:Key="ErrorWrongEmail">El correo electrónico no es válido</sys:String>
+    <sys:String x:Key="ErrorWrongPassword">La contraseña no es válida</sys:String>
+    <sys:String x:Key="ErrorUserBlocked">Este correo electrónico está bloqueado</sys:String>
+</ResourceDictionary>

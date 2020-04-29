@@ -16,6 +16,9 @@ namespace WoT_Win.Common.ViewModels
     {
         private static List<string> _registerViews = new List<string>()
         {
+            "LoginView",
+            "RegisterView",
+            "UserView",
             "InitView",
             "LoadView",
             "CreationView",
@@ -206,7 +209,8 @@ namespace WoT_Win.Common.ViewModels
 
         public static string GetResourceValue(string dictionary, string resource)
         {
-            var currentCulture = CultureInfo.CurrentUICulture.Name;
+            //var currentCulture = CultureInfo.CurrentUICulture.Name;
+            var currentCulture = DataManager.CurrentCulture;
             var dic = $"{dictionary}.{currentCulture}.xaml";
             var uri = $"/WoT-Win;component/Resources/Languages/{dic}";
             ResourceDictionary res = (ResourceDictionary)Application.LoadComponent(new Uri(uri, UriKind.Relative));

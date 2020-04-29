@@ -1,21 +1,14 @@
-﻿namespace KernelDLL.Authentication
+﻿using KernelDLL.Network.Response;
+
+namespace KernelDLL.Authentication
 {
     public class RegisterResult
     {
-        public RegisterResult() : this(true)
-        { }
-
-        public RegisterResult(string reason) : this(false)
+        public RegisterResult(EnumRegisterResponse status)
         {
-            Reason = reason;
+            Status = status;
         }
 
-        private RegisterResult(bool success)
-        {
-            Success = success;
-        }
-
-        public bool Success { get; }
-        public string Reason { get; }
+        public EnumRegisterResponse Status { get; }
     }
 }

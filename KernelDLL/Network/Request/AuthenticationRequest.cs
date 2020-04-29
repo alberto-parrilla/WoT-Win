@@ -3,15 +3,15 @@ using KernelDLL.Network.Response;
 
 namespace KernelDLL.Network.Request
 {
-    public class PingRequest : BaseRequest
+    public class AuthenticationRequest : BaseRequest
     {
         //public override IResponse ProcessRequest()
         //{
-        //    return new PingResponse(0);
+        //    return new AuthenticationResponse();
         //}
         public override async Task<IResponse> ProcessRequestAsync()
         {
-            return new PingResponse(0);
+           return new AuthenticationResponse();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using KernelDLL.Network.Request;
+﻿using System;
+using KernelDLL.Network.Request;
 using KernelDLL.Network.Response;
 
 namespace ClientDLL.Client
@@ -6,6 +7,7 @@ namespace ClientDLL.Client
     public class MainClient : IMainClient
     {
         private IClient _client;
+        public event EventHandler<IResponse> OnManageResponse;
 
         public MainClient()
         {
@@ -14,21 +16,22 @@ namespace ClientDLL.Client
 
         public void Init()
         {
-            _client.StartClient(ReceiveResponse);
+            //_client.StartClient(ReceiveResponse);
         }
 
         private void ReceiveResponse(IResponse response)
         {
-            if (response is PingResponse)
+            if (OnManageResponse != null)
             {
-                
+                OnManageResponse(this, response);
             }
         }
 
-        public IResponse Send(IRequest request)
+        public void Send(IRequest request)
         {
-            var response = _client.SendAsync(new PingRequest());
-            return response;
+            //_client.StartClient();
+            _client.SendAsync(request, ReceiveResponse);
+            //_client.StopClient();
         }
     }
 }

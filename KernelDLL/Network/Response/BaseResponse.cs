@@ -1,6 +1,7 @@
 ﻿namespace KernelDLL.Network.Response
 {
-    public class BaseResponse : IResponse
+    public abstract class BaseResponse : IResponse
     {
+       public abstract EnumResponseType ResponseType { get; }
     }
 }

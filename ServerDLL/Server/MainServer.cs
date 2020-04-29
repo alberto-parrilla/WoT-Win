@@ -18,12 +18,12 @@ namespace ServerDLL.Server
             _server.StartListening(ReceiveRequest);
         }
 
-        private void ReceiveRequest(IRequest request, Socket handler)
+        private async void ReceiveRequest(IRequest request, Socket handler)
         {
-            if (request is PingRequest)
-            {
-                _server.Send(new PingResponse(100), handler);
-            }
+            //IResponse response = request.ProcessRequest();
+            IResponse response = await request.ProcessRequestAsync();
+            _server.Send(response, handler);
         }
+
     }
 }

@@ -1,27 +1,22 @@
-﻿namespace KernelDLL.Authentication
+﻿using KernelDLL.Network.Response;
+
+namespace KernelDLL.Authentication
 {
     public class LoginResult
     {
-        public LoginResult() : this(false)
-        { }
-
-        public LoginResult(string reason) : this(false)
-        {
-            Reason = reason;
-        }
-
-        public LoginResult(int userId) : this(true)
+        public LoginResult(int userId)
         {
             UserId = userId;
+            Status = EnumLoginResponse.Success;
         }
 
-        internal LoginResult(bool success)
+        public LoginResult(EnumLoginResponse status)
         {
-            Success = success;
+            UserId = null;
+            Status = status;
         }
 
-        public int UserId { get; }
-        public bool Success { get; }
-        public string Reason { get; }
+        public EnumLoginResponse Status { get; }
+        public int? UserId { get; }
     }
 }

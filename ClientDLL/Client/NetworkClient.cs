@@ -31,6 +31,8 @@ namespace ClientDLL.Client
         private const string remoteIpAddress = "127.0.0.1";
         // The port number for the remote device. 
         private const int remotePort = 11000;
+        // The Socket
+        private Socket _client;
 
         // ManualResetEvent instances signal completion.  
         private static ManualResetEvent connectDone = new ManualResetEvent(false);
@@ -54,30 +56,32 @@ namespace ClientDLL.Client
                 IPEndPoint remoteEp = new IPEndPoint(ipAddress, remotePort);
 
                 // Create a TCP/IP socket.  
-                Socket client = new Socket(ipAddress.AddressFamily,
+                //Socket client = new Socket(ipAddress.AddressFamily,
+                //    SocketType.Stream, ProtocolType.Tcp);
+                _client = new Socket(ipAddress.AddressFamily,
                     SocketType.Stream, ProtocolType.Tcp);
 
                 // Connect to the remote endpoint.  
-                client.BeginConnect(remoteEp, new AsyncCallback(ConnectCallback), client);
+                _client.BeginConnect(remoteEp, new AsyncCallback(ConnectCallback), _client);
                 connectDone.WaitOne();
 
-                // Send test data to the remote device.  
-                var content = JsonConvert.SerializeObject(new PingRequest());
-                var stream = $"{EnumRequestType.Ping}#{content}#{"<EOF>"}";
-                //Send(client, "This is a test<EOF>");
-                Send(client, stream);
-                sendDone.WaitOne();
+                //// Send test data to the remote device.  
+                //var content = JsonConvert.SerializeObject(new PingRequest());
+                //var stream = $"{EnumRequestType.Ping}#{content}#{"<EOF>"}";
+                ////Send(client, "This is a test<EOF>");
+                //Send(client, stream);
+                //sendDone.WaitOne();
 
-                // Receive the response from the remote device.  
-                Receive(client);
-                receiveDone.WaitOne();
+                //// Receive the response from the remote device.  
+                //Receive(client);
+                //receiveDone.WaitOne();
 
-                // Write the response to the console.  
-                Console.WriteLine("Response received : {0}", response);
+                //// Write the response to the console.  
+                //Console.WriteLine("Response received : {0}", response);
 
-                // Release the socket.  
-                client.Shutdown(SocketShutdown.Both);
-                client.Close();
+                //// Release the socket.  
+                //client.Shutdown(SocketShutdown.Both);
+                //client.Close();
 
             }
             catch (Exception e)
@@ -86,6 +90,11 @@ namespace ClientDLL.Client
             }
         }
 
+        public void StopClient()
+        {
+            _client.Shutdown(SocketShutdown.Both);
+            _client.Close();
+        }
 
         private static void ConnectCallback(IAsyncResult ar)
         {
@@ -114,14 +123,47 @@ namespace ClientDLL.Client
             throw new System.NotImplementedException();
         }
 
-        public IResponse SendAsync(IRequest request)
+        public void SendAsync(IRequest request, Action<IResponse> manageResponse)
         {
+            StartClient(manageResponse);
+
+            string stream = null;
+            // Send test data to the remote device.  
             if (request is PingRequest)
             {
-                return SendPing();
+                var content = JsonConvert.SerializeObject(request);
+                stream = $"{EnumRequestType.Ping}#{content}#{"<EOF>"}";
+            }
+            else if (request is LoginRequest)
+            {
+                var content = JsonConvert.SerializeObject(request);
+                stream = $"{EnumRequestType.Login}#{content}#{"<EOF>"}";
+            }
+            else if (request is RegisterRequest)
+            {
+                var content = JsonConvert.SerializeObject(request);
+                stream = $"{EnumRequestType.Register}#{content}#{"<EOF>"}";
+            }
+            else if (request is AuthenticationRequest)
+            {
+                var content = JsonConvert.SerializeObject(request);
+                stream = $"{EnumRequestType.Authentication}#{content}#{"<EOF>"}";
             }
 
-            return null;
+            Send(_client, stream);
+            sendDone.WaitOne();
+
+            // Receive the response from the remote device.  
+            Receive(_client);
+            receiveDone.WaitOne();
+
+            //if (request is PingRequest)
+            //{
+            //    return SendPing();
+            //}
+
+            //return null;
+            //StopClient();
         }
 
 
@@ -149,7 +191,7 @@ namespace ClientDLL.Client
             {
                 // Retrieve the state object and the client socket
                 // from the asynchronous state object.  
-                StateObject state = (StateObject)ar.AsyncState;
+                StateObject state = (StateObject) ar.AsyncState;
                 Socket client = state.workSocket;
 
                 // Read data from the remote device.  
@@ -171,8 +213,13 @@ namespace ClientDLL.Client
                     {
                         var content = state.sb.ToString();
                         var response = DeserializeToResponse(content.TrimEnd("<EOF>".ToCharArray()));
-                        new Thread(() => _manageResponse(response)).Start();
+                        new Thread(() =>
+                        {
+                            _manageResponse(response);
+                            StopClient();
+                        }).Start();
                     }
+
                     // Signal that all bytes have been received.  
                     receiveDone.Set();
                 }
@@ -235,7 +282,7 @@ namespace ClientDLL.Client
             {
                 return DeserializeToResponse(type, parts[1]);
             }
-            return new BaseResponse();
+            return new EmptyResponse();
         }
 
         private IResponse DeserializeToResponse(EnumResponseType type, string content)
@@ -244,8 +291,14 @@ namespace ClientDLL.Client
             {
                 case EnumResponseType.Ping:
                     return JsonConvert.DeserializeObject<PingResponse>(content);
+                case EnumResponseType.Login:
+                    return JsonConvert.DeserializeObject<LoginResponse>(content);
+                case EnumResponseType.Register:
+                    return JsonConvert.DeserializeObject<RegisterResponse>(content);
+                case EnumResponseType.Authentication:
+                    return JsonConvert.DeserializeObject<AuthenticationResponse>(content);
             }
-            return new BaseResponse();
+            return new EmptyResponse();
         }
     }
 }

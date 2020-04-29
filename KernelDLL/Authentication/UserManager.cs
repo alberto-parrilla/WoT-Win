@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Mail;
 using CoreDatabase.Managers;
 using System.Threading.Tasks;
+using KernelDLL.Network.Response;
 
 namespace KernelDLL.Authentication
 {
@@ -13,50 +14,47 @@ namespace KernelDLL.Authentication
         public UserManager()
         {
             _userDbManager = new UserDbManager();
+            //_userDbManager = new FakeUserDbManager();
         }
 
-        public async Task<RegisterResult> RegisterUserAsync(RegisterUser registerUser)
+        public async Task<RegisterResult> RegisterUserAsync(string username, string email, string password)
         {
-            var user = await _userDbManager.GetUserByEmailAsync(registerUser.Email);
+            var user = await _userDbManager.GetUserByUsernameAsync(username);
             if (user != null)
             {
-                return new RegisterResult("Email already exists");
+                return new RegisterResult(EnumRegisterResponse.UserExists);
             }
 
-            user = await _userDbManager.GetUserByUsernameAsync(registerUser.Username);
+            user = await _userDbManager.GetUserByEmailAsync(email);
             if (user != null)
             {
-                return new RegisterResult("Username already exists");
+                return new RegisterResult(EnumRegisterResponse.EmailExists);
             }
 
             var activationCode = Guid.NewGuid();
-            var sucess = await _userDbManager.RegisterAsync(registerUser.Username, registerUser.Email, registerUser.Password, activationCode);
+            var sucess = await _userDbManager.RegisterAsync(username, email, password, activationCode);
 
             if (!sucess)
             {
-                return new RegisterResult("Error during registration");
+                return new RegisterResult(EnumRegisterResponse.UndefinedError);
             }
 
             //Verification Email
-            VerificationEmail(registerUser.Email, activationCode.ToString());
-            return new RegisterResult();
+            VerificationEmail(email, activationCode.ToString());
+            return new RegisterResult(EnumRegisterResponse.Success);
         }
 
         // TODO: Finish, fix and test. It's necessary?? It's possible??
         private void VerificationEmail(string email, string activationCode)
         {
-            var url = string.Format("/Account/ActivationAccount/{0}", activationCode);
-            //var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, url);
-            var link = "Test address";
-
             var fromEmail = new MailAddress("wotweb.test@gmail.com", "Activation Account - AKKA");
             var toEmail = new MailAddress(email);
 
             var fromEmailPassword = "wotweb1976";
             string subject = "Activation Account !";
 
-            string body = "<br/> Please click on the following link in order to activate your account" +
-                          "<br/><a href='" + link + "'> Activation Account ! </a>";
+            string body = "<br/> Please, introduce the following code to activate your account:" +
+                          "<br/>'" + activationCode + "'";
 
             var smtp = new SmtpClient
             {
@@ -88,27 +86,58 @@ namespace KernelDLL.Authentication
             var success = await _userDbManager.LoginAsync(usernameOrEmail, password);
             if (success)
             {
+                var loggedUser = await _userDbManager.GetUserByUsernameAsync(usernameOrEmail) ??
+                           await _userDbManager.GetUserByEmailAsync(usernameOrEmail);
+                return new LoginResult(loggedUser.Id);
+            }
+
+            var user = await _userDbManager.GetUserByUsernameAsync(usernameOrEmail) ??
+                   await _userDbManager.GetUserByEmailAsync(usernameOrEmail);
+
+            if (user == null)
+            {
+                return new LoginResult(EnumLoginResponse.WrongUserOrEmail);
+            }
+
+            if (user.Status == 0)
+            {
+                return new LoginResult(EnumLoginResponse.NotVerified);
+            }
+
+            if (user.Status == 2)
+            {
+                return new LoginResult(EnumLoginResponse.UserBlocked);
+            }
+
+            return new LoginResult(EnumLoginResponse.WrongPassword);
+        }
+
+        public async Task<LoginResultLegacy> LoginUserLegacyAsync(string usernameOrEmail, string password)
+        {
+            var success = await _userDbManager.LoginAsync(usernameOrEmail, password);
+            if (success)
+            {
                 var user = await _userDbManager.GetUserByUsernameAsync(usernameOrEmail) ?? await _userDbManager.GetUserByEmailAsync(usernameOrEmail);
 
                 if (user == null)
                 {
-                    return new LoginResult("User not found");
+                    return new LoginResultLegacy("User not found");
                 }
 
-                if (!user.IsActive)
-                {
-                    return new LoginResult("User not actived");
-                }
+                //if (!user.IsActive)
+                //{
+                //    return new LoginResultLegacy("User not actived");
+                //}
 
-                if (user.IsBlocked)
-                {
-                    return new LoginResult("User blocked");
-                }
+                //if (user.IsBlocked)
+                //{
+                //    return new LoginResultLegacy("User blocked");
+                //}
 
-                return new LoginResult(user.Id);
+                return new LoginResultLegacy(user.Id);
             }
 
-            return new LoginResult("Login failed");
+            return new LoginResultLegacy("Login failed");
         }
     }
 }

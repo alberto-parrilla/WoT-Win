@@ -12,12 +12,12 @@ namespace ClientDLL.Client
             throw new System.NotImplementedException();
         }
 
-        public IResponse SendAsync(IRequest request)
-        {
-            throw new System.NotImplementedException();
-        }
+        //public void SendAsync(IRequest request)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
 
-        public void StartClient(Action<IResponse> manageResponse)
+        public void SendAsync(IRequest request, Action<IResponse> manageResponse)
         {
             throw new NotImplementedException();
         }

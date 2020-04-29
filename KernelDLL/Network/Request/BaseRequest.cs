@@ -1,6 +1,11 @@
-﻿namespace KernelDLL.Network.Request
+﻿using System.Threading.Tasks;
+using KernelDLL.Network.Response;
+
+namespace KernelDLL.Network.Request
 {
-    public class BaseRequest : IRequest
+    public abstract class BaseRequest : IRequest
     {
+        //public abstract IResponse ProcessRequest();
+        public abstract Task<IResponse> ProcessRequestAsync();
     }
 }

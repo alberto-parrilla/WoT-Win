@@ -1,0 +1,31 @@
+﻿<Window x:Class="WoT_Win.Authentication.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:WoT_Win.Common.Views"
+        Title="{Binding Path=AppTitle}" 
+        Height="340" Width="400"
+        ResizeMode="NoResize"
+        Background="{StaticResource WindowBackgroundBrush}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Languages/LoginView.es-ES.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <views:LanguageSelectorView HorizontalAlignment="Right" VerticalAlignment="Top" Width="Auto" Height="Auto" />
+        <Label Content="{DynamicResource ResourceKey=LblUser}" Style="{StaticResource LblInGridStyle}" Margin="20,60,0,0" VerticalContentAlignment="Center"/>
+        <TextBox Text="{Binding Path=Email}" Style="{StaticResource TxtInGridStyle}" HorizontalAlignment="Center" Margin="0,60,0,0" Width="200"/>
+        <Label Content="{DynamicResource ResourceKey=LblPassword}" Style="{StaticResource LblInGridStyle}" Margin="20,100,0,0" VerticalContentAlignment="Center"/>
+        <PasswordBox x:Name="PasswordBox" Style="{StaticResource PasswordTxtInGridStyle}" HorizontalAlignment="Center" Margin="0,100,0,0" Width="200" />
+        <Button Content="{DynamicResource ResourceKey=BtnLogin}" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=PasswordBox}" Style="{StaticResource BtnInGridStyle}" HorizontalAlignment="Center" Margin="0,140,0,0"/>
+        <Button Content="{DynamicResource ResourceKey=BtnRegister}" Command="{Binding RegisterCommand}" Style="{StaticResource BtnInGridStyle}" HorizontalAlignment="Center" Margin="0,180,0,0"/>
+        <Button Content="{DynamicResource ResourceKey=BtnExit}" Command="{Binding ExitCommand}" Style="{StaticResource BtnInGridStyle}" HorizontalAlignment="Center" Margin="0,220,0,0"/>
+        <StatusBar Height="30" VerticalAlignment="Bottom" Background="{StaticResource DisabledBackgroundBrush}">
+            <StatusBarItem HorizontalContentAlignment="Right">
+                <views:ServerStatusView DataContext="{Binding Path=ServerStatusViewModel}"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

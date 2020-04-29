@@ -6,15 +6,6 @@ using System.Threading.Tasks;
 
 namespace KernelDLL.Game.Enums
 {
-    public enum EnumRequestType
-    {
-        Ping
-    }
-
-    public enum EnumResponseType
-    {
-        Ping
-    }
     public enum EnumRace
     {
         Human,

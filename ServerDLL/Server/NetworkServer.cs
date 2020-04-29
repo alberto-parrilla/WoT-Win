@@ -189,7 +189,7 @@ namespace ServerDLL.Server
             {
                 return DeserializeToRequest(type, parts[1]);
             }
-            return new BaseRequest();
+            return new EmptyRequest();
         }
 
         private IRequest DeserializeToRequest(EnumRequestType type, string content)
@@ -198,19 +198,20 @@ namespace ServerDLL.Server
             {
                 case EnumRequestType.Ping:
                     return JsonConvert.DeserializeObject<PingRequest>(content);
+                case EnumRequestType.Login:
+                    return JsonConvert.DeserializeObject<LoginRequest>(content);
+                case EnumRequestType.Register:
+                    return JsonConvert.DeserializeObject<RegisterRequest>(content);
+                case EnumRequestType.Authentication:
+                    return JsonConvert.DeserializeObject<AuthenticationRequest>(content);
             }
-            return new BaseRequest();
+            return new EmptyRequest();
         }
 
         private string SerializeToResponse(IResponse response)
         {
-            if (response is PingResponse)
-            {
-                var content = JsonConvert.SerializeObject(response as PingResponse);
-                return string.Format("{0}#{1}#{2}", EnumResponseType.Ping, content, "<EOF>");
-            }
-
-            return "<EOF>";
+            var content = JsonConvert.SerializeObject(response);
+            return string.Format("{0}#{1}#{2}", response.ResponseType, content, "<EOF>");
         }
     }
 }

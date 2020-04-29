@@ -1,0 +1,50 @@
+﻿<Window x:Class="WoT_Win.Authentication.UserView"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:init="clr-namespace:WoT_Win.Init"
+        xmlns:views="clr-namespace:WoT_Win.Common.Views"
+        Title="{Binding Path=AppTitle}"
+        Height="600" Width="600"
+        Background="{DynamicResource WindowBackgroundBrush}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Languages/UserView.es-ES.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="NullLoadedGameDataTemplate">
+                <Grid Width="500" Height="110" Margin="10">
+                    <Label Content="{DynamicResource ResourceKey=LblEmpty}" Style="{StaticResource LabelStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontStyle="Italic" FontWeight="Bold"/>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="LoadedGameDataTemplate" DataType="init:LoadedGameViewModel">
+                <init:LoadedGameView DataContext="{Binding Path=Model}" Margin="10" />
+            </DataTemplate>
+            <init:LoadedGameTemplateSelector x:Key="LoadedGameTemplateSelector" 
+                                         NullTemplate="{StaticResource NullLoadedGameDataTemplate}"
+                                         ValidTemplate="{StaticResource LoadedGameDataTemplate}"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="452" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <views:LanguageSelectorView Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="Auto" Height="Auto" />
+        <ListBox Grid.Row="1"
+                 ItemsSource="{Binding Path=Items}" 
+                 ItemTemplateSelector="{StaticResource LoadedGameTemplateSelector}" 
+                 SelectedItem="{Binding Path=SelectedItem}"
+                 Margin="20"/>
+        <Button Grid.Row="2" Content="{DynamicResource ResourceKey=BtnExit}" Command="{Binding CancelCommand}" Style="{StaticResource BtnInGridStyle}"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Margin="200,0,0,0"/>
+        <Button Grid.Row="2" Content="{DynamicResource ResourceKey=BtnLoad}" Command="{Binding LoadCommand}" Style="{StaticResource BtnInGridStyle}"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,200,0"/>
+        <StatusBar Grid.Row="3" Height="30" VerticalAlignment="Bottom" Background="{StaticResource DisabledBackgroundBrush}" Margin="0,20,0,0">
+            <StatusBarItem HorizontalContentAlignment="Right">
+                <views:ServerStatusView DataContext="{Binding Path=ServerStatusViewModel}"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

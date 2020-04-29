@@ -7,8 +7,7 @@ namespace ClientDLL.Client
 {
     public interface IClient
     {
-        void StartClient(Action<IResponse> manageResponse);
-        IResponse SendAsync(IRequest request);
+        void SendAsync(IRequest request, Action<IResponse> manageResponse);
         Task<IResponse> ReceiveAsync();
     }
 }
