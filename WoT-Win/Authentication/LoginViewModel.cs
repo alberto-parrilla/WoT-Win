@@ -17,7 +17,7 @@ namespace WoT_Win.Authentication
         public LoginViewModel(Window view, DataManager dataManager, IMainClient client) : base(view, client, dataManager)
         {
             LoginCommand = new RelayCommand((o) => Login(o), (o) => GetIsOnline());
-            RegisterCommand = new RelayCommand((o) => Register(), (o) => true);
+            RegisterCommand = new RelayCommand((o) => Register(), (o) => GetIsOnline());
             ExitCommand = new RelayCommand((o) => Exit(), (o) => true);
             //_view = view;
             //ServerStatusViewModel = new ServerStatusViewModel(_client);
@@ -57,6 +57,7 @@ namespace WoT_Win.Authentication
 
         protected override async void ManageResponse(IResponse e)
         {
+            //var response = e as LoginResponseLegacy;
             var response = e as LoginResponse;
             if (response == null) return;
 
@@ -83,6 +84,7 @@ namespace WoT_Win.Authentication
         private void Login(object parameter)
         {
             var hashPassword = Util.HashPassword((parameter as PasswordBox)?.Password);
+            //var request = new LoginRequestLegacy(Email, hashPassword);
             var request = new LoginRequest(Email, hashPassword);
             _client.Send(request);
         }
@@ -105,7 +107,7 @@ namespace WoT_Win.Authentication
         {
             if (!userId.HasValue) return;
 
-            OpenWindowSafe(() => new UserView(_dataManager, _client).Show());
+            OpenWindowSafe(() => new UserView(userId.Value, _dataManager, _client).Show());
             CloseWindowSafe(_view);
         }
 

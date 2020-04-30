@@ -41,7 +41,8 @@ namespace KernelDLL.Authentication
 
             //Verification Email
             VerificationEmail(email, activationCode.ToString());
-            return new RegisterResult(EnumRegisterResponse.Success);
+            user = await _userDbManager.GetUserByUsernameAsync(username);
+            return new RegisterResult(EnumRegisterResponse.Success, user.Id);
         }
 
         // TODO: Finish, fix and test. It's necessary?? It's possible??
@@ -138,6 +139,19 @@ namespace KernelDLL.Authentication
             }
 
             return new LoginResultLegacy("Login failed");
+        }
+
+        public async Task<AuthenticationResult> AuthenticateUserAsync(int userId, string authenticationCode)
+        {
+            if (!Guid.TryParse(authenticationCode, out Guid guid)) return new AuthenticationResult(EnumAuthenticationResponse.InvalidCode);
+            var success = await _userDbManager.CheckAuthenticationAsync(userId, guid);
+            if (success)
+            {
+                await _userDbManager.AuthenticateAsync(userId);
+                return new AuthenticationResult(EnumAuthenticationResponse.Success);
+            }
+
+            return new AuthenticationResult(EnumAuthenticationResponse.InvalidCode);
         }
     }
 }

@@ -10,5 +10,7 @@ namespace CoreDatabase.Managers
         Task<User> GetUserByUsernameAsync(string username);
         Task<User> GetUserByEmailAsync(string email);
         Task<bool> RegisterAsync(string username, string email, string password, Guid activationCode);
+        Task<bool> CheckAuthenticationAsync(int userId, Guid authenticationCode);
+        Task<bool> AuthenticateAsync(int userId);
     }
 }

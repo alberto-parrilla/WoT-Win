@@ -5,7 +5,7 @@ using KernelDLL.Network.Response;
 
 namespace ClientDLL.Client
 {
-    public class LocalClient : IClient
+    public class LocalClient : IClientLegacy
     {
         public Task<IResponse> ReceiveAsync()
         {

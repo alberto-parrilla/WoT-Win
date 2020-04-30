@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using KernelDLL.Authentication;
 using KernelDLL.Network.Response;
 
 namespace KernelDLL.Network.Request
 {
-    public class RegisterRequest : BaseRequest
+    [Serializable]
+    public class RegisterRequest : RequestMessageBase
     {
         public RegisterRequest(string username, string email, string hashPassword)
         {
@@ -21,7 +23,7 @@ namespace KernelDLL.Network.Request
         {
             var userManager = new UserManager();
             var result = await userManager.RegisterUserAsync(Username, Email, HashPassword);
-            return new RegisterResponse(result.Status);
+            return new RegisterResponse(result.Status, result.UserId);
         }
     }
 }

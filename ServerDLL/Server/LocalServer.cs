@@ -6,7 +6,7 @@ using KernelDLL.Network.Response;
 
 namespace ServerDLL.Server
 {
-    public class LocalServer : IServer
+    public class LocalServer : IServerLegacy
     {
         public Task<IRequest> ReceiveAsync()
         {

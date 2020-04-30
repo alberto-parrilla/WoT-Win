@@ -14,6 +14,7 @@ namespace WoTServer.Views
         {
             InitializeComponent();
             DataContext = new MainViewModel(this, dataManager, server);
+            this.Loaded += (sender, args) => { (DataContext as MainViewModel).Init(); };
         }
     }
 }

@@ -1,17 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using KernelDLL.Network.Response;
 
 namespace KernelDLL.Network.Request
 {
-    public class PingRequest : BaseRequest
+    [Serializable]
+    public class PingRequest : RequestMessageBase
     {
-        //public override IResponse ProcessRequest()
-        //{
-        //    return new PingResponse(0);
-        //}
         public override async Task<IResponse> ProcessRequestAsync()
         {
-            return new PingResponse(0);
+            return new PingResponse();
         }
     }
 }

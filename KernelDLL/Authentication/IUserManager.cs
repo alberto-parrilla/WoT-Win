@@ -7,5 +7,6 @@ namespace KernelDLL.Authentication
         Task<RegisterResult> RegisterUserAsync(string username, string email, string password);
         Task<LoginResultLegacy> LoginUserLegacyAsync(string usernameOrEmail, string password);
         Task<LoginResult> LoginUserAsync(string usernameOrEmail, string password);
+        Task<AuthenticationResult> AuthenticateUserAsync(int userId, string authenticationCode);
     }
 }

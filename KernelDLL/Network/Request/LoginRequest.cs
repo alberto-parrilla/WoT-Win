@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using KernelDLL.Authentication;
 using KernelDLL.Network.Response;
 
 namespace KernelDLL.Network.Request
 {
-    public class LoginRequest : BaseRequest
+    [Serializable]
+    public class LoginRequest : RequestMessageBase
     {
         public LoginRequest(string email, string hashPassword)
         {

@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using CoreDatabase.Context.Users;
 
 namespace CoreDatabase.Context
 {
@@ -6,16 +8,17 @@ namespace CoreDatabase.Context
     {
         protected override void Seed(UserDbContext context)
         {
-            //var user = new User()
-            //{
-            //    Username = "test",
-            //    Email = "test@test.com",
-            //    Password = DbUtil.ToBase64Encode("test"),
-            //    ActivationCode = Guid.NewGuid(),
-            //};
+            var user = new User()
+            {
+                Username = "test",
+                Email = "test@test.com",
+                Password = "lO4FkzXlh+UBzEv5BhPggU8Ap7CLx8ZI/YZaKvaiLMI=",
+                Status = 1,
+                ActivationCode = Guid.NewGuid(),
+            };
 
-            //context.Users.Add(user);
-            //context.SaveChanges();
+            context.Users.Add(user);
+            context.SaveChanges();
         }
     }
 }

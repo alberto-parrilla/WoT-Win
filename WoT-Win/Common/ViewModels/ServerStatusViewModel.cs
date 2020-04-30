@@ -65,6 +65,7 @@ namespace WoT_Win.Common.ViewModels
             _serverTimer.Stop();
 
             _stopwatch.Start();
+            //_client.Send(new PingRequestLegacy());
             _client.Send(new PingRequest());
         }
 
@@ -74,7 +75,8 @@ namespace WoT_Win.Common.ViewModels
             if (response == null) return;
 
             _stopwatch.Stop();
-            bool connect = !response.TimeOut;
+            //bool connect = !response.TimeOut;
+            bool connect = true;
             if (connect)
             {
                 ServerStatusDisplay = $"Server connected: Ping = {_stopwatch.ElapsedMilliseconds} ms";

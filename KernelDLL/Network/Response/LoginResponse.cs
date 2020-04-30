@@ -1,4 +1,6 @@
-﻿namespace KernelDLL.Network.Response
+﻿using System;
+
+namespace KernelDLL.Network.Response
 {
     public enum EnumLoginResponse
     {
@@ -9,7 +11,8 @@
         UserBlocked
     }
 
-    public class LoginResponse : BaseResponse
+    [Serializable]
+    public class LoginResponse : ResponseMessageBase
     {
         public LoginResponse(EnumLoginResponse status, int? userId)
         {

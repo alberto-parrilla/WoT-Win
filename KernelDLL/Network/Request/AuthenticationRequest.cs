@@ -1,17 +1,27 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using KernelDLL.Authentication;
 using KernelDLL.Network.Response;
 
 namespace KernelDLL.Network.Request
 {
-    public class AuthenticationRequest : BaseRequest
+    [Serializable]
+    public class AuthenticationRequest : RequestMessageBase
     {
-        //public override IResponse ProcessRequest()
-        //{
-        //    return new AuthenticationResponse();
-        //}
+        public AuthenticationRequest(int userId, string authenticationCode)
+        {
+            UserId = userId;
+            AuthenticationCode = authenticationCode;
+        }
+
+        public int UserId { get; }
+        public string AuthenticationCode { get; }
+
         public override async Task<IResponse> ProcessRequestAsync()
         {
-           return new AuthenticationResponse();
+            var userManager = new UserManager();
+            var result = await userManager.AuthenticateUserAsync(UserId, AuthenticationCode);
+            return new AuthenticationResponse(result.Status);
         }
     }
 }

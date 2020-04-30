@@ -30,7 +30,6 @@ namespace CoreDatabase.Managers
             {
                 return await userDbContext.Users.AnyAsync(u =>
                     (u.Username == usernameOrEmail || u.Email == usernameOrEmail) && u.Password == password && u.Status == 1);
-
             }
         }
 
@@ -45,12 +44,45 @@ namespace CoreDatabase.Managers
                         Username = username,
                         Email = email,
                         Password = password,
+                        Status =  0,
+                        RegisterDate = DateTime.Now,
                         ActivationCode = activationCode
                     };
 
                     dbContext.Users.Add(user);
                     await dbContext.SaveChangesAsync();
 
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> CheckAuthenticationAsync(int userId, Guid authenticationCode)
+        {
+            using (var userDbContext = new UserDbContext())
+            {
+                return await userDbContext.Users.AnyAsync(u =>
+                    u.Id == userId  && u.ActivationCode == authenticationCode && u.Status == 0);
+            }
+        }
+
+        public async Task<bool> AuthenticateAsync(int userId)
+        {
+            try
+            {
+                using (var userDbContex = new UserDbContext())
+                {
+                    var user = await userDbContex.Users.FirstAsync(a => a.Id == userId && a.Status == 0);
+                    if (user == null) return false;
+
+                    user.ActivationDate = DateTime.Now;
+                    user.Status = 1;
+
+                    userDbContex.SaveChanges();
                     return true;
                 }
             }

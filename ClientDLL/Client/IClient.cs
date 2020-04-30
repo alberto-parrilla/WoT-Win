@@ -1,13 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using KernelDLL.Network.Request;
-using KernelDLL.Network.Response;
+﻿using KernelDLL.Network.Request;
 
 namespace ClientDLL.Client
 {
     public interface IClient
     {
-        void SendAsync(IRequest request, Action<IResponse> manageResponse);
-        Task<IResponse> ReceiveAsync();
+        void Connect();
+        void Disconnect();
+        void SendMessage(IRequest request);
     }
 }

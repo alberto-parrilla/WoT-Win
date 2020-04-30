@@ -10,10 +10,10 @@ namespace WoT_Win.Authentication
     /// </summary>
     public partial class UserView : Window
     {
-        public UserView(DataManager dataManager, IMainClient client)
+        public UserView(int userId, DataManager dataManager, IMainClient client)
         {
             InitializeComponent();
-            DataContext = new UserViewModel(this, dataManager, client);
+            DataContext = new UserViewModel(this, userId, dataManager, client);
 
             LanguageManager.SwitchLanguage(this, DataManager.CurrentCulture);
         }

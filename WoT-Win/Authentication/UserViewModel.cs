@@ -7,7 +7,7 @@ namespace WoT_Win.Authentication
 {
     public class UserViewModel : CustomBaseViewModel
     {
-        public UserViewModel(Window view, DataManager dataManager, IMainClient client) : base(view, client, dataManager)
+        public UserViewModel(Window view, int userId, DataManager dataManager, IMainClient client) : base(view, client, dataManager)
         {
 
         }

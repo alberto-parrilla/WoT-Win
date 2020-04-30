@@ -51,7 +51,7 @@ namespace WoT_Win.Authentication
             switch (response.Status)
             {
                 case EnumRegisterResponse.Success:
-                    //        Load(response.UserId);
+                    Authentication(response.UserId);
                     break;
                 case EnumRegisterResponse.UserExists:
                     Error(LanguageManager.GetResourceValue("RegisterView", "ErrorUserExists"));
@@ -68,15 +68,18 @@ namespace WoT_Win.Authentication
         private void Continue(object parameter)
         {
             var hashPassword = Util.HashPassword((parameter as PasswordBox)?.Password);
+            //var request = new RegisterRequestLegacy(Username, Email, hashPassword);
             var request = new RegisterRequest(Username, Email, hashPassword);
             _client.Send(request);
         }
 
-        //private void Register()
-        //{
-        //    OpenWindowSafe(() => { new RegisterView(_dataManager, _client).Show(); });
-        //    CloseWindowSafe(_view);
-        //}
+        private void Authentication(int? userId)
+        {
+            if (!userId.HasValue) return;
+
+            OpenWindowSafe(() => new AuthenticationView(userId.Value, _dataManager, _client).Show());
+            CloseWindowSafe(_view);
+        }
 
         private void Exit()
         {

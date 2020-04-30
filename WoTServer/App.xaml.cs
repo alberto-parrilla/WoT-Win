@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using KernelDLL.Common;
 using KernelDLL.Database;
 using ServerDLL.Server;
@@ -34,7 +28,7 @@ namespace WoTServer
         private void Init()
         {
             _server = new MainServer();
-            _server.Init();
+            //_server.Init();
             _dataManager = new DataManager(new FakeDatabase(), new RepositoryManager());
         }
     }

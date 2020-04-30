@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,7 +34,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\AuthenticationResult.cs" />
     <Compile Include="Authentication\IUserManager.cs" />
     <Compile Include="Authentication\LoginResult.cs" />
     <Compile Include="Authentication\LoginResultLegacy.cs" />
@@ -87,20 +98,29 @@
     <Compile Include="Init\PlayerSavedModel.cs" />
     <Compile Include="Init\SavedGameModel.cs" />
     <Compile Include="Init\SceneSavedModel.cs" />
+    <Compile Include="Network\AllowAllAssemblyVersionsDeserializationBinder.cs" />
     <Compile Include="Network\Request\AuthenticationRequest.cs" />
     <Compile Include="Network\Request\BaseRequest.cs" />
     <Compile Include="Network\Request\EmptyRequest.cs" />
     <Compile Include="Network\Request\IRequest.cs" />
     <Compile Include="Network\Request\LoginRequest.cs" />
+    <Compile Include="Network\Request\LoginRequestLegacy.cs" />
     <Compile Include="Network\Request\PingRequest.cs" />
+    <Compile Include="Network\Request\PingRequestLegacy.cs" />
     <Compile Include="Network\Request\RegisterRequest.cs" />
+    <Compile Include="Network\Request\RegisterRequestLegacy.cs" />
+    <Compile Include="Network\Request\RequestMessageBase.cs" />
     <Compile Include="Network\Response\AuthenticationResponse.cs" />
     <Compile Include="Network\Response\BaseResponse.cs" />
     <Compile Include="Network\Response\EmptyResponse.cs" />
     <Compile Include="Network\Response\IResponse.cs" />
     <Compile Include="Network\Response\LoginResponse.cs" />
+    <Compile Include="Network\Response\LoginResponseLegacy.cs" />
     <Compile Include="Network\Response\PingResponse.cs" />
+    <Compile Include="Network\Response\PingResponseLegacy.cs" />
     <Compile Include="Network\Response\RegisterResponse.cs" />
+    <Compile Include="Network\Response\RegisterResponseLegacy.cs" />
+    <Compile Include="Network\Response\ResponseMessageBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -109,8 +129,19 @@
       <Name>CoreDatabase</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

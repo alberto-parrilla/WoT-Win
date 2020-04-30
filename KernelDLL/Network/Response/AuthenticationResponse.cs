@@ -1,7 +1,24 @@
-﻿namespace KernelDLL.Network.Response
+﻿using System;
+
+namespace KernelDLL.Network.Response
 {
-    public class AuthenticationResponse : BaseResponse
+    public enum EnumAuthenticationResponse
     {
+        Success,
+        InvalidCode,
+        UndefinedError
+    }
+
+    [Serializable]
+    public class AuthenticationResponse : ResponseMessageBase
+    {
+        public AuthenticationResponse(EnumAuthenticationResponse status)
+        {
+            Status = status;
+        }
+
+        public EnumAuthenticationResponse Status { get; }
+
         public override EnumResponseType ResponseType => EnumResponseType.Authentication;
     }
 }

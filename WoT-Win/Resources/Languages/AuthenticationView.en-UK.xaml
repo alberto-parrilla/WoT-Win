@@ -5,4 +5,8 @@
     <sys:String x:Key="TxtInfo">Please introduce the code you have received in your Email</sys:String>
     <sys:String x:Key="BtnContinue">Continue</sys:String>
     <sys:String x:Key="BtnExit">Exit</sys:String>
+    <sys:String x:Key="Success">Your account has been activated</sys:String>
+    <sys:String x:Key="ErrorInvalidCode">The code is not valid</sys:String>
+    <sys:String x:Key="ErrorUndefined">An unexpected error happened</sys:String>
+    <sys:String x:Key="WarningEmptyCode">Must introduce a code</sys:String>
 </ResourceDictionary>

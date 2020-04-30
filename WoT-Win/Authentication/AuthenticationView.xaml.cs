@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ClientDLL.Client;
+using KernelDLL.Common;
+using WoT_Win.Common.ViewModels;
 
 namespace WoT_Win.Authentication
 {
@@ -19,9 +22,12 @@ namespace WoT_Win.Authentication
     /// </summary>
     public partial class AuthenticationView : Window
     {
-        public AuthenticationView()
+        public AuthenticationView(int userId, DataManager dataManager, IMainClient client)
         {
             InitializeComponent();
+            DataContext = new AuthenticationViewModel(this, userId, dataManager, client);
+
+            LanguageManager.SwitchLanguage(this, DataManager.CurrentCulture);
         }
     }
 }
