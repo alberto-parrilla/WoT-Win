@@ -53,7 +53,6 @@
     <Compile Include="Authentication\AuthenticationResult.cs" />
     <Compile Include="Authentication\IUserManager.cs" />
     <Compile Include="Authentication\LoginResult.cs" />
-    <Compile Include="Authentication\LoginResultLegacy.cs" />
     <Compile Include="Authentication\RegisterResult.cs" />
     <Compile Include="Authentication\UserManager.cs" />
     <Compile Include="Common\DataManager.cs" />
@@ -100,26 +99,16 @@
     <Compile Include="Init\SceneSavedModel.cs" />
     <Compile Include="Network\AllowAllAssemblyVersionsDeserializationBinder.cs" />
     <Compile Include="Network\Request\AuthenticationRequest.cs" />
-    <Compile Include="Network\Request\BaseRequest.cs" />
-    <Compile Include="Network\Request\EmptyRequest.cs" />
     <Compile Include="Network\Request\IRequest.cs" />
     <Compile Include="Network\Request\LoginRequest.cs" />
-    <Compile Include="Network\Request\LoginRequestLegacy.cs" />
     <Compile Include="Network\Request\PingRequest.cs" />
-    <Compile Include="Network\Request\PingRequestLegacy.cs" />
     <Compile Include="Network\Request\RegisterRequest.cs" />
-    <Compile Include="Network\Request\RegisterRequestLegacy.cs" />
     <Compile Include="Network\Request\RequestMessageBase.cs" />
     <Compile Include="Network\Response\AuthenticationResponse.cs" />
-    <Compile Include="Network\Response\BaseResponse.cs" />
-    <Compile Include="Network\Response\EmptyResponse.cs" />
     <Compile Include="Network\Response\IResponse.cs" />
     <Compile Include="Network\Response\LoginResponse.cs" />
-    <Compile Include="Network\Response\LoginResponseLegacy.cs" />
     <Compile Include="Network\Response\PingResponse.cs" />
-    <Compile Include="Network\Response\PingResponseLegacy.cs" />
     <Compile Include="Network\Response\RegisterResponse.cs" />
-    <Compile Include="Network\Response\RegisterResponseLegacy.cs" />
     <Compile Include="Network\Response\ResponseMessageBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,19 +6,14 @@ using KernelDLL.Network.Response;
 
 namespace ServerDLL.Server
 {
-    public class LocalServer : IServerLegacy
+    public class LocalServer : IServer
     {
-        public Task<IRequest> ReceiveAsync()
+        public void Start()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public void Send(IResponse response, Socket handler)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void StartListening(Action<IRequest, Socket> receiveRequest)
+        public void Stop()
         {
             throw new NotImplementedException();
         }

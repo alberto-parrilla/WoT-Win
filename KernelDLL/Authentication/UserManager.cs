@@ -113,34 +113,6 @@ namespace KernelDLL.Authentication
             return new LoginResult(EnumLoginResponse.WrongPassword);
         }
 
-        public async Task<LoginResultLegacy> LoginUserLegacyAsync(string usernameOrEmail, string password)
-        {
-            var success = await _userDbManager.LoginAsync(usernameOrEmail, password);
-            if (success)
-            {
-                var user = await _userDbManager.GetUserByUsernameAsync(usernameOrEmail) ?? await _userDbManager.GetUserByEmailAsync(usernameOrEmail);
-
-                if (user == null)
-                {
-                    return new LoginResultLegacy("User not found");
-                }
-
-                //if (!user.IsActive)
-                //{
-                //    return new LoginResultLegacy("User not actived");
-                //}
-
-                //if (user.IsBlocked)
-                //{
-                //    return new LoginResultLegacy("User blocked");
-                //}
-
-                return new LoginResultLegacy(user.Id);
-            }
-
-            return new LoginResultLegacy("Login failed");
-        }
-
         public async Task<AuthenticationResult> AuthenticateUserAsync(int userId, string authenticationCode)
         {
             if (!Guid.TryParse(authenticationCode, out Guid guid)) return new AuthenticationResult(EnumAuthenticationResponse.InvalidCode);

@@ -12,32 +12,16 @@ namespace WoT_Win.Authentication
 {
     public class LoginViewModel : CustomBaseViewModel
     {
-        //private Window _view;
-
         public LoginViewModel(Window view, DataManager dataManager, IMainClient client) : base(view, client, dataManager)
         {
             LoginCommand = new RelayCommand((o) => Login(o), (o) => GetIsOnline());
             RegisterCommand = new RelayCommand((o) => Register(), (o) => GetIsOnline());
             ExitCommand = new RelayCommand((o) => Exit(), (o) => true);
-            //_view = view;
-            //ServerStatusViewModel = new ServerStatusViewModel(_client);
-            //ServerStatusViewModel.PropertyChanged += ServerStatusViewModel_PropertyChanged;
         }
 
-        //private void ServerStatusViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-        //    if (e.PropertyName == "IsOnline")
-        //    {
-        //        OnPropertyChanged("IsOnline");
-        //    }
-        //}
-
-        //public bool IsOnline { get { return ServerStatusViewModel.IsOnline; } }
         public ICommand LoginCommand { get; private set; }
         public ICommand RegisterCommand { get; private set; }
         public ICommand ExitCommand { get; private set; }
-
-        //public ServerStatusViewModel ServerStatusViewModel { get; private set; }
 
         private string _email;
         public string Email
@@ -50,14 +34,8 @@ namespace WoT_Win.Authentication
             }
         }
 
-        //private bool GetIsOnline()
-        //{
-        //    return ServerStatusViewModel.IsOnline;
-        //}
-
         protected override async void ManageResponse(IResponse e)
         {
-            //var response = e as LoginResponseLegacy;
             var response = e as LoginResponse;
             if (response == null) return;
 
@@ -84,7 +62,6 @@ namespace WoT_Win.Authentication
         private void Login(object parameter)
         {
             var hashPassword = Util.HashPassword((parameter as PasswordBox)?.Password);
-            //var request = new LoginRequestLegacy(Email, hashPassword);
             var request = new LoginRequest(Email, hashPassword);
             _client.Send(request);
         }
@@ -113,7 +90,6 @@ namespace WoT_Win.Authentication
 
         private void Error(string error)
         {
-            //CustomMessageBox.Show("Error", error, EnumMessageBox.OkCancel);
             OpenWindowSafe(() =>  CustomMessageBox.Show("Error", error, EnumMessageBox.OkCancel));
         }
     }

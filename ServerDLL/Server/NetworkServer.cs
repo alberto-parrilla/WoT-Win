@@ -59,7 +59,6 @@ namespace ServerDLL.Server
                 Receiver newClient = new Receiver(Listener.EndAcceptTcpClient(ar), _mainServer);
                 newClient.Start();
                 Clients.Add(newClient);
-                ///OnClientConnected(newClient);
             }
 
             Debug.WriteLine("New Client Connected");

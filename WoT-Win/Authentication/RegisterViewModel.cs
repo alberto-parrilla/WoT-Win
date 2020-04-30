@@ -68,7 +68,6 @@ namespace WoT_Win.Authentication
         private void Continue(object parameter)
         {
             var hashPassword = Util.HashPassword((parameter as PasswordBox)?.Password);
-            //var request = new RegisterRequestLegacy(Username, Email, hashPassword);
             var request = new RegisterRequest(Username, Email, hashPassword);
             _client.Send(request);
         }

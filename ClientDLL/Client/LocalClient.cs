@@ -1,23 +1,21 @@
 ﻿using System;
-using System.Threading.Tasks;
 using KernelDLL.Network.Request;
-using KernelDLL.Network.Response;
 
 namespace ClientDLL.Client
 {
-    public class LocalClient : IClientLegacy
+    public class LocalClient : IClient
     {
-        public Task<IResponse> ReceiveAsync()
+        public void Connect()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        //public void SendAsync(IRequest request)
-        //{
-        //    throw new System.NotImplementedException();
-        //}
+        public void Disconnect()
+        {
+            throw new NotImplementedException();
+        }
 
-        public void SendAsync(IRequest request, Action<IResponse> manageResponse)
+        public void SendMessage(IRequest request)
         {
             throw new NotImplementedException();
         }

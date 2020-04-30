@@ -57,11 +57,9 @@
   <ItemGroup>
     <Compile Include="Client\IClient.cs" />
     <Compile Include="Client\MainClient.cs" />
-    <Compile Include="Client\IClientLegacy.cs" />
     <Compile Include="Client\IMainClient.cs" />
     <Compile Include="Client\LocalClient.cs" />
     <Compile Include="Client\NetworkClient.cs" />
-    <Compile Include="Client\NetworkClientLegacy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

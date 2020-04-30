@@ -20,7 +20,6 @@ namespace ServerDLL.Server
         public void Start()
         {
             IsRunning = true;
-            //new Thread(() => _server.StartListening(ReceiveRequest)).Start();
             _server.Start();
         }
 
@@ -35,12 +34,5 @@ namespace ServerDLL.Server
             var response = await request.ProcessRequestAsync();
             clientrReceiver.SendMessage(response);
         }
-
-        private async void ReceiveRequest(IRequest request, Socket handler)
-        {
-            //////////IResponse response = await request.ProcessRequestAsync();
-            //////////_server.Send(response, handler);
-        }
-
     }
 }

@@ -18,9 +18,6 @@ namespace ServerDLL.Server
 
         public Receiver()
         {
-            //ID = Guid.NewGuid();
-            //MessageQueue = new List<MessageBase>();
-            //Status = StatusEnum.Connected;
             IsConnected = true;
         }
 
@@ -43,25 +40,12 @@ namespace ServerDLL.Server
             receivingThread = new Thread(ReceivingMethod);
             receivingThread.IsBackground = true;
             receivingThread.Start();
-
-            //sendingThread = new Thread(SendingMethod);
-            //sendingThread.IsBackground = true;
-            //sendingThread.Start();
         }
 
         private void Disconnect()
         {
             if (!IsConnected) return;
-            //if (Status == StatusEnum.Disconnected) return;
-
-            //if (OtherSideReceiver != null)
-            //{
-            //    OtherSideReceiver.OtherSideReceiver = null;
-            //    OtherSideReceiver.Status = StatusEnum.Validated;
-            //    OtherSideReceiver = null;
-            //}
-
-            //Status = StatusEnum.Disconnected;
+         
             IsConnected = false;
             Client.Client.Disconnect(false);
             Client.Close();
@@ -83,33 +67,6 @@ namespace ServerDLL.Server
                 }
             }
         }
-        
-        private void SendingMethod()
-        {
-            //while (Status != StatusEnum.Disconnected)
-            while (IsConnected)
-            {
-            //    if (MessageQueue.Count > 0)
-            //    {
-            //        var message = MessageQueue[0];
-
-            //        try
-            //        {
-            //            BinaryFormatter f = new BinaryFormatter();
-            //            f.Serialize(Client.GetStream(), message);
-            //        }
-            //        catch
-            //        {
-            //            Disconnect();
-            //        }
-            //        finally
-            //        {
-            //            MessageQueue.Remove(message);
-            //        }
-            //    }
-                Thread.Sleep(30);
-            }
-        }
 
         private async void ReceivingMethod()
         {
@@ -124,7 +81,6 @@ namespace ServerDLL.Server
                     {
                         BinaryFormatter f = new BinaryFormatter();
                         RequestMessageBase msg = f.Deserialize(Client.GetStream()) as RequestMessageBase;
-                        //OnMessageReceived(msg);
                         await MainServer.ProcessRequestAsync(msg, this);
                     }
                     catch (Exception e)

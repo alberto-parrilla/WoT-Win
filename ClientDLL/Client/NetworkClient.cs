@@ -15,11 +15,8 @@ namespace ClientDLL.Client
         private const int remotePort = 11000;
 
         private Thread receivingThread;
-        //private Thread sendingThread;
-        //private List<ResponseCallbackObject> callBacks;
 
         public TcpClient TcpClient { get; set; }
-        //public List<RequestMessageBase> MessageQueue { get; private set; }
 
         private Action<IResponse> _manageResponse;
 
@@ -32,39 +29,22 @@ namespace ClientDLL.Client
         {
             TcpClient = new TcpClient();
             TcpClient.Connect(remoteIpAddress, remotePort);
-            //Status = StatusEnum.Connected;
             TcpClient.ReceiveBufferSize = 1024;
             TcpClient.SendBufferSize = 1024;
 
             receivingThread = new Thread(ReceivingMethod);
             receivingThread.IsBackground = true;
             receivingThread.Start();
-
-            //sendingThread = new Thread(SendingMethod);
-            //sendingThread.IsBackground = true;
-            //sendingThread.Start();
         }
 
         public void Disconnect()
         {
-            //MessageQueue.Clear();
-            //callBacks.Clear();
-            try
-            {
-                //SendMessage(new DisconnectRequest());
-            }
-            catch { }
-            Thread.Sleep(1000);
-            //Status = StatusEnum.Disconnected;
             TcpClient.Client.Disconnect(false);
             TcpClient.Close();
-            //OnClientDisconnected();
         }
 
         private void ReceivingMethod(object obj)
         {
-            //while (Status != StatusEnum.Disconnected)
-            //{
             while (true)
             {
                 if (TcpClient.Available > 0)
@@ -74,13 +54,11 @@ namespace ClientDLL.Client
                         var f = new BinaryFormatter();
                         f.Binder = new AllowAllAssemblyVersionsDeserializationBinder();
                         var msg = f.Deserialize(TcpClient.GetStream()) as ResponseMessageBase;
-                        //OnMessageReceived(msg);
                         _manageResponse(msg);
                     }
                     catch (Exception e)
                     {
                         Exception ex = new Exception("Unknown message recieved. Could not deserialize the stream.", e);
-                        //OnClientError(this, ex);
                         Debug.WriteLine(ex.Message);
                     }
                 }
@@ -99,12 +77,6 @@ namespace ClientDLL.Client
 
         private void SendingMethod(RequestMessageBase request)
         {
-            //while (Status != StatusEnum.Disconnected)
-            //{
-            //    if (MessageQueue.Count > 0)
-            //    {
-            //        MessageBase m = MessageQueue[0];
-
             BinaryFormatter f = new BinaryFormatter();
             try
             {
@@ -114,12 +86,6 @@ namespace ClientDLL.Client
             {
                 Disconnect();
             }
-
-            //        MessageQueue.Remove(m);
-            //    }
-
-            //Thread.Sleep(30);
-            //}
         }
     }
 }
