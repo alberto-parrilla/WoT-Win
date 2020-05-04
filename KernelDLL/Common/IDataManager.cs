@@ -6,5 +6,6 @@ namespace KernelDLL.Common
     public interface IDataManager
     {
         Task<AreaInfoModel> GetAreaInfoAsync(int areaId);
+        Task<SceneInfoModel> GetSceneInfoAsync(int areaId);
     }
 }

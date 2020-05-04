@@ -62,6 +62,24 @@
     <Compile Include="Context\Data\Configuration\TransitionConfiguration.cs" />
     <Compile Include="Context\Data\Scene.cs" />
     <Compile Include="Context\Data\Transition.cs" />
+    <Compile Include="Context\GameDbContext.cs" />
+    <Compile Include="Context\GameDbContextInitializer.cs" />
+    <Compile Include="Context\Game\Attribute.cs" />
+    <Compile Include="Context\Game\AttributeMod.cs" />
+    <Compile Include="Context\Game\Configuration\AttributeConfiguration.cs" />
+    <Compile Include="Context\Game\Configuration\AttributeModConfiguration.cs" />
+    <Compile Include="Context\Game\Configuration\GameSessionConfiguration.cs" />
+    <Compile Include="Context\Game\Configuration\PlayerConfiguration.cs" />
+    <Compile Include="Context\Game\Configuration\PlayerFeatConfiguration.cs" />
+    <Compile Include="Context\Game\Configuration\PlayerItemConfiguration.cs" />
+    <Compile Include="Context\Game\Configuration\PlayerSkillConfiguration.cs" />
+    <Compile Include="Context\Game\Configuration\PlayerWeaveConfiguration.cs" />
+    <Compile Include="Context\Game\GameSession.cs" />
+    <Compile Include="Context\Game\Player.cs" />
+    <Compile Include="Context\Game\PlayerFeat.cs" />
+    <Compile Include="Context\Game\PlayerItem.cs" />
+    <Compile Include="Context\Game\PlayerSkill.cs" />
+    <Compile Include="Context\Game\PlayerWeave.cs" />
     <Compile Include="Context\UserDbContext.cs" />
     <Compile Include="Context\UserDbContextInitializer.cs" />
     <Compile Include="Context\Users\Configuration\UserConfiguration.cs" />
@@ -80,9 +98,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Context\Game\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

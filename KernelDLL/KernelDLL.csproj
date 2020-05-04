@@ -66,6 +66,8 @@
     <Compile Include="Database\FakeDatabase.cs" />
     <Compile Include="Database\IDatabase.cs" />
     <Compile Include="Game\Enums\Enums.cs" />
+    <Compile Include="Game\GameManager.cs" />
+    <Compile Include="Game\IGameManager.cs" />
     <Compile Include="Game\Interfaces\IScene.cs" />
     <Compile Include="Game\Interfaces\ISkillParameter.cs" />
     <Compile Include="Game\Interfaces\ISkillTarget.cs" />
@@ -78,9 +80,12 @@
     <Compile Include="Game\Models\BaseObjectModel.cs" />
     <Compile Include="Game\Models\BaseWeaveModel.cs" />
     <Compile Include="Game\Models\FeatModel.cs" />
+    <Compile Include="Game\Models\GameSessionInfoModel.cs" />
+    <Compile Include="Game\Models\GameSessionModel.cs" />
     <Compile Include="Game\Models\IServiceModel.cs" />
     <Compile Include="Game\Models\ObjectModel.cs" />
     <Compile Include="Game\Models\PlayerFeatModel.cs" />
+    <Compile Include="Game\Models\PlayerInfoModel.cs" />
     <Compile Include="Game\Models\PlayerItemModel.cs" />
     <Compile Include="Game\Models\PlayerModel.cs" />
     <Compile Include="Game\Models\PlayerSkillModel.cs" />

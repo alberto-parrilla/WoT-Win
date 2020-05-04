@@ -62,7 +62,7 @@ namespace WoT_Win.Common.ViewModels
         public string Name { get { return Model.Name; } }
         public EnumRace Race { get { return Model.Race; } }
         public EnumSex Sex { get { return Model.Sex; } }
-        public int Nation { get { return Model.Nation; } }
+        public int Nation { get { return Model.Location; } }
         public bool IsChanneler { get { return Model.IsChanneler; } }
 
         public string Faceset { get { return Path.Combine(Util.SavedPlayerPath, string.Format(@"{0}\faceset.png", Id)); } }

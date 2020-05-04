@@ -4,7 +4,7 @@ using CoreDatabase.Context.Data.Configuration;
 
 namespace CoreDatabase.Context
 {
-    public class DataDbContext : UserDbContext
+    public class DataDbContext : DbContext
     {
         public DataDbContext()
         {
