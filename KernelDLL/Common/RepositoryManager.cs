@@ -12,9 +12,9 @@ namespace KernelDLL.Common
 {
     public class RepositoryManager : IRepositoryManager
     {
-        public List<TransitionModel> LoadTransitions(string areaName)
+        public List<TransitionModelLegacy> LoadTransitions(string areaName)
         {
-           var list = new List<TransitionModel>();
+           var list = new List<TransitionModelLegacy>();
 
            
                XDocument xmlFile = XDocument.Load(areaName);
@@ -33,7 +33,7 @@ namespace KernelDLL.Common
                        var width = Convert.ToInt32(Convert.ToDouble(widthStr.Replace(".",",")) * 3 / 4);
                        var heightStr = data.Attributes().Where(a => a.Name == "height").Select(a => a.Value).FirstOrDefault();
                        var height = Convert.ToInt32(Convert.ToDouble(heightStr.Replace(".",",")) * 3 / 4);
-                       list.Add(new TransitionModel(Convert.ToInt32(transitionId), x, y, width, height));
+                       list.Add(new TransitionModelLegacy(Convert.ToInt32(transitionId), x, y, width, height));
                    }
                }
            

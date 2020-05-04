@@ -29,7 +29,8 @@ namespace CoreDatabase.Managers
             using (var userDbContext = new UserDbContext())
             {
                 return await userDbContext.Users.AnyAsync(u =>
-                    (u.Username == usernameOrEmail || u.Email == usernameOrEmail) && u.Password == password && u.Status == 1);
+                    (u.Username == usernameOrEmail || u.Email == usernameOrEmail) && u.Password == password &&
+                    u.Status == 1);
             }
         }
 

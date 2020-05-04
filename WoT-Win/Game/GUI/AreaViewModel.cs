@@ -6,11 +6,11 @@ namespace WoT_Win.Game.GUI
 {
     public class AreaViewModel : BaseViewModel
     {
-        public AreaViewModel(AreaModel model)
+        public AreaViewModel(AreaModelLegacy model)
         {
             Model = model;          
         }
 
-        private AreaModel Model { get; set; }      
+        private AreaModelLegacy Model { get; set; }      
     }
 }

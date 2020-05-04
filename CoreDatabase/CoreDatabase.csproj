@@ -54,6 +54,14 @@
   <ItemGroup>
     <Compile Include="Abstractions\BusinessEntity.cs" />
     <Compile Include="Abstractions\BusinessEntityTypeConfiguration.cs" />
+    <Compile Include="Context\DataDbContext.cs" />
+    <Compile Include="Context\DataDbContextInitializer.cs" />
+    <Compile Include="Context\Data\Area.cs" />
+    <Compile Include="Context\Data\Configuration\AreaConfiguration.cs" />
+    <Compile Include="Context\Data\Configuration\SceneConfiguration.cs" />
+    <Compile Include="Context\Data\Configuration\TransitionConfiguration.cs" />
+    <Compile Include="Context\Data\Scene.cs" />
+    <Compile Include="Context\Data\Transition.cs" />
     <Compile Include="Context\UserDbContext.cs" />
     <Compile Include="Context\UserDbContextInitializer.cs" />
     <Compile Include="Context\Users\Configuration\UserConfiguration.cs" />
@@ -73,7 +81,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Context\Data\" />
     <Folder Include="Context\Game\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,6 +9,6 @@ namespace KernelDLL.Common
 {
     public interface IRepositoryManager
     {
-        List<TransitionModel> LoadTransitions(string areaName);
+        List<TransitionModelLegacy> LoadTransitions(string areaName);
     }
 }

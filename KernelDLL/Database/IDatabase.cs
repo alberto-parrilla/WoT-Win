@@ -12,7 +12,7 @@ namespace KernelDLL.Database
     {
         IList<SavedGameModel> LoadSavedGames();
         PlayerModel LoadPlayer(int id);       
-        AreaModel LoadArea(int id);      
-        SceneModel LoadScene(int areaId, int id);
+        AreaModelLegacy LoadArea(int id);      
+        SceneModelLegacy LoadScene(int areaId, int id);
     }
 }

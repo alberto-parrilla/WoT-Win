@@ -11,7 +11,7 @@ namespace WoTServer.ViewModels
         private Window _view;
         private IMainServer _server;
 
-        public MainViewModel(Window view, DataManager dataManager, IMainServer server) : base(dataManager)
+        public MainViewModel(Window view, IMainServer server, DataManager dataManager) : base(dataManager)
         {
             _view = view;
             _server = server;

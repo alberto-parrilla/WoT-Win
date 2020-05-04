@@ -12,13 +12,13 @@ namespace WoT_Win.Game.GUI
 {
     public sealed class TransitionViewModel : BaseViewModel
     {
-        public TransitionViewModel(TransitionModel model, SceneViewModel parent)
+        public TransitionViewModel(TransitionModelLegacy model, SceneViewModel parent)
         {
             Model = model;
             Parent = parent;
         }
 
-        private TransitionModel Model { get; set; }
+        private TransitionModelLegacy Model { get; set; }
         private SceneViewModel Parent { get; set; }
 
         public int X { get { return Model.X; } }

@@ -10,8 +10,8 @@ namespace KernelDLL.Database
     public class FakeDatabase : IDatabase
     {
         private IList<PlayerModel> Players { get; set; }
-        private IList<AreaModel> Areas { get; set; }
-        private IList<SceneModel> Scenes { get; set; }
+        private IList<AreaModelLegacy> Areas { get; set; }
+        private IList<SceneModelLegacy> Scenes { get; set; }
         private IList<SavedGameModel> SavedGames { get; set; }
 
         public FakeDatabase()
@@ -84,33 +84,33 @@ namespace KernelDLL.Database
          return SavedGames;
         }
 
-        private IList<AreaModel> InitAreas()
+        private IList<AreaModelLegacy> InitAreas()
         {
-            return new List<AreaModel>()
+            return new List<AreaModelLegacy>()
             {
-                new AreaModel(1, "Campo de Emond"),                
+                new AreaModelLegacy(1, "Campo de Emond"),                
             };
         }
 
-        public AreaModel LoadArea(int id)
+        public AreaModelLegacy LoadArea(int id)
         {
             return Areas.FirstOrDefault(a => a.Id == id);
         }
 
-        private IList<SceneModel> InitScenes()
+        private IList<SceneModelLegacy> InitScenes()
         {
-            return new List<SceneModel>()
+            return new List<SceneModelLegacy>()
             {
-                new SceneModel(1, "CampoEmond", "Campo de Emond", 1, 12288,12288, new List<TransitionModel>(), null),
-                new SceneModel(2, "PosadaManantialPB", "Posada del Manantial (Planta Baja)", 1, 2304, 1536,  new List<TransitionModel>(), null),
-                new SceneModel(3, "PosadaManantial1P", "Posada del Manantial (1 Planta)", 1, -1, -1,  new List<TransitionModel>(), null),
-                new SceneModel(4, "PosadaManantialS", "Posada del Manantial (Sotano)", 1, -1, -1, new List<TransitionModel>(), null ),
-                new SceneModel(1, "BoesqueOeste", "Bosque del Oeste", 2, -1, -1, new List<TransitionModel>(), null),
-                new SceneModel(2, "CasaTam", "Casa de Tam", 2, -1, -1, new List<TransitionModel>(),  null)
+                new SceneModelLegacy(1, "CampoEmond", "Campo de Emond", 1, 12288,12288, new List<TransitionModelLegacy>(), null),
+                new SceneModelLegacy(2, "PosadaManantialPB", "Posada del Manantial (Planta Baja)", 1, 2304, 1536,  new List<TransitionModelLegacy>(), null),
+                new SceneModelLegacy(3, "PosadaManantial1P", "Posada del Manantial (1 Planta)", 1, -1, -1,  new List<TransitionModelLegacy>(), null),
+                new SceneModelLegacy(4, "PosadaManantialS", "Posada del Manantial (Sotano)", 1, -1, -1, new List<TransitionModelLegacy>(), null ),
+                new SceneModelLegacy(1, "BoesqueOeste", "Bosque del Oeste", 2, -1, -1, new List<TransitionModelLegacy>(), null),
+                new SceneModelLegacy(2, "CasaTam", "Casa de Tam", 2, -1, -1, new List<TransitionModelLegacy>(),  null)
             };
         }
 
-        public SceneModel LoadScene(int id, int areaId)
+        public SceneModelLegacy LoadScene(int id, int areaId)
         {
             return Scenes.FirstOrDefault(s => s.Id == id && s.AreaId == areaId);
         }

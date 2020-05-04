@@ -1,20 +1,19 @@
-﻿using System.Net.Sockets;
-using System.Security.Cryptography;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using KernelDLL.Common;
 using KernelDLL.Network.Request;
-using KernelDLL.Network.Response;
 
 namespace ServerDLL.Server
 {
     public class MainServer : IMainServer
     {
         private IServer _server;
+        private IDataManager _dataManager;
         public bool IsRunning { get; private set; }
 
-        public MainServer()
+        public MainServer(IDataManager dataManager)
         {
             _server = new NetworkServer(this);
+            _dataManager = dataManager;
         }
 
         public void Start()

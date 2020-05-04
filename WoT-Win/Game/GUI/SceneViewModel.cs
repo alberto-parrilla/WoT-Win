@@ -15,7 +15,7 @@ namespace WoT_Win.Game.GUI
     public class SceneViewModel : BaseViewModel
     {
         private int _movRange = Util.MovRange;
-        public SceneViewModel(SceneModel model)
+        public SceneViewModel(SceneModelLegacy model)
         {
             Model = model;
             Transitions = new List<TransitionViewModel>( Model.Transitions.Select(t => new TransitionViewModel(t, this)));
@@ -23,7 +23,7 @@ namespace WoT_Win.Game.GUI
             OffsetY = -Height / 2;         
         }
 
-        private SceneModel Model { get; set; }
+        private SceneModelLegacy Model { get; set; }
         public string Map { get { return Model.Map; } }
         public string BackgroundMap { get { return Model.BackgroundMap; } }
         public int Width { get { return Model.Width; } }

@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using KernelDLL.Common;
-using KernelDLL.Database;
 using ServerDLL.Server;
 using WoTServer.Views;
 
@@ -27,9 +26,9 @@ namespace WoTServer
 
         private void Init()
         {
-            _server = new MainServer();
+            _dataManager = new DataManager();
+            _server = new MainServer(_dataManager);
             //_server.Init();
-            _dataManager = new DataManager(new FakeDatabase(), new RepositoryManager());
         }
     }
 }

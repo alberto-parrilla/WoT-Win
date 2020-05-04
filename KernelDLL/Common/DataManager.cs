@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using CoreDatabase.Managers;
 using KernelDLL.Game.Models;
 using KernelDLL.Init;
 using KernelDLL.Database;
@@ -12,14 +15,21 @@ namespace KernelDLL.Common
 
         private IDatabase _db;
         private IRepositoryManager _repositoryManager;
+        private IDataDbManager _dataDbManager;
         private PlayerModel _player;
-        private AreaModel _area;
-        private SceneModel _scene;
+        private AreaModelLegacy _area;
+        private SceneModelLegacy _scene;
+
+        public DataManager()
+        {
+            _dataDbManager = new DataDbManager();
+        }
 
         public DataManager(IDatabase db, IRepositoryManager repositoryManager)
         {
             _db = db;
             _repositoryManager = repositoryManager;
+            _dataDbManager = new DataDbManager();
             Feats = new List<BaseSkillModel>()
             {
                 new FeatModel(1, "Competencia en arma", null, null, null),
@@ -93,9 +103,21 @@ namespace KernelDLL.Common
             _area = _db.LoadArea(id);            
         }
 
-        public AreaModel GetArea()
+        public AreaModelLegacy GetArea()
         {
             return _area;
+        }
+
+        public async Task<AreaInfoModel> GetAreaInfoAsync(int areaId)
+        {
+            var area = await _dataDbManager.GetAreaByIdAsync(areaId);
+            return new AreaInfoModel(area);
+        }
+
+        public async Task<AreaModel> GetAreaAsync(int areaId)
+        {
+            var area = await _dataDbManager.GetAreaByIdAsync(areaId);
+            return new AreaModel(area);
         }
 
         public void LoadScene(int id, int areaId)
@@ -104,9 +126,28 @@ namespace KernelDLL.Common
             _scene.LoadTransitions(_repositoryManager);
         }
 
-        public SceneModel GetScene()
+        public SceneModelLegacy GetScene()
         {
             return _scene;
+        }
+
+        public async Task<SceneInfoModel> GetSceneInfoAsync(int sceneId)
+        {
+            var scene = await _dataDbManager.GetSceneByIdAsync(sceneId);
+            return new SceneInfoModel(scene);
+        }
+
+        public async Task<SceneModel> GetSceneAsync(int sceneId)
+        {
+            var scene = await _dataDbManager.GetSceneByIdAsync(sceneId);
+            return new SceneModel(scene);
+        }
+
+        public async Task<List<TransitionModel>> GetTransitionsAsync(int areaId, int sceneId)
+        {
+            var transitions = await _dataDbManager.GetTransitionsByAreaIdAndSceneIdAsync(areaId, sceneId);
+
+            return transitions.Select(t => new TransitionModel(t)).ToList();
         }
 
         public List<BaseSkillModel> GetSkills()

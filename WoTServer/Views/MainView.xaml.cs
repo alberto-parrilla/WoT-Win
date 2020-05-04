@@ -13,7 +13,7 @@ namespace WoTServer.Views
         public MainView(DataManager dataManager, IMainServer server)
         {
             InitializeComponent();
-            DataContext = new MainViewModel(this, dataManager, server);
+            DataContext = new MainViewModel(this, server, dataManager);
             this.Loaded += (sender, args) => { (DataContext as MainViewModel).Init(); };
         }
     }

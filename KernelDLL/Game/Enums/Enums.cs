@@ -135,4 +135,19 @@ namespace KernelDLL.Game.Enums
         Left,
         Right
     }
+
+    public enum EnumSceneType
+    {
+        Outside,
+        Inside,
+        Service
+    }
+
+    public enum EnumServiceType
+    {
+        Blacksmith,
+        Inn,
+        Food,
+        Herbolary
+    }
 }

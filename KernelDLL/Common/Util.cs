@@ -39,5 +39,10 @@ namespace KernelDLL.Common
                 return string.Empty;
             };
         }
+
+        public static string GetMapScene(int id)
+        {
+            return $@"..\..\..\Resources\Maps\Scenes\{id}.jpg";
+        }
     }
 }
