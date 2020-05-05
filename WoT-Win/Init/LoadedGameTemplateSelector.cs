@@ -11,7 +11,7 @@ namespace WoT_Win.Init
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             DataTemplate dt = null;
-            var vm = item as LoadedGameViewModel;
+            var vm = item as LoadedGameViewModelLegacy;
             if (vm == null)
                 dt = NullTemplate;
             else if (vm.IsNull)

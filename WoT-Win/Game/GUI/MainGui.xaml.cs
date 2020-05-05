@@ -22,10 +22,10 @@ namespace WoT_Win.Game.GUI
     /// </summary>
     public partial class MainGui : Window
     {
-        public MainGui(DataManager datamanager)
+        public MainGui()
         {
             InitializeComponent();
-            DataContext = new MainGuiViewModel(this, datamanager, MainCanvas);
+            DataContext = new MainGuiViewModel(this, MainCanvas);
             MainCanvas.Opacity = 0;          
             FadeOut();
         }

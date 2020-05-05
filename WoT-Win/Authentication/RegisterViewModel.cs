@@ -12,7 +12,7 @@ namespace WoT_Win.Authentication
 {
     public class RegisterViewModel : CustomBaseViewModel
     {
-        public RegisterViewModel(Window view, DataManager dataManager, IMainClient client) : base(view, client, dataManager)
+        public RegisterViewModel(Window view, IMainClient client) : base(view, client)
         {
             ContinueCommand = new RelayCommand((o) => Continue(o), (o) => GetIsOnline());
             ExitCommand = new RelayCommand((o) => Exit(), (o) => true);
@@ -76,7 +76,7 @@ namespace WoT_Win.Authentication
         {
             if (!userId.HasValue) return;
 
-            OpenWindowSafe(() => new AuthenticationView(userId.Value, _dataManager, _client).Show());
+            OpenWindowSafe(() => new AuthenticationView(userId.Value, _client).Show());
             CloseWindowSafe(_view);
         }
 

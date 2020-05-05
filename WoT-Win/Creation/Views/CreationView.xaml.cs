@@ -32,7 +32,7 @@ namespace WoT_Win.Creation.Views
             DataContext = viewModel;
             Loaded += delegate(object sender, RoutedEventArgs args)
             {
-                LanguageManager.SwitchLanguage(this, DataManager.CurrentCulture);
+                LanguageManager.SwitchLanguage(this, Util.CurrentCulture);
             };
         }        
 

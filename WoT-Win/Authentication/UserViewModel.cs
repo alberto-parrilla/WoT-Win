@@ -1,33 +1,43 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using ClientDLL.Client;
 using KernelDLL.Common;
+using KernelDLL.Game.Models;
+using KernelDLL.Network.Request;
+using KernelDLL.Network.Response;
 using WoT_Win.Common.Commands;
 using WoT_Win.Common.ViewModels;
 using WoT_Win.Game.GUI;
-using WoT_Win.Init;
 
 namespace WoT_Win.Authentication
 {
     public class UserViewModel : CustomBaseViewModel
-    {
-        public UserViewModel(Window view, int userId, DataManager dataManager, IMainClient client) : base(view, client, dataManager)
+    { 
+        public UserViewModel(Window view, int userId, IMainClient client) : base(view, client)
         {
-            BtnNewCommand = new RelayCommand((o) => New(), (o) => CanNew());
+            UserId = userId;
             BtnLoadCommand = new RelayCommand((o) => Load(), (o) => CanLoad());
-            BtnExitCommand = new RelayCommand((o) =>Exit(), (o) => true);
-            //_dataManager.LoadGameByUser(userId);
-            //LoadedGame = _dataManager.GetGame();
+            BtnNewCommand = new RelayCommand((o) => New(), (o) => CanNew());
+            BtnDeleteCommand = new RelayCommand((o) => Delete(), (o) => CanDelete());
+            BtnExitCommand = new RelayCommand((o) => Exit(), (o) => true);
+            IsLoading = true;
         }
 
-        public string AppTitle => _dataManager.AppTitle;
+        public override void Init()
+        {
+            _client.Send(new DataRequest<GameSessionInfoModel>(EnumDataType.GameSessionInfo, UserId));
+        }
 
-        public ICommand BtnNewCommand { get; }
+        private int UserId { get; set; }
+        public string AppTitle => Util.AppTitle;
+
         public ICommand BtnLoadCommand { get; }
+        public ICommand BtnNewCommand { get; }
+        public ICommand BtnDeleteCommand { get; }
         public ICommand BtnExitCommand { get; }
 
         private LoadedGameViewModel _loadedGame;
+
         public LoadedGameViewModel LoadedGame
         {
             get { return _loadedGame; }
@@ -38,18 +48,20 @@ namespace WoT_Win.Authentication
             }
         }
 
-        private bool CanNew()
+        private bool _isLoading;
+        public bool IsLoading
         {
-            return LoadedGame == null || LoadedGame.IsNull;
-        }
-
-        private void New()
-        {
+            get => _isLoading;
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged();
+            }
         }
 
         private bool CanLoad()
         {
-            return LoadedGame != null && !LoadedGame.IsNull;
+            return GetIsOnline() && LoadedGame != null && !LoadedGame.IsNull;
         }
 
         private void Load()
@@ -59,14 +71,32 @@ namespace WoT_Win.Authentication
             //splashLoadView.Show();
             //splashLoadView.LoadGame(SelectedItem);
 
-            _dataManager.LoadGame();
-            _dataManager.LoadPlayer(LoadedGame.Model.PlayerId);
-            _dataManager.LoadArea(LoadedGame.Model.AreaId);
-            _dataManager.LoadScene(LoadedGame.Model.SceneId, LoadedGame.Model.AreaId);
+            //_dataManager.LoadGame();
+            //_dataManager.LoadPlayer(LoadedGame.Model.PlayerId);
+            //_dataManager.LoadArea(LoadedGame.Model.AreaId);
+            //_dataManager.LoadScene(LoadedGame.Model.SceneId, LoadedGame.Model.AreaId);
 
             //OpenWindowSafe(() => new MainGui(_dataManager, _client).Show());
-            OpenWindowSafe(() => new MainGui(_dataManager).Show());
+            OpenWindowSafe(() => new MainGui().Show());
             CloseWindowSafe(_view);
+        }
+
+        private bool CanNew()
+        {
+            return GetIsOnline() && (LoadedGame == null || LoadedGame.IsNull);
+        }
+
+        private void New()
+        {
+        }
+
+        private bool CanDelete()
+        {
+            return GetIsOnline() && LoadedGame != null && !LoadedGame.IsNull;
+        }
+
+        private void Delete()
+        {
         }
 
         private void Exit()
@@ -75,6 +105,30 @@ namespace WoT_Win.Authentication
             {
                 Application.Current.Shutdown();
             }
+        }
+
+        protected override async void ManageResponse(IResponse e)
+        {
+            var response = e as DataResponse<GameSessionInfoModel>;
+            if (response == null) return;
+
+            switch (response.Status)
+            {
+                case EnumDataResponse.Success:
+                    LoadedGame = CreateLoadedGame(response.Content);
+                    break;
+                case EnumDataResponse.Error:
+                    //Error(LanguageManager.GetResourceValue("LoginView", "ErrorNotVerified"));
+                    break;
+            }
+
+            IsLoading = false;
+        }
+
+        private LoadedGameViewModel CreateLoadedGame(GameSessionInfoModel model)
+        {
+            if (model == null) return null;
+            return new LoadedGameViewModel(model);
         }
     }
 }

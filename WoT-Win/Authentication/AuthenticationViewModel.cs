@@ -11,7 +11,7 @@ namespace WoT_Win.Authentication
 {
     public class AuthenticationViewModel : CustomBaseViewModel
     {
-        public AuthenticationViewModel(Window view, int userId, DataManager dataManager, IMainClient client) : base(view, client, dataManager)
+        public AuthenticationViewModel(Window view, int userId, IMainClient client) : base(view, client)
         {
             UserId = userId;
             ContinueCommand = new RelayCommand((o) => Continue(), (o) => GetIsOnline());
@@ -57,7 +57,7 @@ namespace WoT_Win.Authentication
 
         private void Login()
         {
-            OpenWindowSafe(() => new LoginView(_dataManager, _client).Show());
+            OpenWindowSafe(() => new LoginView(_client).Show());
             CloseWindowSafe(_view);
         }
 

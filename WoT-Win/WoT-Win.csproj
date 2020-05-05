@@ -76,6 +76,10 @@
       <DependentUpon>AuthenticationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Authentication\AuthenticationViewModel.cs" />
+    <Compile Include="Authentication\LoadedGameView.xaml.cs">
+      <DependentUpon>LoadedGameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Authentication\LoadedGameViewModel.cs" />
     <Compile Include="Authentication\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -94,6 +98,7 @@
       <DependentUpon>ColorPickerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Controls\InverseBooleanToVisibilityConverter.cs" />
+    <Compile Include="Common\Controls\ValueDataTemplateConverter.cs" />
     <Compile Include="Common\Controls\SelectorControl.xaml.cs">
       <DependentUpon>SelectorControl.xaml</DependentUpon>
     </Compile>
@@ -212,10 +217,10 @@
       <DependentUpon>InitView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Init\LoadedGameTemplateSelector.cs" />
-    <Compile Include="Init\LoadedGameView.xaml.cs">
-      <DependentUpon>LoadedGameView.xaml</DependentUpon>
+    <Compile Include="Init\LoadedGameViewLegacy.xaml.cs">
+      <DependentUpon>LoadedGameViewLegacy.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Init\LoadedGameViewModel.cs" />
+    <Compile Include="Init\LoadedGameViewModelLegacy.cs" />
     <Compile Include="Init\LoadView.xaml.cs">
       <DependentUpon>LoadView.xaml</DependentUpon>
     </Compile>
@@ -261,6 +266,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Authentication\AuthenticationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Authentication\LoadedGameView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -388,7 +397,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Init\LoadedGameView.xaml">
+    <Page Include="Init\LoadedGameViewLegacy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

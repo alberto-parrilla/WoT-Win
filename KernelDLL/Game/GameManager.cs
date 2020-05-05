@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using CoreDatabase.Context.Game;
 using CoreDatabase.Managers;
 using KernelDLL.Common;
 using KernelDLL.Game.Models;
@@ -26,10 +25,11 @@ namespace KernelDLL.Game
         public async Task<GameSessionInfoModel> GetGameSessionInfoByUserIdAsync(int userId)
         {
             var gameSession = await _gameDbManager.GetGameSessionByUserIdAsync(userId);
+            if (gameSession == null) return null;
             var area = await _dataManager.GetAreaInfoAsync(gameSession.AreaId);
             var scene = await _dataManager.GetSceneInfoAsync(gameSession.SceneId);
             var player = await GetPlayerInfoAsync(gameSession.PlayerId);
-            return new GameSessionInfoModel(gameSession.UserId, area, scene, player);
+            return new GameSessionInfoModel(gameSession.UserId, area, scene, player, gameSession.SavedTime);
         }
 
         public async Task<PlayerModel> GetPlayerAsync(int playerId)

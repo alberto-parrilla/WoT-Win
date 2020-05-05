@@ -10,26 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ClientDLL.Client;
-using KernelDLL.Common;
-using WoT_Win.Common.Services;
-using WoT_Win.Common.ViewModels;
-using WoT_Win.Init;
 
 namespace WoT_Win.Authentication
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for LoadedGameView.xaml
     /// </summary>
-    public partial class LoginView : Window
+    public partial class LoadedGameView : UserControl
     {
-        public LoginView(IMainClient client)
+        public LoadedGameView()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel(this, client);
-
-            LanguageManager.SwitchLanguage(this, Util.CurrentCulture);
         }
     }
 }

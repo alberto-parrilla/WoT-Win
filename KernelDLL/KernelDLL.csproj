@@ -111,12 +111,15 @@
     <Compile Include="Init\SceneSavedModel.cs" />
     <Compile Include="Network\AllowAllAssemblyVersionsDeserializationBinder.cs" />
     <Compile Include="Network\Request\AuthenticationRequest.cs" />
+    <Compile Include="Network\Request\DataRequest.cs" />
+    <Compile Include="Network\Request\Enum.cs" />
     <Compile Include="Network\Request\IRequest.cs" />
     <Compile Include="Network\Request\LoginRequest.cs" />
     <Compile Include="Network\Request\PingRequest.cs" />
     <Compile Include="Network\Request\RegisterRequest.cs" />
     <Compile Include="Network\Request\RequestMessageBase.cs" />
     <Compile Include="Network\Response\AuthenticationResponse.cs" />
+    <Compile Include="Network\Response\DataResponse.cs" />
     <Compile Include="Network\Response\IResponse.cs" />
     <Compile Include="Network\Response\LoginResponse.cs" />
     <Compile Include="Network\Response\PingResponse.cs" />

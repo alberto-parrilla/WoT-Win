@@ -5,7 +5,8 @@
         Ping,
         Login,
         Register,
-        Authentication
+        Authentication,
+        Data
     }
 
     public interface IResponse

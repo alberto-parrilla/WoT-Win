@@ -62,12 +62,12 @@ namespace KernelDLL.Game.Models
             Location = source.Location;
             IsChanneler = source.IsChanneler;
 
-            Str = new AttributeModel(source.Attributes.FirstOrDefault(a => a.Type == 0));
-            Dex = new AttributeModel(source.Attributes.FirstOrDefault(a => a.Type == 1));
-            Con = new AttributeModel(source.Attributes.FirstOrDefault(a => a.Type == 2));
-            Int = new AttributeModel(source.Attributes.FirstOrDefault(a => a.Type == 3));
-            Wis = new AttributeModel(source.Attributes.FirstOrDefault(a => a.Type == 4));
-            Cha = new AttributeModel(source.Attributes.FirstOrDefault(a => a.Type == 5));
+            //Str = new AttributeModel(source.Attributes.FirstOrDefault(a => a.Type == 0));
+            //Dex = new AttributeModel(source.Attributes.FirstOrDefault(a => a.Type == 1));
+            //Con = new AttributeModel(source.Attributes.FirstOrDefault(a => a.Type == 2));
+            //Int = new AttributeModel(source.Attributes.FirstOrDefault(a => a.Type == 3));
+            //Wis = new AttributeModel(source.Attributes.FirstOrDefault(a => a.Type == 4));
+            //Cha = new AttributeModel(source.Attributes.FirstOrDefault(a => a.Type == 5));
         }
     }
 }

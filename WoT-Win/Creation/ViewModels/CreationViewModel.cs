@@ -19,10 +19,12 @@ namespace WoT_Win.Creation.ViewModels
     public sealed class CreationViewModel : BaseViewModel
     {
         private CreateFactory _createFactory;
+        private DataManager _dataManager;
 
-        public CreationViewModel(DataManager dataManager, CreateFactory createFactory) : base(null, dataManager)
+        public CreationViewModel(DataManager dataManager, CreateFactory createFactory) : base(null)
         {
             _createFactory = createFactory;
+            _dataManager = dataManager;
 
             NextCommand = new RelayCommand((o) => ChangeSection(true), (o) => CanChangeSection(true));
             PrevCommand = new RelayCommand((o) => ChangeSection(false), (o) => CanChangeSection(false));

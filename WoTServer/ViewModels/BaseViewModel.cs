@@ -16,9 +16,6 @@ namespace WoTServer.ViewModels
             _dataManager = dataManager;
         }
 
-        public string AppTitle => _dataManager?.AppTitle;
-
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = "")

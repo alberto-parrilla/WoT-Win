@@ -10,12 +10,12 @@ namespace WoT_Win.Authentication
     /// </summary>
     public partial class RegisterView : Window
     {
-        public RegisterView(DataManager dataManager, IMainClient client)
+        public RegisterView(IMainClient client)
         {
             InitializeComponent();
-            DataContext = new RegisterViewModel(this, dataManager, client);
+            DataContext = new RegisterViewModel(this, client);
 
-            LanguageManager.SwitchLanguage(this, DataManager.CurrentCulture);
+            LanguageManager.SwitchLanguage(this, Util.CurrentCulture);
         }
     }
 }

@@ -15,11 +15,13 @@ namespace WoT_Win.Init
     {
         private Window _view;
         private CreateFactory _factory;
+        private DataManager _dataManager;
 
-        public LoadViewModel(Window view, DataManager dataManager, CreateFactory factory, IMainClient client) : base(client, dataManager)
+        public LoadViewModel(Window view, DataManager dataManager, CreateFactory factory, IMainClient client) : base(client)
         {
             _view = view;
             _factory = factory;
+            _dataManager = dataManager;
             //_dataManager.LoadGames();
             //Items = new ObservableCollection<LoadedGameViewModel>(_dataManager.LoadedGames.Select((m) => _factory.Create(m)).ToList() );
             LoadCommand = new RelayCommand((o) => Load(), (o) => CanLoad());
@@ -29,17 +31,17 @@ namespace WoT_Win.Init
         public override void Init()
         {
             _dataManager.LoadGames();
-            Items = new ObservableCollection<LoadedGameViewModel>(_dataManager.LoadedGames.Select((m) => _factory.Create(m)).ToList());
+            Items = new ObservableCollection<LoadedGameViewModelLegacy>(_dataManager.LoadedGames.Select((m) => _factory.Create(m)).ToList());
         }
 
-        public string AppTitle => _dataManager.AppTitle;
+        public string AppTitle => Util.AppTitle;
 
         public ICommand LoadCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }   
 
-        public ObservableCollection<LoadedGameViewModel> Items { get; private set; }
-        private LoadedGameViewModel _selectedItem;
-        public LoadedGameViewModel SelectedItem
+        public ObservableCollection<LoadedGameViewModelLegacy> Items { get; private set; }
+        private LoadedGameViewModelLegacy _selectedItem;
+        public LoadedGameViewModelLegacy SelectedItem
         {
             get { return _selectedItem; }
             set
@@ -66,7 +68,7 @@ namespace WoT_Win.Init
             _dataManager.LoadArea(SelectedItem.Model.AreaId);
             _dataManager.LoadScene(SelectedItem.Model.SceneId, SelectedItem.Model.AreaId);
 
-            var gui = new MainGui(_dataManager);
+            var gui = new MainGui();
 
             gui.Show();
             _view.Close();

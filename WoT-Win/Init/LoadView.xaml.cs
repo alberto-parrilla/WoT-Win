@@ -18,7 +18,7 @@ namespace WoT_Win.Init
             viewModel.Init();
             DataContext = viewModel;
 
-            LanguageManager.SwitchLanguage(this, DataManager.CurrentCulture);
+            LanguageManager.SwitchLanguage(this, Util.CurrentCulture);
         }
     }
 }

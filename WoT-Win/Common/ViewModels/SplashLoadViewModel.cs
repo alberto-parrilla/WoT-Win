@@ -47,7 +47,7 @@ namespace WoT_Win.Common.ViewModels
             }
         }
 
-        public void LoadGame(LoadedGameViewModel game)
+        public void LoadGame(LoadedGameViewModelLegacy game)
         {
             BackgroundWorker worker = new BackgroundWorker();
             worker.WorkerReportsProgress = true;
@@ -60,14 +60,14 @@ namespace WoT_Win.Common.ViewModels
 
         private void worker_Completed(object sender, RunWorkerCompletedEventArgs e)
         {
-            var gui = new MainGui(_datamanager);
+            var gui = new MainGui();
             gui.Show();
             _view.Close();
         }
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            LoadedGameViewModel game = e.Argument as LoadedGameViewModel;
+            LoadedGameViewModelLegacy game = e.Argument as LoadedGameViewModelLegacy;
             if (game == null) throw new ArgumentNullException("Error loading saved game");
 
             InfoText = "Cargando juego...";

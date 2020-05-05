@@ -12,13 +12,12 @@ namespace WoT_Win
     public partial class App : Application
     {
         private IMainClient _client;
-        private DataManager _dataManager;
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             Init();
             // Create the startup window
-            LoginView wnd = new LoginView(_dataManager, _client);
+            LoginView wnd = new LoginView(_client);
             // Do stuff here, e.g. to the window
 
             // Show the window
@@ -27,8 +26,7 @@ namespace WoT_Win
 
         private void Init()
         {
-            _client = new MainClient();
-            _dataManager = new DataManager(new FakeDatabase(), new RepositoryManager());
+            _client = new MainClient(new DataManager(new FakeDatabase(), new RepositoryManager()));
         }
     }
 }

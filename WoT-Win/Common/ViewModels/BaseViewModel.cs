@@ -12,7 +12,6 @@ namespace WoT_Win.Common.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        protected DataManager _dataManager;
         protected IMainClient _client;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -24,14 +23,6 @@ namespace WoT_Win.Common.ViewModels
         {
             _client = client;
           
-            Register();
-        }
-
-
-        public BaseViewModel(IMainClient client, DataManager dataManager)
-        {
-            _dataManager = dataManager;
-            _client = client;
             Register();
         }
 
@@ -55,7 +46,7 @@ namespace WoT_Win.Common.ViewModels
         protected virtual void ManageResponse(IResponse response)
         { }
 
-        public string AppTitle => _dataManager?.AppTitle;
+        public string AppTitle => Util.AppTitle;
 
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = "")

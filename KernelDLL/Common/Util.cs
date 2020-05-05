@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace KernelDLL.Common
 {
     public class Util
     {
+        private static readonly string _appVersion = "v0.2";
+
         public static int MovRange = 4;
         public static int CanvasWidth = 1152;
         public static int CanvasHeight = 768;
@@ -44,5 +43,8 @@ namespace KernelDLL.Common
         {
             return $@"..\..\..\Resources\Maps\Scenes\{id}.jpg";
         }
+
+        public static string AppTitle => $"WoT- Win {_appVersion}";
+        public static string CurrentCulture = "es-ES";
     }
 }

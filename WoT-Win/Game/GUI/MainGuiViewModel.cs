@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Xml.Serialization.Configuration;
 using KernelDLL.Common;
 using KernelDLL.Game.Enums;
 using WoT_Win.Common.Commands;
@@ -22,16 +16,15 @@ namespace WoT_Win.Game.GUI
         private Window _view;
         private DataManager _datamanager;
 
-        public MainGuiViewModel(Window view, DataManager datamanager, Canvas canvas)
+        public MainGuiViewModel(Window view, Canvas canvas)
         {
             _view = view;
-            _datamanager = datamanager;
 
             Player = new PlayerViewModel(_datamanager.GetPlayer());
             MenuOpenCommand = new RelayCommand((o) => MenuOpen(o), (o) => true);
             MoveCommand = new RelayCommand((o) => Move(o), (o) => true);
-            Area = new AreaViewModel(datamanager.GetArea());
-            Scene = new SceneViewModel(datamanager.GetScene());
+            //Area = new AreaViewModel(datamanager.GetArea());
+            //Scene = new SceneViewModel(datamanager.GetScene());
             Canvas = canvas;
         }
 

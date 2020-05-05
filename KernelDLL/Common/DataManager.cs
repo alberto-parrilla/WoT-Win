@@ -11,8 +11,6 @@ namespace KernelDLL.Common
 {
     public class DataManager : IDataManager
     {
-        private readonly string _appVersion = "v0.2";
-
         private IDatabase _db;
         private IRepositoryManager _repositoryManager;
         private IDataDbManager _dataDbManager;
@@ -66,12 +64,9 @@ namespace KernelDLL.Common
                 //new BaseWeaveModel(403, new List<EnumWeaveType>() {EnumWeaveType.Energy}, "", 1, null, null, null),
             };
                 
-            CurrentCulture = "es-ES";
+        
         }
 
-        public string AppTitle => $"WoT- Win {_appVersion}";
-
-        public static string CurrentCulture { get; set; }
         public List<BaseSkillModel> Skills { get; private set; }
         public List<BaseSkillModel> Feats { get; private set; }
         public List<BaseWeaveModel> Weaves { get; private set; }
@@ -165,6 +160,4 @@ namespace KernelDLL.Common
             return Weaves;
         }
     }
-
-    
 }

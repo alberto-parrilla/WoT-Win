@@ -31,7 +31,7 @@ namespace WoT_Win.Common.Views
             DataContext = ViewModel;
         }
 
-        public void LoadGame(LoadedGameViewModel game)
+        public void LoadGame(LoadedGameViewModelLegacy game)
         {
             ViewModel.LoadGame(game);
         }

@@ -15,9 +15,9 @@ namespace WoT_Win.Common.Services
 {
     public class CreateFactory
     {
-        public LoadedGameViewModel Create(SavedGameModel model)
+        public LoadedGameViewModelLegacy Create(SavedGameModel model)
         {
-            return new LoadedGameViewModel(model);
+            return new LoadedGameViewModelLegacy(model);
         }
 
         public BaseSkillViewModel Create(BaseSkillModel model)

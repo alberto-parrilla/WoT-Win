@@ -22,12 +22,12 @@ namespace WoT_Win.Authentication
     /// </summary>
     public partial class AuthenticationView : Window
     {
-        public AuthenticationView(int userId, DataManager dataManager, IMainClient client)
+        public AuthenticationView(int userId, IMainClient client)
         {
             InitializeComponent();
-            DataContext = new AuthenticationViewModel(this, userId, dataManager, client);
+            DataContext = new AuthenticationViewModel(this, userId, client);
 
-            LanguageManager.SwitchLanguage(this, DataManager.CurrentCulture);
+            LanguageManager.SwitchLanguage(this, Util.CurrentCulture);
         }
     }
 }

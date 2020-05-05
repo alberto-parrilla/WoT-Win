@@ -3,6 +3,10 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <sys:String x:Key="ResourceDictionaryName">Loc-en-UK</sys:String>
     <sys:String x:Key="BtnLoad">Load</sys:String>
+    <sys:String x:Key="BtnNew">New</sys:String>
+    <sys:String x:Key="BtnDelete">Delete</sys:String>
     <sys:String x:Key="BtnExit">Exit</sys:String>
     <sys:String x:Key="LblEmpty">Empty</sys:String>
+    <sys:String x:Key="LblLoading">Loading...</sys:String>
 </ResourceDictionary>
+    

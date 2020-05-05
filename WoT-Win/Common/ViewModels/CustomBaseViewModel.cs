@@ -14,12 +14,6 @@ namespace WoT_Win.Common.ViewModels
             ServerStatusViewModel = new ServerStatusViewModel(_client);
         }
 
-        public CustomBaseViewModel(Window view, IMainClient client, DataManager dataManager) : base(client, dataManager)
-        {
-            _view = view;
-            ServerStatusViewModel = new ServerStatusViewModel(_client);
-        }
-
         protected new void Register()
         {
             base.Register();

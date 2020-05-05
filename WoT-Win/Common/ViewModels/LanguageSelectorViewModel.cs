@@ -26,8 +26,8 @@ namespace WoT_Win.Common.ViewModels
             var control = parameter as DependencyObject;
             if (control == null) throw new NullReferenceException("Control cannot be null");
             var window = Window.GetWindow(control);
-            DataManager.CurrentCulture = Loc;
-            LanguageManager.SwitchLanguage(window, DataManager.CurrentCulture);
+            Util.CurrentCulture = Loc;
+            LanguageManager.SwitchLanguage(window, Util.CurrentCulture);
         }
     }
 

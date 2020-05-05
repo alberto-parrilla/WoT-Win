@@ -116,7 +116,7 @@ namespace WoT_Win.Common.ViewModels
             foreach (var userControl in FindVisualChildren<UserControl>(element))
             {
                 // do something with tb here
-                LanguageManager.SwitchLanguage(userControl, DataManager.CurrentCulture);
+                LanguageManager.SwitchLanguage(userControl, Util.CurrentCulture);
             }
 
             foreach (var tabItem in FindVisualChildren<TabItem>(element))
@@ -210,7 +210,7 @@ namespace WoT_Win.Common.ViewModels
         public static string GetResourceValue(string dictionary, string resource)
         {
             //var currentCulture = CultureInfo.CurrentUICulture.Name;
-            var currentCulture = DataManager.CurrentCulture;
+            var currentCulture = Util.CurrentCulture;
             var dic = $"{dictionary}.{currentCulture}.xaml";
             var uri = $"/WoT-Win;component/Resources/Languages/{dic}";
             ResourceDictionary res = (ResourceDictionary)Application.LoadComponent(new Uri(uri, UriKind.Relative));

@@ -16,7 +16,7 @@ namespace WoT_Win.Init
             InitializeComponent();
             DataContext = new InitViewModel(this, dataManager, createFactory, client);
 
-            LanguageManager.SwitchLanguage(this, DataManager.CurrentCulture);
+            LanguageManager.SwitchLanguage(this, Util.CurrentCulture);
         }
     }
 }

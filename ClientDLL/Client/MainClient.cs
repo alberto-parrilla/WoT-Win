@@ -1,4 +1,5 @@
 ﻿using System;
+using KernelDLL.Common;
 using KernelDLL.Network.Request;
 using KernelDLL.Network.Response;
 
@@ -9,12 +10,14 @@ namespace ClientDLL.Client
         private IClient _client;
         public event EventHandler<IResponse> OnManageResponse;
 
-        public MainClient()
+        public MainClient(IDataManager dataManager)
         {
+            DataManager = dataManager;
             _client = new NetworkClient(ReceiveResponse);
             _client.Connect();
         }
 
+        public IDataManager DataManager { get; private set; }
         private void ReceiveResponse(IResponse response)
         {
             if (OnManageResponse != null)
