@@ -3,7 +3,7 @@ using CoreDatabase.Abstractions;
 
 namespace CoreDatabase.Context.Game
 {
-    public class GameSession : BusinessEntity
+    public class GameSession : GameBusinessEntity
     {
         public int UserId { get; set; }
         public int AreaId { get; set; }

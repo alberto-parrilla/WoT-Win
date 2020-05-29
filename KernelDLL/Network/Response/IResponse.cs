@@ -6,7 +6,9 @@
         Login,
         Register,
         Authentication,
-        Data
+        Data,
+        PlayerData,
+        CheckData
     }
 
     public interface IResponse

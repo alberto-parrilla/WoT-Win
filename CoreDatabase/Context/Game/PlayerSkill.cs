@@ -2,7 +2,7 @@
 
 namespace CoreDatabase.Context.Game
 {
-    public class PlayerSkill : BusinessEntity
+    public class PlayerSkill : GameBusinessEntity
     {
     }
 }

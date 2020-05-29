@@ -3,12 +3,12 @@ using CoreDatabase.Abstractions;
 
 namespace CoreDatabase.Context.Game
 {
-    public class Player : BusinessEntity
+    public class Player : GameBusinessEntity
     {
         public int UserId { get; set; }
         public string Name { get; set; }
         public int Race { get; set; }
-        public int Sex { get; set; }
+        public int Gender { get; set; }
         public int Location { get; set; }
         public bool IsChanneler { get; set; }
         public string Portrait { get; set; }

@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using CoreDatabase.Context;
 using CoreDatabase.Context.Game;
@@ -12,7 +11,7 @@ namespace CoreDatabase.Managers
         {
             using (var context = new GameDbContext())
             {
-                return await context.GameSessions.FirstOrDefaultAsync(u => u.UserId == userId);
+                return await context.GameSessions.FirstOrDefaultAsync(u => u.UserId == userId && u.IsEnabled);
             }
         }
 
@@ -20,7 +19,15 @@ namespace CoreDatabase.Managers
         {
             using (var context = new GameDbContext())
             {
-                return await context.Players.FirstOrDefaultAsync(p => p.GameId == playerId);
+                return await context.Players.FirstOrDefaultAsync(p => p.GameId == playerId && p.IsEnabled);
+            }
+        }
+
+        public async Task<bool> CheckNameAsync(string name)
+        {
+            using (var context = new GameDbContext())
+            {
+                return await context.Players.AnyAsync(p => p.Name == name && p.IsEnabled);
             }
         }
     }

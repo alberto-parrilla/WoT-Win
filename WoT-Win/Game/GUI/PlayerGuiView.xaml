@@ -12,7 +12,7 @@
         <Image Source="{Binding Path=Faceset}" Height="96" Width="96" VerticalAlignment="Top"/>
         <Label Content="{Binding Path=Name}" Style="{StaticResource LblInGridStyle}" Margin="10,120,0,0"/>
         <Label Content="{Binding Path=Race}" Style="{StaticResource LblInGridStyle}" Margin="10,150,0,0"/>
-        <Label Content="{Binding Path=Sex}" Style="{StaticResource LblInGridStyle}" Margin="100,150,0,0"/>
+        <Label Content="{Binding Path=Gender}" Style="{StaticResource LblInGridStyle}" Margin="100,150,0,0"/>
         <Label Content="{Binding Path=Nation}" Style="{StaticResource LblInGridStyle}" Margin="10,180,0,0"/>
         <attributes:PlayerAttributeView DataContext="{Binding Path=Str}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,210,0,0"/>
         <attributes:PlayerAttributeView DataContext="{Binding Path=Dex}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,210,0,0"/>

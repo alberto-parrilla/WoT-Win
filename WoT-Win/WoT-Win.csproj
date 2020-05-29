@@ -97,6 +97,7 @@
     <Compile Include="Common\Controls\ColorPickerControl.xaml.cs">
       <DependentUpon>ColorPickerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\Controls\InverseBooleanConverter.cs" />
     <Compile Include="Common\Controls\InverseBooleanToVisibilityConverter.cs" />
     <Compile Include="Common\Controls\ValueDataTemplateConverter.cs" />
     <Compile Include="Common\Controls\SelectorControl.xaml.cs">
@@ -106,6 +107,7 @@
     <Compile Include="Common\ViewModels\CustomBaseViewModel.cs" />
     <Compile Include="Common\ViewModels\LanguageManager.cs" />
     <Compile Include="Common\ViewModels\LanguageSelectorViewModel.cs" />
+    <Compile Include="Common\ViewModels\LoadManagerViewModel.cs" />
     <Compile Include="Common\ViewModels\ServerStatusViewModel.cs" />
     <Compile Include="Common\Views\ChatView.xaml.cs">
       <DependentUpon>ChatView.xaml</DependentUpon>
@@ -113,9 +115,13 @@
     <Compile Include="Common\Views\LanguageSelectorView.xaml.cs">
       <DependentUpon>LanguageSelectorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\Views\LoadManagerView.xaml.cs">
+      <DependentUpon>LoadManagerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common\Views\ServerStatusView.xaml.cs">
       <DependentUpon>ServerStatusView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Creation\ViewModels\CreateAvatarToolsetItem.cs" />
     <Compile Include="Creation\Views\WeaveView.xaml.cs">
       <DependentUpon>WeaveView.xaml</DependentUpon>
     </Compile>
@@ -140,7 +146,6 @@
     </Compile>
     <Compile Include="Creation\Services\CreationManager.cs" />
     <Compile Include="Creation\ViewModels\BaseCreationViewModel.cs" />
-    <Compile Include="Creation\ViewModels\CreateAvatarItem.cs" />
     <Compile Include="Creation\ViewModels\CreatePlayerAvatarViewModel.cs" />
     <Compile Include="Creation\ViewModels\CreationAttributesViewModel.cs" />
     <Compile Include="Creation\ViewModels\CreationAttributeViewModel.cs" />
@@ -305,6 +310,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Common\Views\LoadManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Common\Views\ServerStatusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -412,6 +421,7 @@
     <Resource Include="Resources\Icons\Weaves\Fire_170x170.png" />
     <Resource Include="Resources\Icons\Weaves\Water_170x170.png" />
     <Resource Include="Resources\Icons\Weaves\Wind_170x170.png" />
+    <Resource Include="Resources\Icons\Common\lupa_32x32BN_v1.png" />
     <Content Include="Resources\Languages\InitView.en-UK.xaml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

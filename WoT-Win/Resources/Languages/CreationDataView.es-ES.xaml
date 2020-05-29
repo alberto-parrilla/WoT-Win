@@ -5,9 +5,10 @@
     <sys:String x:Key="Header">Datos personales</sys:String>
     <sys:String x:Key="LblName">Nombre</sys:String>
     <sys:String x:Key="LblRace">Raza</sys:String>
-    <sys:String x:Key="LblSex">Sexo</sys:String>
+    <sys:String x:Key="LblGender">Gendero</sys:String>
     <sys:String x:Key="LblOrigin">Origen</sys:String>
     <sys:String x:Key="LblChanneler">Encauzador</sys:String>
     <sys:String x:Key="BtnEdit">Editar</sys:String>
     <sys:String x:Key="ErrorName">El nombre debe completarse</sys:String>
+    <sys:String x:Key="ErrorValidationName">El nombre ya existe. Por favor, elija otro</sys:String>
 </ResourceDictionary>

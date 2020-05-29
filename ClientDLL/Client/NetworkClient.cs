@@ -82,7 +82,7 @@ namespace ClientDLL.Client
             {
                 f.Serialize(TcpClient.GetStream(), request);
             }
-            catch
+            catch(Exception ex)
             {
                 Disconnect();
             }

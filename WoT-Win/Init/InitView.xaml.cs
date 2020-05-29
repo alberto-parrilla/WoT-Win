@@ -11,7 +11,7 @@ namespace WoT_Win.Init
     /// </summary>
     public partial class InitView : Window
     {
-        public InitView(DataManager dataManager, CreateFactory createFactory, IMainClient client)
+        public InitView(DataManager dataManager, Common.Services.CreateFactory createFactory, IMainClient client)
         {
             InitializeComponent();
             DataContext = new InitViewModel(this, dataManager, createFactory, client);

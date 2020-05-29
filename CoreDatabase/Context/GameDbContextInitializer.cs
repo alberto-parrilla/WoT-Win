@@ -16,7 +16,7 @@ namespace CoreDatabase.Context
                 UserId = 1,
                 Name = "Gwalchaved",
                 Race = 0,
-                Sex = 0,
+                Gender = 0,
                 Location = 1,
                 IsChanneler = false,
                 MaxHp = 120,

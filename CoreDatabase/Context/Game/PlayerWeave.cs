@@ -2,7 +2,7 @@
 
 namespace CoreDatabase.Context.Game
 {
-    public class PlayerWeave : BusinessEntity
+    public class PlayerWeave : GameBusinessEntity
     {
     }
 }

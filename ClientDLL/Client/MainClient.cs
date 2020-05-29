@@ -13,11 +13,15 @@ namespace ClientDLL.Client
         public MainClient(IDataManager dataManager)
         {
             DataManager = dataManager;
+            DataContainer = new DataContainer();
             _client = new NetworkClient(ReceiveResponse);
             _client.Connect();
+           
         }
 
-        public IDataManager DataManager { get; private set; }
+        public IDataManager DataManager { get;  }
+        public IDataContainer DataContainer { get;  }
+
         private void ReceiveResponse(IResponse response)
         {
             if (OnManageResponse != null)

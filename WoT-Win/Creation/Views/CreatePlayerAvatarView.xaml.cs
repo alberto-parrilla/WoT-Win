@@ -22,7 +22,7 @@ namespace WoT_Win.Creation.Views
     {
         public CreatePlayerAvatarView()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
     }
 }

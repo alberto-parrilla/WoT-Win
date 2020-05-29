@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
+using ClientDLL.Client;
 using KernelDLL.Common;
 using WoT_Win.Common.Commands;
 using WoT_Win.Common.Services;
@@ -19,7 +20,7 @@ namespace WoT_Win.Creation.ViewModels
         private const int CustomSkillPoints = 4;
         private const int CustomFeatPoints = 3;
 
-        public CreationSkillsViewModel(DataManager dataManager, CreateFactory createFactory)
+        public CreationSkillsViewModel(IMainClient client, DataManager dataManager, Common.Services.CreateFactory createFactory) : base(client)
         {
             AddCommand = new RelayCommand((o) => Add(),(o) =>  CanAdd());
             RemoveCommand = new RelayCommand((o) => Remove(), (o) => CanRemove());
@@ -259,6 +260,17 @@ namespace WoT_Win.Creation.ViewModels
         {
             OnPropertyChanged("Header");
             Refresh();
+        }
+
+        public override void OnLoaded()
+        {
+            //Skills = new ObservableCollection<BaseSkillViewModel>(dataManager.GetSkills().Select(s => createFactory.Create(s)));
+            //Feats = new ObservableCollection<BaseSkillViewModel>(dataManager.GetFeats().Select(f => createFactory.Create(f)));
+            //PlayerSkills = new ObservableCollection<PlayerSkillViewModel>();
+            //PlayerFeats = new ObservableCollection<PlayerFeatViewModel>();
+            //IsSkillChecked = true;
+
+            //IsVisible = true;
         }
     }
 }

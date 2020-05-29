@@ -54,12 +54,23 @@
   <ItemGroup>
     <Compile Include="Abstractions\BusinessEntity.cs" />
     <Compile Include="Abstractions\BusinessEntityTypeConfiguration.cs" />
+    <Compile Include="Abstractions\GameBusinessEntity.cs" />
     <Compile Include="Context\DataDbContext.cs" />
     <Compile Include="Context\DataDbContextInitializer.cs" />
     <Compile Include="Context\Data\Area.cs" />
+    <Compile Include="Context\Data\AttributeModifier.cs" />
     <Compile Include="Context\Data\Configuration\AreaConfiguration.cs" />
+    <Compile Include="Context\Data\Configuration\AttributeModifier.cs" />
+    <Compile Include="Context\Data\Feat.cs" />
+    <Compile Include="Context\Data\Configuration\LocationConfiguration.cs" />
+    <Compile Include="Context\Data\Configuration\RaceConfiguration.cs" />
     <Compile Include="Context\Data\Configuration\SceneConfiguration.cs" />
+    <Compile Include="Context\Data\Gender.cs" />
+    <Compile Include="Context\Data\Skill.cs" />
     <Compile Include="Context\Data\Configuration\TransitionConfiguration.cs" />
+    <Compile Include="Context\Data\Weave.cs" />
+    <Compile Include="Context\Data\Location.cs" />
+    <Compile Include="Context\Data\Race.cs" />
     <Compile Include="Context\Data\Scene.cs" />
     <Compile Include="Context\Data\Transition.cs" />
     <Compile Include="Context\GameDbContext.cs" />

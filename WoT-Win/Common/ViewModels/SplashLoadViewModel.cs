@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using KernelDLL.Common;
 using WoT_Win.Game.GUI;
@@ -67,31 +62,31 @@ namespace WoT_Win.Common.ViewModels
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            LoadedGameViewModelLegacy game = e.Argument as LoadedGameViewModelLegacy;
-            if (game == null) throw new ArgumentNullException("Error loading saved game");
+            //////////LoadedGameViewModelLegacy game = e.Argument as LoadedGameViewModelLegacy;
+            //////////if (game == null) throw new ArgumentNullException("Error loading saved game");
 
-            InfoText = "Cargando juego...";
-            _datamanager.LoadGame();
-            //Thread.Sleep(1000);
-            ProgressValue = 1;
+            //////////InfoText = "Cargando juego...";
+            //////////_datamanager.LoadGame();
+            ////////////Thread.Sleep(1000);
+            //////////ProgressValue = 1;
 
-            InfoText = "Cargando jugador...";
-            _datamanager.LoadPlayer(game.Model.PlayerId);
-            //Thread.Sleep(1000);
-            ProgressValue = 2;
+            //////////InfoText = "Cargando jugador...";
+            //////////_datamanager.LoadPlayer(game.Model.PlayerId);
+            ////////////Thread.Sleep(1000);
+            //////////ProgressValue = 2;
 
-            InfoText = "Cargando area...";
-            _datamanager.LoadArea(game.Model.AreaId);
-            //Thread.Sleep(1000);
-            ProgressValue = 3;
+            //////////InfoText = "Cargando area...";
+            //////////_datamanager.LoadArea(game.Model.AreaId);
+            ////////////Thread.Sleep(1000);
+            //////////ProgressValue = 3;
 
-            InfoText = "Cargando escena...";
-            _datamanager.LoadScene(game.Model.SceneId, game.Model.AreaId);
+            //////////InfoText = "Cargando escena...";
+            //////////_datamanager.LoadScene(game.Model.SceneId, game.Model.AreaId);
 
-            InfoText = "Inicializando...";
-            _datamanager.LoadGame();
-            //Thread.Sleep(1000);
-            ProgressValue = 4;             
+            //////////InfoText = "Inicializando...";
+            //////////_datamanager.LoadGame();
+            ////////////Thread.Sleep(1000);
+            //////////ProgressValue = 4;             
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -101,8 +96,8 @@ namespace WoT_Win.Common.ViewModels
 
         public void LoadArea(int id)
         {
-            _datamanager.LoadArea(id);  
-            _view.Close();
+            //////////_datamanager.LoadArea(id);  
+            //////////_view.Close();
         }
       
     }

@@ -16,7 +16,7 @@ namespace WoT_Win.Common.ViewModels
         {
             _serverTimer = new Timer();
             _serverTimer.Elapsed += ServerTimer_Tick;
-            _serverTimer.Interval = 5000;
+            _serverTimer.Interval = 1000;
             _serverTimer.Start();
             _stopwatch = new Stopwatch();
             ServerStatusDisplay = "Connecting...";
@@ -90,7 +90,7 @@ namespace WoT_Win.Common.ViewModels
                 IsOnline = false;
             }
             _stopwatch.Reset();
-            _serverTimer.Start();
+            //_serverTimer.Start();
         }
     }
 }

@@ -14,7 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    <Grid IsEnabled="{Binding Path=IsDataLoaded}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -56,10 +56,10 @@
         </TabControl>
         <Grid Grid.Row="1" Grid.Column="1">
             <TextBox Text="{Binding Path=Info}" Width="200" Height="200" Margin="10" IsReadOnly="True" 
-                   
+                     AcceptsReturn="True" TextWrapping="Wrap"
                      VerticalAlignment="Top"/>
             <TextBox Text="{Binding Path=Message}" Width="200" Height="200" Margin="10, 220, 10, 10" IsReadOnly="True"
-                   
+                     AcceptsReturn="True" TextWrapping="Wrap"
                      VerticalAlignment="Top"/>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">

@@ -2,63 +2,78 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics.Eventing.Reader;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ClientDLL.Client;
 using KernelDLL.Common;
+using KernelDLL.Creation.Models;
+using KernelDLL.Network.Request;
+using KernelDLL.Network.Response;
 using WoT_Win.Common.Commands;
-using WoT_Win.Common.Services;
 using WoT_Win.Common.ViewModels;
 using WoT_Win.Common.Views;
 
 namespace WoT_Win.Creation.ViewModels
 {
-    public sealed class CreationViewModel : BaseViewModel
+    public sealed class CreationViewModel : CustomBaseViewModel
     {
-        private CreateFactory _createFactory;
-        private DataManager _dataManager;
+        private Common.Services.CreateFactory _createFactory;
+        private LoadManagerViewModel _loadManager;
 
-        public CreationViewModel(DataManager dataManager, CreateFactory createFactory) : base(null)
+        public CreationViewModel(Window view, IMainClient client, Common.Services.CreateFactory createFactory) : base(view, client)
         {
             _createFactory = createFactory;
-            _dataManager = dataManager;
 
             NextCommand = new RelayCommand((o) => ChangeSection(true), (o) => CanChangeSection(true));
             PrevCommand = new RelayCommand((o) => ChangeSection(false), (o) => CanChangeSection(false));
             CancelCommand = new RelayCommand((o) => Cancel(), (o) => true);
             FinishCommand = new RelayCommand((o) => Finish(), (o) => CanFinish);
 
-            //Items = new ObservableCollection<BaseCreationViewModel>()
-            //{
-            //    new CreationDataViewModel(),
-            //    new CreationAttributesViewModel(),
-            //    new CreationSkillsViewModel(_dataManager, _createFactory),
-            //    new CreationWeavesViewModel()
-            //};
-
-            //using (CanChangeDisposable())
-            //{
-            //    CurrentCreationSection = Items[0];
-            //}         
+            IsDataLoaded = false;
         }
 
         public override void Init()
         {
             Items = new ObservableCollection<BaseCreationViewModel>()
             {
-                new CreationDataViewModel(),
-                new CreationAttributesViewModel(),
-                new CreationSkillsViewModel(_dataManager, _createFactory),
-                new CreationWeavesViewModel(_dataManager, _createFactory)
+                new CreationDataViewModel(_client),
+                new CreationAttributesViewModel(_client),
+                new CreationSkillsViewModel(_client, _client.DataManager as DataManager, _createFactory),
+                new CreationWeavesViewModel(_client, _client.DataManager as DataManager, _createFactory)
             };
 
             using (CanChangeDisposable())
             {
                 CurrentCreationSection = Items[0];
             }
+        }
+
+        public void Load()
+        {
+            _loadManager = new LoadManagerViewModel(_client);
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.Race), "Loading races"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.Gender), "Loading genders"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.Location), "Loading locations"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.AvatarBodyToolset), "Loading bodies"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.AvatarFaceToolset), "Loading faces"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.AvatarBaseHairToolset), "Loading base hair"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.AvatarFrontHairToolset), "Loading front hair"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.AvatarRearHairToolset), "Loading rear hair"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.AvatarEyebrowsToolset), "Loading eyebrows"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.AvatarBaseEyesToolset), "Loading base eyes"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.AvatarEyesToolset), "Loading eyes"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.AvatarEarsToolset), "Loading ears"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.AvatarNoseToolset), "Loading noses"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.AvatarMouthToolset), "Loading mouths"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.AvatarBeardToolset), "Loading beards"));
+            _loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.AvatarExtrasToolset), "Loading extras"));
+            //_loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.Skill), "Loading skills"));
+            //_loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.Feat), "Loading feats"));
+            //_loadManager.Add(new LoadItem(new PlayerDataRequest(EnumPlayerDataType.Weave), "Loading weaves"));
+            var view = new LoadManagerView(_loadManager);
+            OpenWindowSafe(() => view.Show());
+            _loadManager.Next();
         }
 
         public bool CanChange = false;
@@ -111,6 +126,18 @@ namespace WoT_Win.Creation.ViewModels
             set
             {
                 _message = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isDataLoaded;
+
+        public bool IsDataLoaded
+        {
+            get => _isDataLoaded;
+            set
+            {
+                _isDataLoaded = value;
                 OnPropertyChanged();
             }
         }
@@ -189,6 +216,55 @@ namespace WoT_Win.Creation.ViewModels
         {
             CanChange = true;
             return DisposableAction.InvokeOnDispose(() => CanChange = false);
+        }
+
+        protected override void ManageResponse(IResponse response)
+        {
+            if (response.ResponseType != EnumResponseType.PlayerData) return;
+
+            if (response is PlayerDataResponse<List<RaceModel>>)
+            {
+                var races = response as PlayerDataResponse<List<RaceModel>>;
+                var listRaces = races.Content;
+                _client.DataContainer.Races = listRaces;
+            }
+            if (response is PlayerDataResponse<List<GenderModel>>)
+            {
+                var genders = response as PlayerDataResponse<List<GenderModel>>;
+                var listGenders = genders.Content;
+                _client.DataContainer.Genders = listGenders;
+            }
+            else if (response is PlayerDataResponse<List<LocationModel>>)
+            {
+                var locations = response as PlayerDataResponse<List<LocationModel>>;
+                var listLocations = locations.Content;
+                _client.DataContainer.Locations = listLocations;
+            }
+            else if (response is PlayerDataResponse<List<AvatarToolsetModel>>)
+            {
+                var avatarToolset = response as PlayerDataResponse<List<AvatarToolsetModel>>;
+                var listAvatarToolset = avatarToolset.Content;
+                if (_client.DataContainer.AvatarToolsetItems == null)
+                {
+                    _client.DataContainer.AvatarToolsetItems = listAvatarToolset;
+                }
+                else
+                {
+                    _client.DataContainer.AvatarToolsetItems.AddRange(listAvatarToolset);
+                }
+            }
+
+            _loadManager.Next();
+            if (!_loadManager.IsLoading && !IsDataLoaded)
+            {
+                IsDataLoaded = true;
+                OnLoaded();
+            }
+        }
+
+        private void OnLoaded()
+        {
+          Items.ToList().ForEach(i => i.OnLoaded());
         }
     }
 }

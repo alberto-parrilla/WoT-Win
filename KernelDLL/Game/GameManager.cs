@@ -2,6 +2,7 @@
 using CoreDatabase.Managers;
 using KernelDLL.Common;
 using KernelDLL.Game.Models;
+using KernelDLL.Network.Request;
 
 namespace KernelDLL.Game
 {
@@ -38,12 +39,22 @@ namespace KernelDLL.Game
             return new PlayerModel(player);
         }
 
-      public async Task<PlayerInfoModel> GetPlayerInfoAsync(int playerId)
+        public async Task<PlayerInfoModel> GetPlayerInfoAsync(int playerId)
         {
             var player = await _gameDbManager.GetPlayerAsync(playerId);
             return new PlayerInfoModel(new PlayerModel(player));
         }
 
-      
+        public async Task<bool> CheckDataAsync(EnumCheckDataType type, object data)
+        {
+            if (type == EnumCheckDataType.Name)
+            {
+                var name = data as string;
+                if (name == null) return false;
+                return await _gameDbManager.CheckNameAsync(name);
+            }
+
+            return false;
+        }
     }
 }

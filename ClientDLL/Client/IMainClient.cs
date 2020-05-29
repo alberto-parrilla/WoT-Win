@@ -11,5 +11,6 @@ namespace ClientDLL.Client
         event EventHandler<IResponse> OnManageResponse;
 
        IDataManager DataManager { get; }
+       IDataContainer DataContainer { get; }
     }
 }

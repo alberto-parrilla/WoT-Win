@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KernelDLL.Game.Enums
+﻿namespace KernelDLL.Game.Enums
 {
-    public enum EnumRace
-    {
-        Human,
-        Ogier
-    }
+    //TODO: To remove and use only DB values
+    //////public enum EnumRace
+    //////{
+    //////    Human,
+    //////    Ogier
+    //////}
 
-    public enum EnumSex
-    {
-        Male,
-        Female        
-    }
+    //TODO: To remove an use only DB values
+    //////public enum EnumGender
+    //////{
+    //////    Male,
+    //////    Female
+    //////}
 
     public enum EnumHumanNation
     {
@@ -97,8 +93,8 @@ namespace KernelDLL.Game.Enums
     {
         Skin,
         Face,
-        Hair1,
-        Hair2,
+        FrontHair,
+        RearHair,
         Eyes,
         BaseEyes,
         Ears,

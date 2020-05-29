@@ -11,7 +11,7 @@ namespace WoT_Win.Init
     /// </summary>
     public partial class LoadView : Window
     {
-        public LoadView(DataManager dataManager, CreateFactory createFactory, IMainClient client)
+        public LoadView(DataManager dataManager, Common.Services.CreateFactory createFactory, IMainClient client)
         {
             InitializeComponent();
             var viewModel = new LoadViewModel(this, dataManager, createFactory, client);

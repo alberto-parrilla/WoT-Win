@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using CoreDatabase.Context.Data;
 
@@ -8,6 +9,71 @@ namespace CoreDatabase.Context
     {
         protected override void Seed(DataDbContext context)
         {
+            var race1 = new Race()
+            {
+                GameId = 1,
+                DisplayName = "Human",
+                Description = "Common race",
+                Locations = new List<Location>()
+                {
+                    new Location()
+                    {
+                        GameId = 1, DisplayName = "Aiel", Description = "Aiel people",
+                        AttributeMod = new List<AttributeModifier>()
+                            {new AttributeModifier() {LocationId = 1, Attibute = 1, ModifierValue = 1}}
+                    },
+                    new Location() {GameId = 2, DisplayName = "Altara", Description = "Altara people"},
+                    new Location() {GameId = 3, DisplayName = "Amadicia", Description = "Amadicia people"},
+                    new Location() {GameId = 4, DisplayName = "Andor", Description = "Andor people"},
+                    new Location() {GameId = 5, DisplayName = "AradDoman", Description = "Arad Doman people"},
+                    new Location() {GameId = 6, DisplayName = "Arafel", Description = "Arafel people"},
+                    new Location() {GameId = 7, DisplayName = "AthaanMiere", Description = "Athan An Miere people"},
+                    new Location() {GameId = 8, DisplayName = "Cairhien", Description = "Cairhien people"},
+                    new Location() {GameId = 9, DisplayName = "Ghealdan", Description = "Ghealdan people"},
+                    new Location() {GameId = 10, DisplayName = "Illian", Description = "Illian people"},
+                    new Location() {GameId = 11, DisplayName = "Kandor", Description = "Kandor people"},
+                    new Location() {GameId = 12, DisplayName = "Murandy", Description = "Murandy people"},
+                    new Location() {GameId = 13, DisplayName = "Saldaea", Description = "Saldaea people"},
+                    new Location() {GameId = 14, DisplayName = "Shienar", Description = "Shienar people"},
+                    new Location() {GameId = 15, DisplayName = "Tarabon", Description = "Tarabon people"},
+                    new Location() {GameId = 16, DisplayName = "Tear", Description = "Tear people"}
+                }
+            };
+            var race2 = new Race()
+            {
+                GameId = 2,
+                DisplayName = "Ogier",
+                Description = "Special race",
+                Locations = new List<Location>()
+                {
+                    new Location() { GameId = 101, DisplayName = "Stedding", Description = "Common stedding"},
+                },
+                AttributeMod = new List<AttributeModifier>()
+                {
+                    new AttributeModifier() {RaceId = 1, Attibute = 0, ModifierValue = 1}
+                }
+            };
+
+            context.Races.Add(race1);
+            context.Races.Add(race2);
+
+            var gender1 = new Gender()
+            {
+                GameId = 1,
+                DisplayName = "Male",
+                Description = "Special Gender"
+            };
+
+            var gender2 = new Gender()
+            {
+                GameId = 2,
+                DisplayName = "Female",
+                Description = "Special Gender"
+            };
+
+            context.Genders.Add(gender1);
+            context.Genders.Add(gender2);
+
             var area1 = new Area()
             {
                 GameId = 1,
@@ -126,7 +192,6 @@ namespace CoreDatabase.Context
 
             var transition1 = new Transition()
             {
-                GameId = 1,
                 SourceArea = scene1.AreaGameId,
                 SourceScene = scene1.GameId,
                 TargetArea = scene2.AreaGameId,
@@ -138,7 +203,6 @@ namespace CoreDatabase.Context
 
             var transition2 = new Transition()
             {
-                GameId = 2,
                 SourceArea = scene2.AreaGameId,
                 SourceScene = scene2.GameId,
                 TargetArea = scene1.AreaGameId,
@@ -148,7 +212,6 @@ namespace CoreDatabase.Context
 
             var transition3 = new Transition()
             {
-                GameId = 3,
                 SourceArea = scene1.AreaGameId,
                 SourceScene = scene1.GameId,
                 TargetArea = scene3.AreaGameId,
@@ -160,7 +223,6 @@ namespace CoreDatabase.Context
 
             var transition4 = new Transition()
             {
-                GameId = 4,
                 SourceArea = scene3.AreaGameId,
                 SourceScene = scene3.GameId,
                 TargetArea = scene1.AreaGameId,
@@ -170,7 +232,6 @@ namespace CoreDatabase.Context
 
             var transition5 = new Transition()
             {
-                GameId = 5,
                 SourceArea = scene1.AreaGameId,
                 SourceScene = scene1.GameId,
                 TargetArea = scene6.AreaGameId,
@@ -182,7 +243,6 @@ namespace CoreDatabase.Context
 
             var transition6 = new Transition()
             {
-                GameId = 6,
                 SourceArea = scene6.AreaGameId,
                 SourceScene = scene6.GameId,
                 TargetArea = scene1.AreaGameId,
@@ -192,7 +252,6 @@ namespace CoreDatabase.Context
 
             var transition7 = new Transition()
             {
-                GameId = 7,
                 SourceArea = scene1.AreaGameId,
                 SourceScene = scene1.GameId,
                 TargetArea = scene7.AreaGameId,
@@ -204,7 +263,6 @@ namespace CoreDatabase.Context
 
             var transition8 = new Transition()
             {
-                GameId = 8,
                 SourceArea = scene7.AreaGameId,
                 SourceScene = scene7.GameId,
                 TargetArea = scene1.AreaGameId,
@@ -215,7 +273,6 @@ namespace CoreDatabase.Context
 
             var transition9 = new Transition()
             {
-                GameId = 9,
                 SourceArea = scene3.AreaGameId,
                 SourceScene = scene3.GameId,
                 TargetArea = scene4.AreaGameId,
@@ -225,7 +282,6 @@ namespace CoreDatabase.Context
 
             var transition10 = new Transition()
             {
-                GameId = 10,
                 SourceArea = scene4.AreaGameId,
                 SourceScene = scene4.GameId,
                 TargetArea = scene3.AreaGameId,
@@ -235,7 +291,6 @@ namespace CoreDatabase.Context
 
             var transition11 = new Transition()
             {
-                GameId = 11,
                 SourceArea = scene3.AreaGameId,
                 SourceScene = scene3.GameId,
                 TargetArea = scene5.AreaGameId,
@@ -245,7 +300,6 @@ namespace CoreDatabase.Context
 
             var transition12 = new Transition()
             {
-                GameId = 12,
                 SourceArea = scene5.AreaGameId,
                 SourceScene = scene5.GameId,
                 TargetArea = scene3.AreaGameId,
@@ -255,7 +309,6 @@ namespace CoreDatabase.Context
 
             var transition13 = new Transition()
             {
-                GameId = 13,
                 SourceArea = scene7.AreaGameId,
                 SourceScene = scene7.GameId,
                 TargetArea = scene8.AreaGameId,
@@ -265,7 +318,6 @@ namespace CoreDatabase.Context
 
             var transition14 = new Transition()
             {
-                GameId = 14,
                 SourceArea = scene8.AreaGameId,
                 SourceScene = scene8.GameId,
                 TargetArea = scene7.AreaGameId,

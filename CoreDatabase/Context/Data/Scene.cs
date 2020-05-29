@@ -2,7 +2,7 @@
 
 namespace CoreDatabase.Context.Data
 {
-    public class Scene: BusinessEntity
+    public class Scene: GameBusinessEntity
     {
         public int AreaGameId { get; set; }
         public string DisplayName { get; set; }

@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using CoreDatabase.Context.Game;
 using KernelDLL.Common;
-using KernelDLL.Game.Enums;
+using KernelDLL.Creation.Models;
 
 namespace KernelDLL.Game.Models
 {
     [Serializable]
     public class PlayerModel : IMergeable<Player>
     {
-        public PlayerModel(int id, string name, int race, int sex, int nation, bool isChanneler,
+        public PlayerModel(int id, string name, int race, int gender, int nation, bool isChanneler,
             AttributeModel str, AttributeModel dex, AttributeModel con, AttributeModel intell, AttributeModel wis, AttributeModel cha,
             List<PlayerSkillModel> skills, List<PlayerFeatModel> feats, List<PlayerItemModel> items)
         {
             Id = id;
             Name = name;
-            Race = (EnumRace)race;
-            Sex = (EnumSex) sex;
+            //Race = (EnumRace)race;
+            //Gender = (EnumGender) Gender;
             Location = nation;
             IsChanneler = isChanneler;
             Str = str;
@@ -38,8 +37,8 @@ namespace KernelDLL.Game.Models
         public int Id { get; private set; }
         public int UserId { get; private set; }
         public string Name { get; private set; }
-        public EnumRace Race { get; private set; }
-        public EnumSex Sex { get; private set; }
+        public RaceModel Race { get; private set; }
+        public GenderModel Gender { get; private set; }
         public int Location { get; private set; }
         public bool IsChanneler { get; private set; }
         public AttributeModel Str { get; private set; }
@@ -57,8 +56,8 @@ namespace KernelDLL.Game.Models
             Id = source.GameId;
             UserId = source.UserId;
             Name = source.Name;
-            Race = (EnumRace)source.Race;
-            Sex = (EnumSex)source.Sex;
+            //Race = (EnumRace)source.Race;
+            //Gender = (EnumGender)source.Gender;
             Location = source.Location;
             IsChanneler = source.IsChanneler;
 

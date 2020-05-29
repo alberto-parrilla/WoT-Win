@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using ClientDLL.Client;
 using KernelDLL.Common;
 using KernelDLL.Game.Enums;
 using WoT_Win.Common.Commands;
@@ -17,18 +18,20 @@ namespace WoT_Win.Creation.ViewModels
     {
         private const int CustomWeavesPoints = 2;
 
-        public CreationWeavesViewModel(DataManager dataManager, CreateFactory createFactory)
+        public CreationWeavesViewModel(IMainClient client, DataManager dataManager, Common.Services.CreateFactory createFactory) : base(client)
         {
             SelectTypeCommand = new RelayCommand((o) => SelectType(o), (o) => true);
             AddCommand = new RelayCommand((o) => Add(), (o) => CanAdd());
             RemoveCommand = new RelayCommand((o) => Remove(), (o) => CanRemove());
             WeavePoints = CustomWeavesPoints;
-            AllWeaves = new ObservableCollection<BaseWeaveViewModel>(dataManager.GetWeaves().Select(s => createFactory.Create(s)));
             Weaves = new ObservableCollection<BaseWeaveViewModel>();
             PlayerWeaves = new ObservableCollection<PlayerWeaveViewModel>();
-
-            IsValid = true;
-            IsVisible = false;
+            
+            // TODO: To remove when dataManager is also removed
+            AllWeaves = new ObservableCollection<BaseWeaveViewModel>(dataManager.GetWeaves().Select(s => createFactory.Create(s)));
+            
+            //IsValid = true;
+            //IsVisible = false;
         }
 
         protected override string GetHeader()
@@ -210,6 +213,14 @@ namespace WoT_Win.Creation.ViewModels
         {
             OnPropertyChanged("Header");
             Refresh();
+        }
+
+        public override void OnLoaded()
+        {
+            //TODO: To add again when dataManager is removed
+            //AllWeaves = new ObservableCollection<BaseWeaveViewModel>(_dataManager.GetWeaves().Select(s => createFactory.Create(s)));
+            IsValid = true;
+            IsVisible = false;
         }
     }
 }

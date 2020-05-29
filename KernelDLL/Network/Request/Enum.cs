@@ -1,14 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KernelDLL.Network.Request
+﻿namespace KernelDLL.Network.Request
 {
-    public enum EnumDataType
+    public enum EnumGameDataType
     {
         GameSession,
         GameSessionInfo,
+    }
+
+    public enum EnumPlayerDataType
+    {
+        Race,
+        Gender,
+        Location,
+        Skill,
+        Feat,
+        Weave,
+        AvatarBodyToolset,
+        AvatarFaceToolset,
+        AvatarBaseHairToolset,
+        AvatarFrontHairToolset,
+        AvatarRearHairToolset,
+        AvatarEyebrowsToolset,
+        AvatarBaseEyesToolset,
+        AvatarEyesToolset,
+        AvatarEarsToolset,
+        AvatarNoseToolset,
+        AvatarMouthToolset,
+        AvatarBeardToolset,
+        AvatarExtrasToolset
     }
 }

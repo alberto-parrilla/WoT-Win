@@ -7,5 +7,6 @@ namespace CoreDatabase.Managers
     {
         Task<GameSession> GetGameSessionByUserIdAsync(int userId);
         Task<Player> GetPlayerAsync(int playerId);
+        Task<bool> CheckNameAsync(string name);
     }
 }

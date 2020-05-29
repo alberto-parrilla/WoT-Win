@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ClientDLL.Client;
 using KernelDLL.Game.Enums;
 using WoT_Win.Common.ViewModels;
 
@@ -14,7 +15,7 @@ namespace WoT_Win.Creation.ViewModels
 {
     public class CreationAttributesViewModel : BaseCreationViewModel
     {
-        public CreationAttributesViewModel()
+        public CreationAttributesViewModel(IMainClient client) : base(client)
         {
             Attributes = new List<CreationAttributeViewModel>()
             {
@@ -91,6 +92,11 @@ namespace WoT_Win.Creation.ViewModels
             }
 
             Validate();
+        }
+
+        public override void OnLoaded()
+        {
+           
         }
     }
 }

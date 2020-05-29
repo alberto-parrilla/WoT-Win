@@ -8,8 +8,9 @@
     <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     <controls:InverseBooleanToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
     <controls:BooleanToColorConverter x:Key="BoolToColorConverter"/>
+    <controls:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
 
-    <Style x:Key="BtnInGridStyle" TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+        <Style x:Key="BtnInGridStyle" TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
         <Setter Property="Width" Value="100"/>
         <Setter Property="Height" Value="30"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>

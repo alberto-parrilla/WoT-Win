@@ -17,10 +17,10 @@ namespace WoT_Win.Init
     public sealed class InitViewModel : BaseViewModel
     {
         private Window _view;
-        private CreateFactory _createFactory;
+        private Common.Services.CreateFactory _createFactory;
         private DataManager _dataManager;
 
-        public InitViewModel(Window view, DataManager dataManager, CreateFactory createFactory, IMainClient client) : base(client)
+        public InitViewModel(Window view, DataManager dataManager, Common.Services.CreateFactory createFactory, IMainClient client) : base(client)
         {
             NewCommand = new RelayCommand((o) => New(false), (o) => true);
             NewOnlineCommand = new RelayCommand((o) => New(true), (o) => IsOnline);
@@ -44,7 +44,7 @@ namespace WoT_Win.Init
 
         private void New(bool isOnline)
         {
-            new CreationView(_dataManager, _createFactory).Show();
+            new CreationView(new MainClient(_dataManager), _createFactory).Show();
             _view.Close();
         }
 

@@ -17,22 +17,25 @@
     <Grid>
         <Label Content="{DynamicResource ResourceKey=LblName}" Style="{StaticResource LblInGridStyle}" Margin="40,20,0,0"/>
         <TextBox Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}" Style="{StaticResource TxtInGridStyle}" Margin="120,20,0,0" Width="172"/>
+        <Button Command="{Binding Path=CheckNameCommand}" Height="25" Width="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,20,0,0">
+            <Image Source="..\..\Resources\Icons\Common\lupa_32x32BN_v1.png"/>
+        </Button>
         <Label Content="{DynamicResource ResourceKey=LblRace}" Style="{StaticResource LblInGridStyle}" Margin="40,60,0,0"/>
         <commoncontrols:SelectorControl x:Name="RaceSelectorControl"
-                                        Items="{Binding Path=RaceItems}"   
+                                        Items="{Binding Path=RaceItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"   
                                         SelectedElement="{Binding Path=SelectedRace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         ContentWidth="120" ContentHeight="26"
                                         VerticalAlignment="Top" HorizontalAlignment="Left" Margin="120,60,0,0"/>
-        <Label Content="{DynamicResource ResourceKey=LblSex}" Style="{StaticResource LblInGridStyle}" Margin="40,100,0,0"/>
-        <commoncontrols:SelectorControl x:Name="SexSelectorControl"                                        
-                                        Items="{Binding Path=SexItems}"                                        
-                                        SelectedElement="{Binding Path=SelectedSex}"
+        <Label Content="{DynamicResource ResourceKey=LblGender}" Style="{StaticResource LblInGridStyle}" Margin="40,100,0,0"/>
+        <commoncontrols:SelectorControl x:Name="GenderSelectorControl"                                        
+                                        Items="{Binding Path=GenderItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                                        
+                                        SelectedElement="{Binding Path=SelectedGender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         ContentWidth="120" ContentHeight="26"
                                         VerticalAlignment="Top" HorizontalAlignment="Left" Margin="120,100,0,0"/>
         <Label Content="{DynamicResource ResourceKey=LblOrigin}" Style="{StaticResource LblInGridStyle}" Margin="40,140,0,0"/>
-        <commoncontrols:SelectorControl x:Name="NationSelectorControl"
-                                        Items="{Binding Path=NationItems}"
-                                        SelectedElement="{Binding Path=SelectedNation}"   
+        <commoncontrols:SelectorControl x:Name="LocationSelectorControl"
+                                        Items="{Binding Path=LocationItems}"
+                                        SelectedElement="{Binding Path=SelectedLocation}"   
                                         ContentWidth="120" ContentHeight="26"
                                         VerticalAlignment="Top" HorizontalAlignment="Left" Margin="120,140,0,0"/>
         <Label Content="{DynamicResource ResourceKey=LblChanneler}" Style="{StaticResource LblInGridStyle}" Margin="40,180,0,0"/>

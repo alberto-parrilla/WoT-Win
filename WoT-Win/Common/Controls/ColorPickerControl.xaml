@@ -1,8 +1,6 @@
 ﻿<UserControl x:Class="WoT_Win.Common.Controls.ColorPickerControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:WoT_Win.Common.Controls"
              Height="Auto" Width="Auto">    
     <Grid>
@@ -21,11 +19,6 @@
                     </RadioButton>
                 </DataTemplate>                
             </ItemsControl.ItemTemplate>
-            <!--<SolidColorBrush Color="LightGray"/>
-            <SolidColorBrush Color="Yellow"/>
-            <SolidColorBrush Color="SaddleBrown"/>
-            <SolidColorBrush Color="DarkRed"/>
-            <SolidColorBrush Color="Black"/>-->
         </ItemsControl>
     </Grid>
 </UserControl>

@@ -5,9 +5,10 @@
     <sys:String x:Key="Header">Personal data</sys:String>
     <sys:String x:Key="LblName">Name</sys:String>
     <sys:String x:Key="LblRace">Race</sys:String>
-    <sys:String x:Key="LblSex">Sex</sys:String>
+    <sys:String x:Key="LblGender">Gender</sys:String>
     <sys:String x:Key="LblOrigin">Origin</sys:String>
     <sys:String x:Key="LblChanneler">Channeler</sys:String>
     <sys:String x:Key="BtnEdit">Edit</sys:String>
     <sys:String x:Key="ErrorName">Name must be completed</sys:String>
+    <sys:String x:Key="ErrorValidationName">Name already exists. Please, choose another one</sys:String>
 </ResourceDictionary>

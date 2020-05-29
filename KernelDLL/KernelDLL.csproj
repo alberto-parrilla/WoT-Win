@@ -40,14 +40,17 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\AuthenticationResult.cs" />
@@ -55,9 +58,11 @@
     <Compile Include="Authentication\LoginResult.cs" />
     <Compile Include="Authentication\RegisterResult.cs" />
     <Compile Include="Authentication\UserManager.cs" />
+    <Compile Include="Common\CreateFactory.cs" />
     <Compile Include="Common\DataContainer.cs" />
     <Compile Include="Common\DataManager.cs" />
     <Compile Include="Common\DisposableAction.cs" />
+    <Compile Include="Common\ICreateFactory.cs" />
     <Compile Include="Common\IDataContainer.cs" />
     <Compile Include="Common\IDataManager.cs" />
     <Compile Include="Common\IMergeable.cs" />
@@ -65,6 +70,12 @@
     <Compile Include="Common\RepositoryManager.cs" />
     <Compile Include="Common\Util.cs" />
     <Compile Include="Creation\Interfaces\IAvatarGenerator.cs" />
+    <Compile Include="Creation\Interfaces\ISelectable.cs" />
+    <Compile Include="Creation\Models\AttributeModifierModel.cs" />
+    <Compile Include="Creation\Models\AvatarToolsetModel.cs" />
+    <Compile Include="Creation\Models\LocationModel.cs" />
+    <Compile Include="Creation\Models\RaceModel.cs" />
+    <Compile Include="Creation\Models\SexModel.cs" />
     <Compile Include="Database\FakeDatabase.cs" />
     <Compile Include="Database\IDatabase.cs" />
     <Compile Include="Game\Enums\Enums.cs" />
@@ -113,18 +124,22 @@
     <Compile Include="Init\SceneSavedModel.cs" />
     <Compile Include="Network\AllowAllAssemblyVersionsDeserializationBinder.cs" />
     <Compile Include="Network\Request\AuthenticationRequest.cs" />
-    <Compile Include="Network\Request\DataRequest.cs" />
+    <Compile Include="Network\Request\CheckDataRequest.cs" />
+    <Compile Include="Network\Request\GameDataRequest.cs" />
     <Compile Include="Network\Request\Enum.cs" />
     <Compile Include="Network\Request\IRequest.cs" />
     <Compile Include="Network\Request\LoginRequest.cs" />
     <Compile Include="Network\Request\PingRequest.cs" />
+    <Compile Include="Network\Request\PlayerDataRequest.cs" />
     <Compile Include="Network\Request\RegisterRequest.cs" />
     <Compile Include="Network\Request\RequestMessageBase.cs" />
     <Compile Include="Network\Response\AuthenticationResponse.cs" />
+    <Compile Include="Network\Response\CheckDataResponse.cs" />
     <Compile Include="Network\Response\DataResponse.cs" />
     <Compile Include="Network\Response\IResponse.cs" />
     <Compile Include="Network\Response\LoginResponse.cs" />
     <Compile Include="Network\Response\PingResponse.cs" />
+    <Compile Include="Network\Response\PlayerDataResponse.cs" />
     <Compile Include="Network\Response\RegisterResponse.cs" />
     <Compile Include="Network\Response\ResponseMessageBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -138,6 +153,511 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_Skin1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_Skin2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_Skin3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_Skin4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Skin2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Skin3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Skin4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Beard10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Beard11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Beard12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Beard2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Beard3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Beard4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Beard5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Beard6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Beard7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Beard8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Beard9.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Beard10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Beard11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Beard12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Beard2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Beard3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Beard4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Beard5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Beard6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Beard7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Beard8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Beard9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Face1_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Face2_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Face3_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Face4_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Face5_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Face6_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Face7_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Face10_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Face11_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Face12_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Face1_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Face2_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Face3_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Face4_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Face5_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Face6_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Face7_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Face8_Skin1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Face9_Skin1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Beard1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Beard1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair16.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair17.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_FrontHair9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair16.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair17.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair18.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_FrontHair9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair9.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_FrontHair16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair16.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_FrontHair9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair16.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair17.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair18.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair19.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_RearHair9.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair16.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair17.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair18.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair19.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_RearHair9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair16.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair17.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair18.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair19.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair20.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair21.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_RearHair9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair16.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair17.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair18.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair19.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair20.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair21.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_RearHair9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Nose1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Nose10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Nose11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Nose12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Nose13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Nose2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Nose3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Nose4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Nose5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Nose6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Nose7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Nose8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Nose9.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Nose1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Nose10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Nose11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Nose12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Nose13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Nose2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Nose3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Nose4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Nose5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Nose6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Nose7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Nose8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Nose9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Mouth1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Mouth10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Mouth11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Mouth12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Mouth13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Mouth2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Mouth3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Mouth4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Mouth5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Mouth6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Mouth7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Mouth8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Mouth9.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Mouth9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Ears1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Ears1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Extras1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Extras2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Extras3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Extras4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Extras5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Extras6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Extras7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Extras1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Extras2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Extras3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Extras4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Extras5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Extras6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Extras7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Extras8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_Extras1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_Extras2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_Extras3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_Extras4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_Extras5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_Extras6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_Extras7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Extras1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Extras2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Extras3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Extras4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Extras5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Extras6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Extras7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Extras8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Male_Ears1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Charaset\Human_Female_Ears1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyebrows1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyebrows10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyebrows2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyebrows3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyebrows4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyebrows5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyebrows6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyebrows7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyebrows8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyebrows9.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows16.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows17.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows18.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows19.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyebrows9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes16.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes17.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes18.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes19.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes20.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes21.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes22.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes23.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes24.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes25.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes26.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes27.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseEyes9.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes16.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes17.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes18.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes19.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes20.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes21.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes22.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes23.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes24.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes25.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes26.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes27.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_Eyes9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes16.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes17.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes18.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes19.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes20.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseEyes9.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes16.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes17.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes18.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes19.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes20.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_Eyes9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair16.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair17.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair18.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair19.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Male_BaseHair9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair1.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair10.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair11.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair12.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair13.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair14.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair15.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair16.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair17.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair18.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair19.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair2.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair20.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair21.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair3.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair4.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair5.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair6.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair7.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair8.png" />
+    <EmbeddedResource Include="Resources\Player\Generator\Faceset\Human_Female_BaseHair9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Player\Generator\TestPalette.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

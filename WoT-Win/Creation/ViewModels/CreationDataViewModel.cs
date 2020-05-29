@@ -4,32 +4,25 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows;
 using KernelDLL.Common;
-using KernelDLL.Game.Enums;
 using System.Windows.Input;
+using ClientDLL.Client;
+using KernelDLL.Creation.Models;
+using KernelDLL.Network.Request;
 using WoT_Win.Common.Commands;
 using WoT_Win.Common.ViewModels;
 using WoT_Win.Creation.Views;
+using KernelDLL.Network.Response;
 
 namespace WoT_Win.Creation.ViewModels
 {
     public sealed class CreationDataViewModel : BaseCreationViewModel
     {
-        public CreationDataViewModel()
+        public CreationDataViewModel(IMainClient client) : base(client)
         {
-            RaceItems = Enum.GetNames(typeof(EnumRace)).ToList();
-            SelectedRace = 0;
-            SexItems = Enum.GetNames(typeof(EnumSex)).ToList();
-            SelectedSex = 0;
-            NationItems = Enum.GetNames(typeof(EnumHumanNation)).ToList();
-            SelectedNation = 0;
-            HasWeaves = false;            
-            Portrait = Path.Combine(Util.TestPortraitPath, "faceset.png");
-            Avatar = Path.Combine(Util.TestCharasetPath, "charaset.png");
-
             EditAvatarCommand = new RelayCommand((o) => EditAvatar(), (o) => true);
+            CheckNameCommand = new RelayCommand((o) => CheckName(), (o) => true);
 
             IsVisible = true;            
             PropertyChanged += OnPropertyChanged;
@@ -45,6 +38,7 @@ namespace WoT_Win.Creation.ViewModels
         }
 
         public ICommand EditAvatarCommand { get; private set; }
+        public ICommand CheckNameCommand { get; private set; }
 
         private string _error;
         public override string Error
@@ -63,13 +57,13 @@ namespace WoT_Win.Creation.ViewModels
             switch (property)
             {
                 case "SelectedRace":
-                    OnRaceChanged((EnumRace)SelectedRace);
+                    OnRaceChanged(MyRaceItems[SelectedRace]);
                     break;        
-                case "SelectedSex":
-                    OnSexChanged((EnumSex) SelectedSex);
+                case "SelectedGender":
+                    OnGenderChanged(MyGenderItems[SelectedGender]);
                     break;
-                case "SelectedNation":
-                    OnNationChanged(SelectedNation);
+                case "SelectedLocation":
+                    OnLocationChanged(MyLocationItems[SelectedLocation]);
                     break;
             }
 
@@ -89,14 +83,37 @@ namespace WoT_Win.Creation.ViewModels
             }
         }
 
-        public EnumRace Race { get; private set; }
-        public EnumSex Sex { get; private set; }
-        public int Nation { get; private set; } 
+        public RaceModel Race { get; private set; }
+        public GenderModel Gender { get; private set; }
+        public LocationModel Location { get; private set; }
         public int Skin { get; private set; }
         public int Hair { get; private set; }
         public int HairColor { get; private set; }
+
+        private IList<RaceModel> _myRaceItems;
+        public IList<RaceModel> MyRaceItems 
+        {
+            get => _myRaceItems;
+            set
+            {
+                _myRaceItems = value;
+                OnPropertyChanged();
+            }
+        }
+
         public IList<string> RaceItems { get; private set; }
         
+        private RaceModel _mySelectedRace;
+        public RaceModel MySelectedRace
+        {
+            get { return _mySelectedRace; }
+            set
+            {
+                _mySelectedRace = value;
+                OnPropertyChanged();
+            }
+        }
+
         private int _selectedRace;
         public int SelectedRace
         {
@@ -104,32 +121,67 @@ namespace WoT_Win.Creation.ViewModels
             set
             {
                 _selectedRace = value;
-                OnPropertyChanged("SelectedRace");
+                OnPropertyChanged();
             }
         }
 
-        public IList<string> SexItems { get; private set; }
-        
-        private int _selectedSex;
-        public int SelectedSex
+        private IList<GenderModel> _myGenderItems;
+        public IList<GenderModel> MyGenderItems
         {
-            get { return _selectedSex; }
+            get => _myGenderItems;
             set
             {
-                _selectedSex = value;
-                OnPropertyChanged("SelectedSex");
+                _myGenderItems = value;
+                OnPropertyChanged();
             }
         }
-        public IList<string> NationItems { get; private set; }
-        
-        private int _selectedNation;
-        public int SelectedNation
+
+        public IList<string> GenderItems { get; private set; }
+
+        private GenderModel _mySelectedGender;
+        public GenderModel MySelectedGender
         {
-            get { return _selectedNation; }
+            get { return _mySelectedGender; }
             set
             {
-                _selectedNation = value;
-                OnPropertyChanged("SelectedNation");
+                _mySelectedGender = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _selectedGender;
+        public int SelectedGender
+        {
+            get { return _selectedGender; }
+            set
+            {
+                _selectedGender = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public IList<string> LocationItems { get; private set; }
+        public IList<LocationModel> MyLocationItems { get; private set; }
+        
+        private LocationModel _mySelectedLocation;
+        public LocationModel MySelectedLocation
+        {
+            get { return _mySelectedLocation; }
+            set
+            {
+                _mySelectedLocation = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _selectedLocation;
+        public int SelectedLocation
+        {
+            get { return _selectedLocation; }
+            set
+            {
+                _selectedLocation = value;
+                OnPropertyChanged();
             }
         }
 
@@ -167,42 +219,31 @@ namespace WoT_Win.Creation.ViewModels
             set
             {
                 _avatar = value;
-                OnPropertyChanged("Avatar");
+                OnPropertyChanged();
             }
         }
-        private void OnRaceChanged(EnumRace race)
-        {
-            if (race == EnumRace.Human)
-            {            
-                NationItems = Enum.GetNames(typeof(EnumHumanNation)).ToList();
-            }
-            else
-            {               
-                NationItems = Enum.GetNames(typeof(EnumOgierNation)).ToList();
-            }
 
-            OnPropertyChanged("NationItems");
+        private void OnRaceChanged(RaceModel race)
+        {
+            MyLocationItems = race.Locations;
+            LocationItems = MyLocationItems.Select(l => l.DisplayName).ToList();
+            MySelectedLocation = MyLocationItems.FirstOrDefault();
+            SelectedLocation = MyLocationItems.IndexOf(MySelectedLocation);
+            OnPropertyChanged("MyLocationItems");
+            OnPropertyChanged("LocationItems");
+            OnPropertyChanged("SelectedLocation");
+            OnPropertyChanged("MySelectedLocation");
             Race = race;
         }
 
-        private void OnSexChanged(EnumSex sex)
+        private void OnGenderChanged(GenderModel gender)
         {
-            Sex = sex;
+            Gender = gender;
         }
 
-        private void OnNationChanged(int selectedNation)
+        private void OnLocationChanged(LocationModel selectedLocation)
         {
-            var race = (EnumRace) SelectedRace;
-            if (race == EnumRace.Human)
-            {
-                var nation = (EnumHumanNation) selectedNation;                
-            }
-            else
-            {
-                var stedding = (EnumOgierNation) selectedNation;                
-            }
-
-            Nation = selectedNation;
+            Location = selectedLocation;
         }
 
         private void UpdateAvatar()
@@ -232,17 +273,59 @@ namespace WoT_Win.Creation.ViewModels
         private void EditAvatar()
         {
             CreatePlayerAvatarView view = new CreatePlayerAvatarView();
-            CreatePlayerAvatarViewModel viewModel = new CreatePlayerAvatarViewModel(view, Race, Sex, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            CreatePlayerAvatarViewModel viewModel = new CreatePlayerAvatarViewModel(view, Race, Gender, 0,  0,  0, _client);
             view.DataContext = viewModel;
          
             view.ShowDialog();
-          
+        }
+
+        private void CheckName()
+        {
+            if (!string.IsNullOrEmpty(Name))
+            {
+                _client.Send(new CheckDataRequest(EnumCheckDataType.Name, Name));
+            }
         }
 
         public override void RefreshUI()
         {
             OnPropertyChanged("Header");
             Validate("Name");
+        }
+
+        public override void OnLoaded()
+        {
+            MyRaceItems = _client.DataContainer.Races.OrderBy(r => r.GameId).ToList();
+            RaceItems = MyRaceItems.Select(r => r.DisplayName).ToList();
+            MySelectedRace = MyRaceItems.FirstOrDefault();
+            SelectedRace = MyRaceItems.IndexOf(MySelectedRace);
+            MyGenderItems = _client.DataContainer.Genders.OrderBy(r => r.GameId).ToList();
+            GenderItems = MyGenderItems.Select(r => r.DisplayName).ToList();
+            MySelectedGender = MyGenderItems.FirstOrDefault();
+            SelectedGender = MyGenderItems.IndexOf(MySelectedGender);
+            MyLocationItems = MySelectedRace?.Locations;
+            LocationItems = MyLocationItems?.Select(r => r.DisplayName).ToList();
+            MySelectedLocation = MyLocationItems?.FirstOrDefault();
+            SelectedLocation = MyLocationItems.IndexOf(MySelectedLocation);
+            HasWeaves = false;
+            Portrait = Path.Combine(Util.TestPortraitPath, "faceset.png");
+            Avatar = Path.Combine(Util.TestCharasetPath, "charaset.png");
+            OnPropertyChanged("RaceItems");
+            OnPropertyChanged("LocationItems");
+            OnPropertyChanged("GenderItems");
+        }
+
+        protected override void ManageResponse(IResponse response)
+        {
+            if (response.ResponseType != EnumResponseType.CheckData) return;
+
+            var responseMessage = response as CheckDataResponse;
+            if (responseMessage == null) return;
+
+            if (responseMessage.CheckResult == EnumCheckDataResult.Exists)
+            {
+                Error = LanguageManager.GetResourceValue("CreationDataView", "ErrorValidationName");
+            }
         }
     }
 }

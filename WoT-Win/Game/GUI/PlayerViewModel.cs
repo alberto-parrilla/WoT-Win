@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using KernelDLL.Common;
+using KernelDLL.Creation.Models;
 using KernelDLL.Game.Enums;
 using KernelDLL.Game.Models;
 using WoT_Win.Common.Commands;
@@ -60,8 +59,9 @@ namespace WoT_Win.Common.ViewModels
         private PlayerModel Model { get; set; }
         public int Id { get { return Model.Id; } }
         public string Name { get { return Model.Name; } }
-        public EnumRace Race { get { return Model.Race; } }
-        public EnumSex Sex { get { return Model.Sex; } }
+        //public EnumRace Race { get { return Model.Race; } }
+        public RaceModel Race { get { return Model.Race; } }
+        public GenderModel Gender { get { return Model.Gender; } }
         public int Nation { get { return Model.Location; } }
         public bool IsChanneler { get { return Model.IsChanneler; } }
 

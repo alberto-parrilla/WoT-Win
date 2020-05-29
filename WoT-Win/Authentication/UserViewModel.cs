@@ -7,6 +7,7 @@ using KernelDLL.Network.Request;
 using KernelDLL.Network.Response;
 using WoT_Win.Common.Commands;
 using WoT_Win.Common.ViewModels;
+using WoT_Win.Creation.Views;
 using WoT_Win.Game.GUI;
 
 namespace WoT_Win.Authentication
@@ -25,7 +26,7 @@ namespace WoT_Win.Authentication
 
         public override void Init()
         {
-            _client.Send(new DataRequest<GameSessionInfoModel>(EnumDataType.GameSessionInfo, UserId));
+            _client.Send(new DataRequest(EnumGameDataType.GameSessionInfo, UserId));
         }
 
         private int UserId { get; set; }
@@ -88,6 +89,8 @@ namespace WoT_Win.Authentication
 
         private void New()
         {
+            OpenWindowSafe(() => new CreationView(_client, new Common.Services.CreateFactory()).Show());
+            CloseWindowSafe(_view);
         }
 
         private bool CanDelete()

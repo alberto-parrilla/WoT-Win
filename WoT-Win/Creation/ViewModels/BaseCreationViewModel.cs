@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Runtime.Remoting.Contexts;
+using ClientDLL.Client;
 using WoT_Win.Common.ViewModels;
 
 namespace WoT_Win.Creation.ViewModels
 {
     public abstract class BaseCreationViewModel : BaseViewModel, IDataErrorInfo
     {
+        public BaseCreationViewModel(IMainClient client) :base(client)
+        { }
+
         public string Header => GetHeader();
         public bool IsValid { get; protected set; }
         public abstract void Validate();
@@ -25,5 +25,7 @@ namespace WoT_Win.Creation.ViewModels
         }
 
         protected abstract string GetHeader();
+
+        public abstract void OnLoaded();
     }
 }

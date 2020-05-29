@@ -1,7 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
 using KernelDLL.Common;
-using WoT_Win.Common.Services;
 using WoT_Win.Common.ViewModels;
 using System.Windows.Input;
 using WoT_Win.Common.Commands;
@@ -14,24 +12,16 @@ namespace WoT_Win.Init
     public class LoadViewModel : BaseViewModel
     {
         private Window _view;
-        private CreateFactory _factory;
+        private Common.Services.CreateFactory _factory;
         private DataManager _dataManager;
 
-        public LoadViewModel(Window view, DataManager dataManager, CreateFactory factory, IMainClient client) : base(client)
+        public LoadViewModel(Window view, DataManager dataManager, Common.Services.CreateFactory factory, IMainClient client) : base(client)
         {
             _view = view;
             _factory = factory;
             _dataManager = dataManager;
-            //_dataManager.LoadGames();
-            //Items = new ObservableCollection<LoadedGameViewModel>(_dataManager.LoadedGames.Select((m) => _factory.Create(m)).ToList() );
             LoadCommand = new RelayCommand((o) => Load(), (o) => CanLoad());
             CancelCommand = new RelayCommand((o) => Exit(), (o) => true);    
-        }
-
-        public override void Init()
-        {
-            _dataManager.LoadGames();
-            Items = new ObservableCollection<LoadedGameViewModelLegacy>(_dataManager.LoadedGames.Select((m) => _factory.Create(m)).ToList());
         }
 
         public string AppTitle => Util.AppTitle;
@@ -64,9 +54,9 @@ namespace WoT_Win.Init
             //splashLoadView.LoadGame(SelectedItem);
 
             _dataManager.LoadGame();
-            _dataManager.LoadPlayer(SelectedItem.Model.PlayerId);
-            _dataManager.LoadArea(SelectedItem.Model.AreaId);
-            _dataManager.LoadScene(SelectedItem.Model.SceneId, SelectedItem.Model.AreaId);
+            //////////_dataManager.LoadPlayer(SelectedItem.Model.PlayerId);
+            //////////_dataManager.LoadArea(SelectedItem.Model.AreaId);
+            //////////_dataManager.LoadScene(SelectedItem.Model.SceneId, SelectedItem.Model.AreaId);
 
             var gui = new MainGui();
 
