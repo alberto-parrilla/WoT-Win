@@ -55,8 +55,10 @@
     <Compile Include="Authentication\LoginResult.cs" />
     <Compile Include="Authentication\RegisterResult.cs" />
     <Compile Include="Authentication\UserManager.cs" />
+    <Compile Include="Common\DataContainer.cs" />
     <Compile Include="Common\DataManager.cs" />
     <Compile Include="Common\DisposableAction.cs" />
+    <Compile Include="Common\IDataContainer.cs" />
     <Compile Include="Common\IDataManager.cs" />
     <Compile Include="Common\IMergeable.cs" />
     <Compile Include="Common\IRepositoryManager.cs" />
