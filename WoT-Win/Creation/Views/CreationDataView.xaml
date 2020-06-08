@@ -35,7 +35,7 @@
         <Label Content="{DynamicResource ResourceKey=LblOrigin}" Style="{StaticResource LblInGridStyle}" Margin="40,140,0,0"/>
         <commoncontrols:SelectorControl x:Name="LocationSelectorControl"
                                         Items="{Binding Path=LocationItems}"
-                                        SelectedElement="{Binding Path=SelectedLocation}"   
+                                        SelectedElement="{Binding Path=SelectedLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"   
                                         ContentWidth="120" ContentHeight="26"
                                         VerticalAlignment="Top" HorizontalAlignment="Left" Margin="120,140,0,0"/>
         <Label Content="{DynamicResource ResourceKey=LblChanneler}" Style="{StaticResource LblInGridStyle}" Margin="40,180,0,0"/>

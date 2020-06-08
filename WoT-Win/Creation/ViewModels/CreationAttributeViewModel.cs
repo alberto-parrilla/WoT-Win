@@ -5,22 +5,24 @@ using System.Windows.Input;
 using KernelDLL.Game.Enums;
 using WoT_Win.Common.Commands;
 using WoT_Win.Common.ViewModels;
+using WoT_Win.Creation.Services;
 
 namespace WoT_Win.Creation.ViewModels
 {
     public class CreationAttributeViewModel : BaseViewModel
     {
         private CreationAttributesViewModel _parent;
-        public CreationAttributeViewModel(EnumAttribute type, int baseValue, CreationAttributesViewModel parent)
+        public CreationAttributeViewModel(EnumAttribute type, int baseValue, CreationAttributesViewModel parent,CreationManager creationManager)
         {
+            CreationManager = creationManager;
             _parent = parent;
             Type = type;
             BaseValue = baseValue;
-            RaceMod = 0;
-            NationMod = 0;
             UpCommand = new RelayCommand((o) => Up(), (o) => CanUp());
             DownCommand = new RelayCommand((o) => Down(), (o) => CanDown());
         }
+
+        private CreationManager CreationManager { get; set; }
 
         public ICommand UpCommand { get; private set; }
         public ICommand DownCommand { get; private set; }
@@ -28,9 +30,10 @@ namespace WoT_Win.Creation.ViewModels
         public EnumAttribute Type { get; private set; }
         public string Header => GetHeader();
         public int BaseValue { get; private set; }
-        public int RaceMod { get; private set; }
-        public int NationMod { get; private set; }
-        public int Value { get { return BaseValue + RaceMod + NationMod; } }
+        public int RaceMod { get { return CreationManager.GetRaceMod((int)Type); } }
+        public int LocationMod { get { return CreationManager.GetLocationMod((int) Type); } }
+
+        public int Value { get { return BaseValue + RaceMod + LocationMod; } }
 
         private string GetHeader()
         {

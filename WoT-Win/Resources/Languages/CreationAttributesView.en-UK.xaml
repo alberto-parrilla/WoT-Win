@@ -10,5 +10,10 @@
     <sys:String x:Key="LblInt">Int</sys:String>
     <sys:String x:Key="LblWis">Wis</sys:String>
     <sys:String x:Key="LblCha">Cha</sys:String>
+    <sys:String x:Key="LblBase">Base</sys:String>
+    <sys:String x:Key="LblRace">Race</sys:String>
+    <sys:String x:Key="LblLocation">Loc</sys:String>
+    <sys:String x:Key="LblTotal">Total</sys:String>
     <sys:String x:Key="ErrorPoints">All attributes points must be used</sys:String>
 </ResourceDictionary>
+    

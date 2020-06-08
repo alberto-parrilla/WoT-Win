@@ -14,12 +14,13 @@ using WoT_Win.Common.Commands;
 using WoT_Win.Common.ViewModels;
 using WoT_Win.Creation.Views;
 using KernelDLL.Network.Response;
+using WoT_Win.Creation.Services;
 
 namespace WoT_Win.Creation.ViewModels
 {
     public sealed class CreationDataViewModel : BaseCreationViewModel
     {
-        public CreationDataViewModel(IMainClient client) : base(client)
+        public CreationDataViewModel(IMainClient client, CreationManager creationManager) : base(client, creationManager)
         {
             EditAvatarCommand = new RelayCommand((o) => EditAvatar(), (o) => true);
             CheckNameCommand = new RelayCommand((o) => CheckName(), (o) => true);
@@ -234,16 +235,19 @@ namespace WoT_Win.Creation.ViewModels
             OnPropertyChanged("SelectedLocation");
             OnPropertyChanged("MySelectedLocation");
             Race = race;
+            Manager.Player.Race = Race;
         }
 
         private void OnGenderChanged(GenderModel gender)
         {
             Gender = gender;
+            Manager.Player.Gender = Gender;
         }
 
         private void OnLocationChanged(LocationModel selectedLocation)
         {
             Location = selectedLocation;
+            Manager.Player.Location = Location;
         }
 
         private void UpdateAvatar()

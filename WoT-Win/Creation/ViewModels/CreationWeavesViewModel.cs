@@ -10,6 +10,7 @@ using KernelDLL.Game.Enums;
 using WoT_Win.Common.Commands;
 using WoT_Win.Common.Services;
 using WoT_Win.Common.ViewModels;
+using WoT_Win.Creation.Services;
 using WoT_Win.Game.Weaves;
 
 namespace WoT_Win.Creation.ViewModels
@@ -18,7 +19,7 @@ namespace WoT_Win.Creation.ViewModels
     {
         private const int CustomWeavesPoints = 2;
 
-        public CreationWeavesViewModel(IMainClient client, DataManager dataManager, Common.Services.CreateFactory createFactory) : base(client)
+        public CreationWeavesViewModel(IMainClient client, DataManager dataManager, Common.Services.CreateFactory createFactory, CreationManager creationManager) : base(client, creationManager)
         {
             SelectTypeCommand = new RelayCommand((o) => SelectType(o), (o) => true);
             AddCommand = new RelayCommand((o) => Add(), (o) => CanAdd());

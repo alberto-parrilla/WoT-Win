@@ -8,11 +8,14 @@ using System.Windows.Input;
 using ClientDLL.Client;
 using KernelDLL.Common;
 using KernelDLL.Creation.Models;
+using KernelDLL.Game.Models;
 using KernelDLL.Network.Request;
 using KernelDLL.Network.Response;
 using WoT_Win.Common.Commands;
 using WoT_Win.Common.ViewModels;
 using WoT_Win.Common.Views;
+using WoT_Win.Creation.Models;
+using WoT_Win.Creation.Services;
 
 namespace WoT_Win.Creation.ViewModels
 {
@@ -35,12 +38,14 @@ namespace WoT_Win.Creation.ViewModels
 
         public override void Init()
         {
+            var creationManager = new CreationManager(_client.DataContainer);
+
             Items = new ObservableCollection<BaseCreationViewModel>()
             {
-                new CreationDataViewModel(_client),
-                new CreationAttributesViewModel(_client),
-                new CreationSkillsViewModel(_client, _client.DataManager as DataManager, _createFactory),
-                new CreationWeavesViewModel(_client, _client.DataManager as DataManager, _createFactory)
+                new CreationDataViewModel(_client, creationManager),
+                new CreationAttributesViewModel(_client, creationManager),
+                new CreationSkillsViewModel(_client, _client.DataManager as DataManager, _createFactory, creationManager),
+                new CreationWeavesViewModel(_client, _client.DataManager as DataManager, _createFactory, creationManager)
             };
 
             using (CanChangeDisposable())
@@ -75,6 +80,8 @@ namespace WoT_Win.Creation.ViewModels
             OpenWindowSafe(() => view.Show());
             _loadManager.Next();
         }
+
+        private PlayerModel Player { get; set; }
 
         public bool CanChange = false;
 

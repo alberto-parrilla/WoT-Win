@@ -37,7 +37,7 @@ namespace CoreDatabase.Managers
         {
             using (var dataDbContext = new DataDbContext())
             {
-                return await dataDbContext.Races.Where(r => r.IsEnabled).Include(r => r.Locations).ToListAsync();
+                return await dataDbContext.Races.Where(r => r.IsEnabled).Include(r => r.Locations).Include(r => r.AttributeMod).ToListAsync();
             }
         }
 
@@ -53,7 +53,7 @@ namespace CoreDatabase.Managers
         {
             using (var dataDbContext = new DataDbContext())
             {
-                return await dataDbContext.Locations.Where(l => l.IsEnabled).ToListAsync();
+                return await dataDbContext.Locations.Where(l => l.IsEnabled).Include(l => l.AttributeMod).ToListAsync();
             }
         }
 

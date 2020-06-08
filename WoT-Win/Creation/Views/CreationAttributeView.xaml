@@ -6,18 +6,26 @@
              mc:Ignorable="d" 
              Height="30" Width="360">
     <StackPanel Orientation="Horizontal">
-        <Label Content="{Binding Path=Header}" Style="{StaticResource LblInGridStyle}" Margin="10,0,10,0" Width="60"/>
+        <Label Content="{Binding Path=Header}" Style="{StaticResource LblInGridStyle}" Margin="10,0,10,0" Width="60" VerticalContentAlignment="Center"/>
         <Button Content="&#xE768;" FontFamily="Segoe MDL2 Assets" FontSize="24" Width="26" Height="26"
                 Command="{Binding DownCommand}">
             <Button.LayoutTransform>
                 <RotateTransform CenterX="0.5" CenterY="0.5" Angle="180"/>
             </Button.LayoutTransform>
         </Button>
-        <TextBox Text="{Binding Path=BaseValue}" Style="{StaticResource TxtInGridStyle}" Width="50"/>
+        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2" Margin="5,0,5,0">
+            <Label Content="{Binding Path=BaseValue}" Style="{StaticResource LblInGridStyle}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50"/>
+        </Border>
         <Button Content="&#xE768;" FontFamily="Segoe MDL2 Assets" FontSize="24" Width="26" Height="26" 
                 Command="{Binding UpCommand}"/>
-        <TextBox Text="{Binding Path=RaceMod}" Style="{StaticResource TxtInGridStyle}"  Width="30" Margin="10,0,10,0"/>
-        <TextBox Text="{Binding Path=NationMod}" Style="{StaticResource TxtInGridStyle}"  Width="30" Margin="10,0,10,0"/>
-        <TextBox Text="{Binding Path=Value, Mode=OneWay}" Style="{StaticResource TxtInGridStyle}"  Width="50" Margin="10,0,10,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2" Margin="5,0,5,0">
+            <Label Content="{Binding Path=RaceMod}" Style="{StaticResource LblInGridStyle}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="30"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2" Margin="5,0,5,0">
+            <Label Content="{Binding Path=LocationMod}" Style="{StaticResource LblInGridStyle}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="30"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2" Margin="5,0,5,0">
+            <Label Content="{Binding Path=Value, Mode=OneWay}" Style="{StaticResource LblInGridStyle}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50"/>
+        </Border>
     </StackPanel>
 </UserControl>

@@ -1,14 +1,18 @@
 ﻿using System.ComponentModel;
-using System.Runtime.Remoting.Contexts;
 using ClientDLL.Client;
 using WoT_Win.Common.ViewModels;
+using WoT_Win.Creation.Services;
 
 namespace WoT_Win.Creation.ViewModels
 {
     public abstract class BaseCreationViewModel : BaseViewModel, IDataErrorInfo
     {
-        public BaseCreationViewModel(IMainClient client) :base(client)
-        { }
+        public BaseCreationViewModel(IMainClient client, CreationManager creationManager) : base(client)
+        {
+            Manager = creationManager;
+        }
+
+        protected CreationManager Manager { get; set; }
 
         public string Header => GetHeader();
         public bool IsValid { get; protected set; }

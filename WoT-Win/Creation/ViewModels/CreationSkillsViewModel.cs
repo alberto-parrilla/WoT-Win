@@ -11,6 +11,7 @@ using KernelDLL.Common;
 using WoT_Win.Common.Commands;
 using WoT_Win.Common.Services;
 using WoT_Win.Common.ViewModels;
+using WoT_Win.Creation.Services;
 using WoT_Win.Game.Skills;
 
 namespace WoT_Win.Creation.ViewModels
@@ -20,7 +21,7 @@ namespace WoT_Win.Creation.ViewModels
         private const int CustomSkillPoints = 4;
         private const int CustomFeatPoints = 3;
 
-        public CreationSkillsViewModel(IMainClient client, DataManager dataManager, Common.Services.CreateFactory createFactory) : base(client)
+        public CreationSkillsViewModel(IMainClient client, DataManager dataManager, Common.Services.CreateFactory createFactory, CreationManager creationManager) : base(client, creationManager)
         {
             AddCommand = new RelayCommand((o) => Add(),(o) =>  CanAdd());
             RemoveCommand = new RelayCommand((o) => Remove(), (o) => CanRemove());

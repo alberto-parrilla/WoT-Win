@@ -24,7 +24,6 @@ namespace WoT_Win.Creation.ViewModels
     {
         private IMainClient _client;
         private Window _view;
-        private readonly CreationManager _creationManager;
         private readonly RaceModel _race;
         private readonly GenderModel _gender;
 
@@ -35,7 +34,6 @@ namespace WoT_Win.Creation.ViewModels
             _view = view;
             FinishCommand = new RelayCommand((o) => Finish(), (o) => true);
             CancelCommand = new RelayCommand((o) => Cancel(), (o) => true);
-            _creationManager = new CreationManager();
             _race = race;
             _gender = gender;
 

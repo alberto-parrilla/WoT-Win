@@ -121,6 +121,8 @@
     <Compile Include="Common\Views\ServerStatusView.xaml.cs">
       <DependentUpon>ServerStatusView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Creation\Models\CreationPlayerModel.cs" />
+    <Compile Include="Creation\Services\CreationManager.cs" />
     <Compile Include="Creation\ViewModels\CreateAvatarToolsetItem.cs" />
     <Compile Include="Creation\Views\WeaveView.xaml.cs">
       <DependentUpon>WeaveView.xaml</DependentUpon>
@@ -144,7 +146,6 @@
     <Compile Include="Common\Views\SplashLoadView.xaml.cs">
       <DependentUpon>SplashLoadView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Creation\Services\CreationManager.cs" />
     <Compile Include="Creation\ViewModels\BaseCreationViewModel.cs" />
     <Compile Include="Creation\ViewModels\CreatePlayerAvatarViewModel.cs" />
     <Compile Include="Creation\ViewModels\CreationAttributesViewModel.cs" />

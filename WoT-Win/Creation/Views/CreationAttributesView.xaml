@@ -20,8 +20,14 @@
     <Grid>
         <Label Content="{DynamicResource ResourceKey=LblPoints}" Style="{StaticResource LblInGridStyle}" Margin="10,10,0,0"/>
         <Label Content="{Binding Path=Points}" Style="{StaticResource LblInGridStyle}" Margin="110,10,0,0"/>
-         <ListBox ItemsSource="{Binding Path=Attributes}" 
-                  ItemTemplate="{StaticResource CreationAttributeDataTemplate}" 
-                  Width="Auto" Height="Auto" Margin="10,40,10,10"/>
+        <Label Content="{DynamicResource ResourceKey=LblBase}" Style="{StaticResource LblInGridStyle}" Margin="140,10,0,0"/>
+        <Label Content="{DynamicResource ResourceKey=LblRace}" Style="{StaticResource LblInGridStyle}" Margin="220,10,0,0"/>
+        <Label Content="{DynamicResource ResourceKey=LblLocation}" Style="{StaticResource LblInGridStyle}" Margin="265,10,0,0"/>
+        <Label Content="{DynamicResource ResourceKey=LblTotal}" Style="{StaticResource LblInGridStyle}" Margin="310,10,0,0"/>
+        <ListBox ItemsSource="{Binding Path=Attributes}" 
+                 ItemTemplate="{StaticResource CreationAttributeDataTemplate}" 
+                 Width="Auto" Height="Auto" Margin="10,40,10,10"/>
     </Grid>
 </UserControl>
+
+    

@@ -1,30 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using ClientDLL.Client;
 using KernelDLL.Game.Enums;
 using WoT_Win.Common.ViewModels;
+using WoT_Win.Creation.Services;
 
 namespace WoT_Win.Creation.ViewModels
 {
     public class CreationAttributesViewModel : BaseCreationViewModel
     {
-        public CreationAttributesViewModel(IMainClient client) : base(client)
+        public CreationAttributesViewModel(IMainClient client, CreationManager creationManager) : base(client, creationManager)
         {
             Attributes = new List<CreationAttributeViewModel>()
             {
-                new CreationAttributeViewModel(EnumAttribute.Str, 10, this),
-                new CreationAttributeViewModel(EnumAttribute.Dex, 10, this),
-                new CreationAttributeViewModel(EnumAttribute.Con, 10, this),
-                new CreationAttributeViewModel(EnumAttribute.Int, 10, this),
-                new CreationAttributeViewModel(EnumAttribute.Wis, 10, this),
-                new CreationAttributeViewModel(EnumAttribute.Cha, 10, this),
+                new CreationAttributeViewModel(EnumAttribute.Str, 10, this, creationManager),
+                new CreationAttributeViewModel(EnumAttribute.Dex, 10, this, creationManager),
+                new CreationAttributeViewModel(EnumAttribute.Con, 10, this, creationManager),
+                new CreationAttributeViewModel(EnumAttribute.Int, 10, this, creationManager),
+                new CreationAttributeViewModel(EnumAttribute.Wis, 10, this, creationManager),
+                new CreationAttributeViewModel(EnumAttribute.Cha, 10, this, creationManager),
             };
             Points = 6;
             IsVisible = true;
